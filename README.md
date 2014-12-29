@@ -23,6 +23,12 @@ Github源代码目录结构
 
 >*/src/server/service/* ：存放服务端业务层源代码目录
 
+>*/src/server/service/dudu/* ：存放服务端业务层@dudu的源代码目录
+
+>*/src/server/service/taskcontrol/* ：存放服务端业务层任务调度源代码目录（john）
+
+>*/src/server/service/auth/* ：存放服务端业务层用户注册登录源代码目录（john）
+
 Github使用注意事项：
 
 1. clone指定的分支，不建议clone master分支，如果要clone可以，但不要基于master分支进行开发。
