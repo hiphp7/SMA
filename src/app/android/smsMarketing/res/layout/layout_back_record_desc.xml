@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical" >
+
+    <include layout="@layout/item_layout_title_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/content_top"
+        android:background="@color/selector_def_back"
+        android:orientation="vertical" >
+
+        <zrc.widget.ZrcListView
+            android:id="@+id/lv_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:listSelector="@color/background_color" >
+        </zrc.widget.ZrcListView>
+    </LinearLayout>
+
+    <!-- <include layout="@layout/item_layout_bt" /> -->
+
+</LinearLayout>
