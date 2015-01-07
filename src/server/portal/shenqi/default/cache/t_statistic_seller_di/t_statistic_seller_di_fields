@@ -1,0 +1,1 @@
+a:3:{s:4:"time";i:1420595178;s:3:"ttl";i:3600;s:4:"data";a:1:{s:5:"_type";a:7:{s:6:"s_date";s:7:"varchar";s:8:"sellerid";s:7:"varchar";s:7:"issueid";s:7:"varchar";s:5:"title";s:7:"varchar";s:5:"cycle";s:7:"varchar";s:9:"plancount";s:7:"varchar";s:9:"realcount";s:7:"varchar";}}}

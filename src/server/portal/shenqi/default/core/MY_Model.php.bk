@@ -1,0 +1,227 @@
+<?php
+/**
+ * 自定义模型类,继承CI_Model
+ * 
+ * @author xuebingwang
+ *
+ */
+
+class MY_Model extends CI_Model{
+	
+	public $_table;
+	protected  $_pk;
+	protected  $_fields;
+	protected  $_new;
+	
+	function __construct(){
+		
+		if(!$this->_table){
+			$this->_table = strtolower(str_replace('_model', '', get_class($this)));
+		}
+	}
+	
+	private function curl($method,$params=NULL){
+	    
+// 	    $mylog = new CI_Log(array('file_name'=>'test'));
+// 	    $mylog->write_log('info','日志内容');
+	    
+	    $data = array('table'=>$this->_table,'method'=>$method,'params'=>$params);
+	    log_message('INFO','提交请求======:'.var_export($data,TRUE));
+		$return = curlRequest(config_item('php_api_url'),json_encode($data));//测试服务器环境
+// 		$return = curlRequest('http://121.199.3.89/server/index.php',json_encode($data));//测试服务器环境
+// 	    $return = curlRequest('http://server.pass.com/index.php',json_encode($data));
+
+	    log_message('INFO','收到返回************:'.$return);
+	    
+	    $return = json_decode($return,TRUE);
+	    if($return['errcode']){
+	        
+    	    //log_message('ERROR','发生错误,收到返回======:'.var_export($return,TRUE));
+    	    return null;
+	    }else{
+	        
+    	    //log_message('INFO','收到返回======:'.var_export($return,TRUE));
+    	    return $return['data'];
+	    }
+	    
+	}
+	
+	/**
+	 * 获取字段信息，如果信息不存在，则查询数据库自动缓存
+	 */
+	public function getFields()
+	{
+		if(!$this->_fields){
+
+		    $this->cache->set_dir($this->_table);
+		    $this->_fields = $this->cache->get($this->_table.'_fields');
+		    if(!$this->_fields){
+        		$this->_fields = $this->curl('getFields');
+
+        		$this->cache->set_dir($this->_table);
+        		$this->cache->save($this->_table.'_fields', $this->_fields,config_item('site_cache_time'));
+        		
+		    }
+			
+		}
+		return $this->_fields;
+		
+	}
+	
+	public function getPK()
+	{
+	    if(!$this->_pk){
+	        if(empty($this->_fields)){
+	            $this->getFields();
+	        }
+    		$this->_pk = isset($this->_fields['_pk']) ? $this->_fields['_pk'] : null;
+	    }
+		return $this->_pk;
+	}
+	
+	/**
+	 * 获取一条新的数据库表对象或数组
+	 * @return Ambigous <multitype:, multitype:multitype:boolean mixed unknown  >
+	 */
+	public function getNew($is_array=TRUE){
+	    if(!$this->_new){
+	        
+    		$this->_new = $this->curl('getNew');
+	    }
+		return $is_array ? $this->_new : (object)$this->_new;
+	}
+	
+	/**
+	 * 获取一条数据
+	 * @param array|string|int $options
+	 * @param boolean $is_array
+	 */
+	public function getOne($options=null,$is_array=false){
+	    
+		if (!$options){
+	        return $this->getNew($is_array);
+	    } 
+	    
+	    $item = $this->curl('getOne', array('options'=>$options));
+		$item = $is_array ? $item : ($item ? (object)$item : null);
+		
+		return $item;
+	}
+	
+
+
+	public function getTotal($options=array()){
+	    
+	    $total = $this->curl('getTotal',array('options'=>$options));
+	    
+	    return $total;
+	}
+	
+	/**
+	 * 获取多条数据
+	 * @param array|int|string $options
+	 * @param array $total_rows
+	 */
+	public function getAll($options=null,&$total_rows=array()){
+
+	    $return = $this->curl('getAll', array('options'=>$options,'total_rows'=>$total_rows));
+	    list($data,$total_rows) = $return;
+	    
+		return $data;
+	}
+	
+	/**
+	 * 获取多条数据,以数组形式返回
+	 * @param array|int|string $options
+	 */
+	public function getAll2Array($options=null){
+		$null = null;
+		return $this->getAll($options,$null);
+	}
+	
+	/**
+	 * 增加记录
+	 * @param array $data
+	 * @return int|boolean
+	 */
+	public function add(Array $data=array()){
+
+	    return $this->curl('add', array('data'=>$data));
+	}
+	
+	/**
+	 * 指量增加记录
+	 * @param array $data
+	 * @return boolean
+	 */
+	public function addBatch(Array $data=array()){
+
+	    return $this->curl('addBatch',array('data'=>$data));
+	}
+	
+	/**
+	 * 批量修改记录
+	 * @param array $set
+	 * @return boolean
+	 */
+	public function updateBatch(Array $set=array(),$index){
+
+		return $this->curl('updateBatch',array('set'=>$set,'index'=>$index));
+	}
+	
+	/**
+	 * 更新记录
+	 * @param array $data
+	 * @param array $where
+	 * @return object|boolean
+	 */
+	public function update(Array $data=array(),$options=array()){
+	    
+	    return $this->curl('update', array('data'=>$data,'options'=>$options));
+	}
+	
+	/**
+	 * 
+	 * @param array $data
+	 * @param array $options
+	 * @return Ambigous <object, boolean>|Ambigous <number, boolean>
+	 */
+	public function save(Array &$data=array(),$options=array()){
+	    
+	    if(array_key_exists($this->getPK(), $data) && $data[$this->getPK()]){
+	        
+	        return $this->update($data,$options);
+	    }else {
+	        
+            return $this->add($data);
+	    }
+	}
+	
+	/**
+	 * 删除记录
+	 * @param array $where
+	 */
+	public function delete($options=null){
+	    return $this->curl('delete',array('options'=>$options));
+	}
+	
+	/**
+	 * 
+	 * @param string $query
+	 */
+	public function query($query,$func='row'){
+
+	    return $this->curl('query',array('query'=>$query,'func'=>$func));
+	}
+	
+	/**
+	 * 带有id返回的插入，表中不能使用tigger处理自增长
+	 * @param string $query
+	 */
+	public function insert($data,$seq,$key='id'){
+
+	    return $this->curl('insert',array('data'=>$data,'seq'=>$seq,'key'=>$key));
+	}
+}
+
+?>
