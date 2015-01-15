@@ -60,11 +60,11 @@ log_message('INFO',$sql);
 			return array();
 		}
 		$rt['taskInfo'] = $query->row_array();
-		$sql = "select (select count(*) from t_rouji) as rouji,(select ifnull(max(c),1)  from (select count(*) as c from t_task where (status='RPF' or status='RPS')   group by roujiMobileNum ) as m) maxman,(select count(*) as beyondIndex from (select count(*) as c from t_task where (status='RPF' or status='RPS') group by roujiMobileNum having c>={$rt['taskInfo']['today']}) b) as beyondIndex";
+		$sql = "select (select if(count(*)=0,1,count(*)) from (select count(*) as c from t_task where (status='RPF' or status='RPS') and senttime >= '{$today} 00:00:00' group by roujiMobileNum ) as rj) as rouji,(select ifnull(max(c),1)  from (select count(*) as c from t_task where (status='RPF' or status='RPS') and senttime >= '{$today} 00:00:00' group by roujiMobileNum ) as m) maxman,(select count(*) as beyondIndex from (select count(*) as c from t_task where (status='RPF' or status='RPS') and senttime >= '{$today} 00:00:00' group by roujiMobileNum having c<{$rt['taskInfo']['today']}) b) as beyondIndex";
 		$query = $this->db->query($sql);
 		$row= $query->row_array();
-		$rt['industryIndex'] = floor(($rt['taskInfo']['today']/$row['maxman'])*100).'%';
-		$rt['beyondIndex'] = floor((1-$row['beyondIndex']/$row['rouji'])*100).'%';
+		$rt['industryIndex'] = floor((($rt['taskInfo']['today'])/($row['maxman']+1))*100).'%';
+		$rt['beyondIndex'] = floor(($row['beyondIndex']/$row['rouji'])*100).'%';
 		//$rt['beyondIndex'] = (round($rt['taskInfo']['today']/$row['maxman']*$row['rouji'],0)).'%';
 log_message('INFO',$sql);
 		return $rt;

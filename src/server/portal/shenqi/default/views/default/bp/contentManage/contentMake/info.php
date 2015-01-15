@@ -26,12 +26,12 @@ echo ace_form_open('','',array('id'=>$item->contentid));
 $options = array(
                                 'name'=>'smscontent',
                                 'label_text'=>'内容',
-                                'datatype'=>'*1-170',
+                                'datatype'=>'*1-280',
                                 'nullmsg'=>"请输入内容！",
-                                'errormsg'=>"内容应小于70个汉字！",
-                                'help'=>'最大70个汉字，有短链最大50个汉字'
+                                'errormsg'=>"内容应小于280个汉字！",
+                                'help'=>'不含短链最大280个汉字'
                                 );
-echo ace_textarea('<span class="red">*</span>内容',$options,$item->smscontent,'id="smscontent" rows="10"');
+echo ace_textarea('<span class="red">*</span>内容',$options,$item->smscontent,'id="smscontent" rows="50"');
 ?>
 <div class="form-group"><label class="col-xs-12 col-sm-2 control-label no-padding-right">类型:</label><div class="col-xs-12 col-sm-5"><label><input type="radio" name="type" value="ADV" checked="checked" class="ace"><span class="lbl"> 广告 &nbsp;</span></label><label><input type="radio" name="type" value="BLS" class="ace"><span class="lbl"> 祝福 </span></label></div>
             	      <div class="help-block col-xs-12 col-sm-reset inline"></div>
@@ -55,47 +55,6 @@ window.UEDITOR_HOME_URL='<?php echo base_url()?>';
           elementPathEnabled:false//关闭elementPath
 					,toolbars:[['bold', 'italic', 'underline', 'strikethrough',  'blockquote', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc','source','fullscreen','link', 'unlink', 'insertimage','preview','fontfamily', 'fontsize']]
       });
-$("#smscontent").keyup(function(){
-var type =$('input[name=shorturl]:radio:checked').val();
-if(type=='Y')
-{
-	Maxlength($("#smscontent"),50);
-  return;
-}
-Maxlength($("#smscontent"),70);
-});
-function Maxlength(text,length)
-{
-    var iMaxLen = length*2;
-    var iCurLen = byteLength(text.val());
-
-    if (iCurLen > iMaxLen )
-    {
-				//var len = Math.ceil((iCurLen - iMaxLen)/2);
-       // text.val(text.val().substring(0, length-len));
-				text.val(substr(text.val(),iMaxLen));
-    }
-}
-function substr(str,l) {
- var byteLen = 0, len = str.length;
- if( !str ) return 0;
- for( var i=0; i<len; i++ ){
-  byteLen += str.charCodeAt(i) > 255 ? 2 : 1;
-	nextlen = str.charCodeAt(i+1) > 255 ? 2 : 1;
-	if((nextlen+byteLen - l)>0)
-	{
-    return str.substring(0,i+1);
-	}
- }
- return str.subsrting(0,l);
-}
-function byteLength(str) {
- var byteLen = 0, len = str.length;
- if( !str ) return 0;
- for( var i=0; i<len; i++ )
-  byteLen += str.charCodeAt(i) > 255 ? 2 : 1;
- return byteLen;
-}
 </script>
    </div>
 <?php 

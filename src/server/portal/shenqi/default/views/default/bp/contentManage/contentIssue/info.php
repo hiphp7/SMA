@@ -107,6 +107,13 @@ $(function(){
 </div><div id="tab3" class="tab-pane">
 <div class="form-group fileupload-buttonbar" style="position:inherit; top: auto; background: #fff;">
 <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 control-label no-padding-right" >模板文件</label>
+		    <div class="col-xs-12 col-sm-5">
+			    <a href="/attachments/tpl/target.txt">点击下载模板文件</a>
+                    </div>			
+		    <div class="help-block col-xs-12 col-sm-reset inline">请先下载模板文件,模板为txt文件,请使用记事本编辑,utf-8编码保存</div>	
+		    </div>
+<div class="form-group">
                     <label class="col-xs-12 col-sm-2 control-label no-padding-right" >上传群发号码</label>
                     <div class="col-xs-12 col-sm-10">
                         <div class="row">

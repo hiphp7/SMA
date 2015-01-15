@@ -275,7 +275,8 @@ if ( ! function_exists('ace_input')){
 	        $label = ace_label($options['label_text'],$data['name']);
 	    }
 	    
-	    $element = '<span class="input-icon block input-icon-right">'.form_input($data,$value,$extra).'<i class="icon icon-info-sign"></i></span>';
+	    //$element = '<span class="input-icon block input-icon-right">'.form_input($data,$value,$extra).'<i class="icon icon-info-sign"></i></span>';
+	    $element = '<span class="input-icon block input-icon-right">'.form_input($data,$value,$extra).'</span>';
 	    
 	    return ace_group($label,$element,$options['help']);
 	}
