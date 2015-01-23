@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hummingbird.smsmarketing.mapper.AddressMapper" >
+  <resultMap id="BaseResultMap" type="com.hummingbird.smsmarketing.entity.Address" >
+    <id column="suffix" property="suffix" jdbcType="VARCHAR" />
+    <result column="roujiMobile" property="roujimobile" jdbcType="VARCHAR" />
+    <result column="sendsMobileNum" property="sendsmobilenum" jdbcType="VARCHAR" />
+    <result column="taskId" property="taskid" jdbcType="INTEGER" />
+    <result column="issueId" property="issueid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    suffix, roujiMobile, sendsMobileNum, taskId, issueId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_address
+    where suffix = #{suffix,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_address
+    where suffix = #{suffix,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hummingbird.smsmarketing.entity.Address" >
+    insert into t_address (suffix, roujiMobile, sendsMobileNum, 
+      taskId, issueId)
+    values (#{suffix,jdbcType=VARCHAR}, #{roujimobile,jdbcType=VARCHAR}, #{sendsmobilenum,jdbcType=VARCHAR}, 
+      #{taskid,jdbcType=INTEGER}, #{issueid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hummingbird.smsmarketing.entity.Address" >
+    insert into t_address
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="suffix != null" >
+        suffix,
+      </if>
+      <if test="roujimobile != null" >
+        roujiMobile,
+      </if>
+      <if test="sendsmobilenum != null" >
+        sendsMobileNum,
+      </if>
+      <if test="taskid != null" >
+        taskId,
+      </if>
+      <if test="issueid != null" >
+        issueId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="suffix != null" >
+        #{suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="roujimobile != null" >
+        #{roujimobile,jdbcType=VARCHAR},
+      </if>
+      <if test="sendsmobilenum != null" >
+        #{sendsmobilenum,jdbcType=VARCHAR},
+      </if>
+      <if test="taskid != null" >
+        #{taskid,jdbcType=INTEGER},
+      </if>
+      <if test="issueid != null" >
+        #{issueid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hummingbird.smsmarketing.entity.Address" >
+    update t_address
+    <set >
+      <if test="roujimobile != null" >
+        roujiMobile = #{roujimobile,jdbcType=VARCHAR},
+      </if>
+      <if test="sendsmobilenum != null" >
+        sendsMobileNum = #{sendsmobilenum,jdbcType=VARCHAR},
+      </if>
+      <if test="taskid != null" >
+        taskId = #{taskid,jdbcType=INTEGER},
+      </if>
+      <if test="issueid != null" >
+        issueId = #{issueid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where suffix = #{suffix,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hummingbird.smsmarketing.entity.Address" >
+    update t_address
+    set roujiMobile = #{roujimobile,jdbcType=VARCHAR},
+      sendsMobileNum = #{sendsmobilenum,jdbcType=VARCHAR},
+      taskId = #{taskid,jdbcType=INTEGER},
+      issueId = #{issueid,jdbcType=INTEGER}
+    where suffix = #{suffix,jdbcType=VARCHAR}
+  </update>
+</mapper>

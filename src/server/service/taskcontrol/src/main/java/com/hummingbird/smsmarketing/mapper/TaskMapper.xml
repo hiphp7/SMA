@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hummingbird.smsmarketing.mapper.TaskMapper" >
+  <resultMap id="BaseResultMap" type="com.hummingbird.smsmarketing.entity.Task" >
+    <id column="taskId" property="taskId" jdbcType="INTEGER" />
+    <result column="issueId" property="issueId" jdbcType="INTEGER" />
+    <result column="sendsMobileNum" property="sendsmobileNum" jdbcType="VARCHAR" />
+    <result column="roujiMobileNum" property="roujiMobileNum" jdbcType="VARCHAR" />
+    <result column="startTime" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="endTime" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="sentTime" property="sentTime" jdbcType="TIMESTAMP" />
+    <result column="type" property="type" jdbcType="CHAR" />
+    <result column="contentId" property="contentId" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <association property="content" javaType="com.hummingbird.smsmarketing.entity.Content">  
+            <id column="contentId" property="contentid"/>  
+            <result column="smscontent" property="smscontent"  jdbcType="VARCHAR"/>  
+            <result column="shorturl" property="shorturl"  jdbcType="VARCHAR"/>  
+        </association> 
+  </resultMap>
+  <sql id="Base_Column_List" >
+    taskId, issueId, sendsMobileNum, startTime, endTime, type, contentId, title, status,roujiMobileNum,sentTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_task
+    where taskId = #{taskId,jdbcType=INTEGER}
+  </select>
+  <select id="selectUnsendTask" resultMap="BaseResultMap" parameterType="com.hummingbird.smsmarketing.entity.Task" >
+    select 
+    taskId, issueId, sendsMobileNum, startTime, endTime,t. type, t.contentId, t.title, t.status,c.smscontent,roujiMobileNum,sentTime,shorturl
+    from t_task t inner join t_content c on t.contentId = c.contentId  
+    where issueId = #{issueId,jdbcType=INTEGER} and t.status = #{status,jdbcType=CHAR} 
+    and starttime &lt;= now() and endtime &gt;= now() 
+    <if test="taskId != null" >
+        and taskId > #{taskId,jdbcType=INTEGER} 
+      </if>
+      order by taskId
+    limit 0,100
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_task
+    where taskId = #{taskId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hummingbird.smsmarketing.entity.Task" >
+    insert into t_task (taskId, issueId, sendsMobileNum, 
+      startTime, endTime, type, 
+      contentId, title, status,roujiMobileNum
+      )
+    values (#{taskId,jdbcType=INTEGER}, #{issueId,jdbcType=INTEGER}, #{sendsmobileNum,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{type,jdbcType=CHAR}, 
+      #{contentId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hummingbird.smsmarketing.entity.Task" >
+    insert into t_task
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="taskId != null" >
+        taskId,
+      </if>
+      <if test="issueId != null" >
+        issueId,
+      </if>
+      <if test="sendsmobileNum != null" >
+        sendsMobileNum,
+      </if>
+      <if test="startTime != null" >
+        startTime,
+      </if>
+      <if test="endTime != null" >
+        endTime,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="contentId != null" >
+        contentId,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="roujiMobileNum != null" >
+        roujiMobileNum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="taskId != null" >
+        #{taskId,jdbcType=INTEGER},
+      </if>
+      <if test="issueId != null" >
+        #{issueId,jdbcType=INTEGER},
+      </if>
+      <if test="sendsmobileNum != null" >
+        #{sendsmobileNum,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="contentId != null" >
+        #{contentId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="roujiMobileNum != null" >
+        #{roujiMobileNum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hummingbird.smsmarketing.entity.Task" >
+    update t_task
+    <set >
+      <if test="issueId != null" >
+        issueId = #{issueId,jdbcType=INTEGER},
+      </if>
+      <if test="sendsmobileNum != null" >
+        sendsMobileNum = #{sendsmobileNum,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        startTime = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        endTime = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sentTime != null" >
+        sentTime = #{sentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="contentId != null" >
+        contentId = #{contentId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="roujiMobileNum != null" >
+        roujiMobileNum = #{roujiMobileNum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where taskId = #{taskId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hummingbird.smsmarketing.entity.Task" >
+    update t_task
+    set issueId = #{issueId,jdbcType=INTEGER},
+      sendsMobileNum = #{sendsmobileNum,jdbcType=VARCHAR},
+      startTime = #{startTime,jdbcType=TIMESTAMP},
+      endTime = #{endTime,jdbcType=TIMESTAMP},
+      sentTime = #{sentTime,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=CHAR},
+      contentId = #{contentId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      roujiMobileNum = #{roujiMobileNum,jdbcType=VARCHAR}
+    where taskId = #{taskId,jdbcType=INTEGER}
+  </update>
+  <update id="updateTaskStatus" >
+    update t_task
+    set status = #{status,jdbcType=CHAR}
+    ,sentTime=now()
+    where taskId = #{taskId,jdbcType=INTEGER}
+  </update>
+  <update id="assignTask" >
+    update t_task
+    set status = 'ASG'
+    ,sentTime=now()
+    ,roujiMobileNum = #{roujiMobileNum,jdbcType=VARCHAR}
+    where taskId = #{taskId,jdbcType=INTEGER}
+  </update>
+  <update id="resetFailTask"  parameterType="java.lang.Integer" >
+    update t_task
+    set status = 'CRT'
+    where issueId = #{issueId,jdbcType=INTEGER} AND STATUS = 'ASG'
+  </update>
+  <update id="updateTasks" >
+    update t_task
+    set status = #{status,jdbcType=CHAR}
+    ,roujiMobileNum = #{mobileNum,jdbcType=VARCHAR}
+    ,sentTime = now()
+    where taskId in 
+    	<foreach collection="taskIds" index="index" item="taskId" open="("
+    separator="," close=")">
+    		#{taskId,jdbcType=NUMERIC}
+    	</foreach>
+  </update>
+  <select id="statCount" resultType="java.lang.Integer" parameterType="java.util.Map" >
+    select count(*)
+    from t_task
+    where 1=1
+    <if test="issueId != null">
+    and issueId = #{issueId,jdbcType=INTEGER}
+    </if>
+    <if test="mobileNum != null">
+    and roujiMobileNum = #{mobileNum,jdbcType=VARCHAR}
+    </if>
+    <if test="onehour != null">
+    and date_format(sentTime,'%Y%m%d%H') = date_format(now(),'%Y%m%d%H') 
+    </if>
+    <if test="oneday != null">
+    and date_format(sentTime,'%Y%m%d') = date_format(now(),'%Y%m%d') 
+    </if>
+    <if test="status != null">
+    and status = #{status,jdbcType=VARCHAR}
+    </if>
+    <if test="statusArr !=null">
+    and status in 
+    	<foreach collection="statusArr" index="index" item="pstatus" open="("
+    		separator="," close=")">
+    		#{pstatus,jdbcType=VARCHAR}
+    	</foreach>
+    </if>
+    <if test="type != null">
+    and type = #{type,jdbcType=VARCHAR}
+    </if>
+    <if test="nottype != null">
+    and type != #{nottype,jdbcType=VARCHAR}
+    </if>
+  </select>
+  
+</mapper>

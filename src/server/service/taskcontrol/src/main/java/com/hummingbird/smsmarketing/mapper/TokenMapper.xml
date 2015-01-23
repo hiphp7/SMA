@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hummingbird.smsmarketing.mapper.TokenMapper" >
+  <resultMap id="BaseResultMap" type="com.hummingbird.smsmarketing.entity.Token" >
+    <id column="mobileNum" property="mobileNum" jdbcType="VARCHAR" />
+    <result column="token" property="token" jdbcType="VARCHAR" />
+    <result column="expireIn" property="expireIn" jdbcType="INTEGER" />
+    <!-- <result column="userId" property="userId" jdbcType="VARCHAR" />
+    <result column="appId" property="appId" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" /> -->
+  </resultMap>
+  <sql id="Base_Column_List" >
+    mobileNum,token, expireIn
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_rouji_token
+    where mobileNum = #{mobileNum,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByToken" resultMap="BaseResultMap" parameterType="com.hummingbird.commonbiz.vo.UserToken" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_rouji_token
+    where 1=1 
+    <if test="token != null" >
+       and token = #{token,jdbcType=VARCHAR}
+      </if>
+      <if test="mobileNum != null" >
+        and mobileNum = #{mobileNum,jdbcType=VARCHAR} 
+      </if>
+  </select>
+  <select id="selectByTokenStr" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_rouji_token
+    where  token = #{token,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_rouji_token
+    where mobileNum = #{mobileNum,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hummingbird.smsmarketing.entity.Token" >
+    insert into t_rouji_token (token, 
+      expireIn,  mobileNum
+      )
+    values (#{token,jdbcType=VARCHAR}, 
+      #{expireIn,jdbcType=INTEGER},#{mobileNum,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hummingbird.smsmarketing.entity.Token" >
+    insert into t_rouji_token
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="token != null" >
+        token,
+      </if>
+      <if test="expireIn != null" >
+        expireIn,
+      </if>
+      <if test="mobileNum != null" >
+        mobileNum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="token != null" >
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="expireIn != null" >
+        #{expireIn,jdbcType=INTEGER},
+      </if>
+      <if test="mobileNum != null" >
+        #{mobileNum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hummingbird.smsmarketing.entity.Token" >
+    update t_rouji_token
+    <set >
+      <if test="expireIn != null" >
+        expireIn = #{expireIn,jdbcType=INTEGER},
+      </if>
+      <if test="token != null" >
+        token = #{token,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where mobileNum = #{mobilNum,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hummingbird.smsmarketing.entity.Token" >
+    update t_rouji_token
+    set 
+      expireIn = #{expireIn,jdbcType=INTEGER},
+      token = #{token,jdbcType=VARCHAR}
+    where 
+    mobileNum = #{mobileNum,jdbcType=VARCHAR}
+  </update>
+</mapper>

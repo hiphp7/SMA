@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hummingbird.smsmarketing.mapper.ContentMapper" >
+  <resultMap id="BaseResultMap" type="com.hummingbird.smsmarketing.entity.Content" >
+    <id column="contentId" property="contentid" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="smscontent" property="smscontent" jdbcType="VARCHAR" />
+    <result column="mobilePage" property="mobilepage" jdbcType="VARCHAR" />
+    <result column="pcPage" property="pcpage" jdbcType="VARCHAR" />
+    <result column="padPage" property="padpage" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="type" property="type" jdbcType="CHAR" />
+    <result column="sellerId" property="sellerid" jdbcType="VARCHAR" />
+    <result column="shorturl" property="shorturl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    contentId, title, smscontent, mobilePage, pcPage, padPage, createTime, status, type,sellerId,shorturl
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_content
+    where contentId = #{contentid,jdbcType=INTEGER}
+  </select>
+  <select id="selectByIssueId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_content
+    where contentId in (select contentid from t_issue where issueId=#{issueid,jdbcType=VARCHAR})
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_content
+    where contentId = #{contentid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hummingbird.smsmarketing.entity.Content" >
+    insert into t_content (contentId, title, smscontent, 
+      mobilePage, pcPage, padPage, 
+      createTime, status, type,sellerId,shorturl
+      )
+    values (#{contentid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{smscontent,jdbcType=VARCHAR}, 
+      #{mobilepage,jdbcType=VARCHAR}, #{pcpage,jdbcType=VARCHAR}, #{padpage,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{status,jdbcType=CHAR}, #{type,jdbcType=CHAR},#{sellerid,jdbcType=VARCHAR}
+      ,#{shorturl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hummingbird.smsmarketing.entity.Content" >
+    insert into t_content
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="contentid != null" >
+        contentId,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="smscontent != null" >
+        smscontent,
+      </if>
+      <if test="mobilepage != null" >
+        mobilePage,
+      </if>
+      <if test="pcpage != null" >
+        pcPage,
+      </if>
+      <if test="padpage != null" >
+        padPage,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="sellerid != null" >
+        sellerid,
+      </if>
+      <if test="shorturl != null" >
+        shorturl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="contentid != null" >
+        #{contentid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="smscontent != null" >
+        #{smscontent,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilepage != null" >
+        #{mobilepage,jdbcType=VARCHAR},
+      </if>
+      <if test="pcpage != null" >
+        #{pcpage,jdbcType=VARCHAR},
+      </if>
+      <if test="padpage != null" >
+        #{padpage,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="sellerid != null" >
+        #{sellerid,jdbcType=VARCHAR},
+      </if>
+      <if test="shorturl != null" >
+        #{shorturl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hummingbird.smsmarketing.entity.Content" >
+    update t_content
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="smscontent != null" >
+        smscontent = #{smscontent,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilepage != null" >
+        mobilePage = #{mobilepage,jdbcType=VARCHAR},
+      </if>
+      <if test="pcpage != null" >
+        pcPage = #{pcpage,jdbcType=VARCHAR},
+      </if>
+      <if test="padpage != null" >
+        padPage = #{padpage,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="sellerid != null" >
+       #{sellerid,jdbcType=VARCHAR},
+      </if>
+      <if test="shorturl != null" >
+       #{shorturl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where contentId = #{contentid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hummingbird.smsmarketing.entity.Content" >
+    update t_content
+    set title = #{title,jdbcType=VARCHAR},
+      smscontent = #{smscontent,jdbcType=VARCHAR},
+      mobilePage = #{mobilepage,jdbcType=VARCHAR},
+      pcPage = #{pcpage,jdbcType=VARCHAR},
+      padPage = #{padpage,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=CHAR},
+      type = #{type,jdbcType=CHAR},
+      sellerid=#{sellerid,jdbcType=VARCHAR},
+      shorturl=#{shorturl,jdbcType=VARCHAR}
+    where contentId = #{contentid,jdbcType=INTEGER}
+  </update>
+</mapper>

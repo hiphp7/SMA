@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hummingbird.smsmarketing.mapper.AppInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.hummingbird.smsmarketing.entity.AppInfo" >
+    <id column="appId" property="appId" jdbcType="VARCHAR" />
+    <result column="appKey" property="appKey" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+     appId, appKey
+  </sql>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_appinfo
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_appinfo
+    where appId = #{appId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_appinfo
+    where appId = #{appId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hummingbird.smsmarketing.entity.AppInfo" >
+    insert into t_appinfo (appId, appKey)
+    values ( #{appId,jdbcType=VARCHAR}, #{appKey,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.hummingbird.smsmarketing.entity.AppInfo" >
+    update t_appinfo
+    set appKey = #{appKey,jdbcType=VARCHAR}
+    where appId = #{appId,jdbcType=VARCHAR}
+  </update>
+</mapper>
