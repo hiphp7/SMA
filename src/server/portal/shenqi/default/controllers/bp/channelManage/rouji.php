@@ -157,6 +157,24 @@ class Rouji extends Admin_Controller {
 		echo '{"status":0,"info":"上传成功"}';
 		return;
 	}	
+	function moveGroup()
+	{
+		if($this->input->is_post()){
+			$mobile = $this->input->get_post('mobile');
+			$groupid = $this->input->get_post('groupId');
+			$rt = $this->model->update(array('mobilenum'=>$mobile,'groupid'=>$groupid));
+			if($rt>0){
+				echo '{"info":"移动成功","status":"1"}';
+			}else{
+				echo '{"info":"移动分组失败","status":"0"}';
+			}
+			return;
+		}
+		$groups = $this->rouji_group_model->getAll(array('sellerid'=>$this->sellerid));
+		$mobile = $this->input->get_post('mobile');
+		$item = $this->model->getOne(array('where'=>array('mobileNum'=>$mobile)));
+		$this->load->view('bp/channelManage/roujiGroup',array('item'=>$item,'groups'=>$groups)); 
+	}
 	function  roujiExist($num)
 	{
 		$row = $this->rouji_model->getOne(array('where'=>array('mobileNum'=>$num)));

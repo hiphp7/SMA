@@ -109,7 +109,7 @@ $(function(){
 <div class="form-group">
                     <label class="col-xs-12 col-sm-2 control-label no-padding-right" >模板文件</label>
 		    <div class="col-xs-12 col-sm-5">
-			    <a href="/attachments/tpl/target.txt">点击下载模板文件</a>
+                            <a href="/attachments/tpl/target.php">点击下载模板文件</a>
                     </div>			
 		    <div class="help-block col-xs-12 col-sm-reset inline">请先下载模板文件,模板为txt文件,请使用记事本编辑,utf-8编码保存</div>	
 		    </div>

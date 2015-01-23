@@ -27,7 +27,8 @@ class Day extends Admin_Controller {
  		$option =array('where'=>array('s_date >='=>$sdate,'s_date <='=>$edate,'sellerId'=>$this->sellerid),'page'    => $cupage,'per_page'  => $per_page);
 		$option['order'] = 's_date desc,mobile';
 		$rt =$this->statistic_seller_d_model->getAll($option,$return_arr);
-		$page = $this->sharepage->showPage ('', $return_arr ['total_rows'], $cupage );
+ 		$url = '?sdate='.$sdate.'&edate='.$edate;
+		$page = $this->sharepage->showPage ($url, $return_arr ['total_rows'], $cupage );
  		$this->_template('bp/statistic/dayByRj',array('lc_list'=>$rt,'page'=>$page,'totals'  => $return_arr ['total_rows'],'sdate'=>$sdate,'edate'=>$edate));
 	}	
 	function dayByIssue()
@@ -48,7 +49,8 @@ class Day extends Admin_Controller {
  		$option =array('where'=>array('s_date >='=>$sdate,'s_date <='=>$edate,'sellerId'=>$this->sellerid),'page'    => $cupage,'per_page'  => $per_page);
 		$option['order'] = 's_date desc,issueid';
 		$rt =$this->statistic_seller_di_model->getAll($option,$return_arr);
-		$page = $this->sharepage->showPage ('', $return_arr ['total_rows'], $cupage );
+ 		$url = '?sdate='.$sdate.'&edate='.$edate;
+		$page = $this->sharepage->showPage ($url, $return_arr ['total_rows'], $cupage );
  		$this->_template('bp/statistic/dayByIssue',array('lc_list'=>$rt,'page'=>$page,'totals'  => $return_arr ['total_rows'],'sdate'=>$sdate,'edate'=>$edate));
 	}
 	function dayByRate(){

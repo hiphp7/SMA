@@ -1,4 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); 
+set_time_limit(60);
 
 class ContentIssue extends Admin_Controller {
 	 var $sellerid; 
@@ -19,7 +20,7 @@ class ContentIssue extends Admin_Controller {
 		
 		$where = array();
 		$where['t_issue.status !=']="RVK";	
-	  $where['t_issue.sellerid']=$this->sellerid;	
+		$where['t_issue.sellerid']=$this->sellerid;	
 		$title = htmlspecialchars($this->input->get_post("title"));
 		$issueid = htmlspecialchars($this->input->get_post("issueid"));
 		$like = array();
@@ -80,12 +81,12 @@ class ContentIssue extends Admin_Controller {
 			$options['where'] = array('issueid'=>$id);
 		}
 		$item = $this->model->getOne($options);
-		$title  = $this->content_model->getAll(array('select'=>'contentid,title','where'=>array('status !='=>'DEL','sellerid'=>$this->sellerid),'order'=>'createtime desc')); //查询所有信息
+		$title  = $this->content_model->getAll(array('select'=>'contentid,title','where'=>array('status !='=>'RVK','sellerid'=>$this->sellerid),'order'=>'createtime desc')); //查询所有信息
 		$titles = array();
 		foreach($title as $v)
-    {
+		{
 			$titles[$v->contentid] = $v->title;
-    }
+		}
 		$groups  = $this->rouji_group_model->getAll(array('select'=>'groupid,groupname','where'=>array('sellerId'=>$this->sellerid))); //查询所有信息
 		$group  = $this->issue_rouji_model->getAll(array('select'=>'groupid','group'=>'groupid','where'=>array('issueId'=>$id))); //查询所有信息
 		$this->_template('bp/contentManage/contentIssue/edit',array('item'=>$item,'titles'=>$titles,'groups'=>$groups,'group'=>$group)); 
@@ -112,20 +113,20 @@ class ContentIssue extends Admin_Controller {
 			$options['where'] = array('issueid'=>$id);
 		}
 		$item = $this->model->getOne($options);
-		$title  = $this->content_model->getAll(array('select'=>'contentid,title','where'=>array('status !='=>'DEL','sellerid'=>$this->sellerid),'order'=>'createtime desc')); //查询所有信息
+		$title  = $this->content_model->getAll(array('select'=>'contentid,title','where'=>array('status !='=>'RVK','sellerid'=>$this->sellerid),'order'=>'createtime desc')); //查询所有信息
 		$titles = array();
 		foreach($title as $v)
-    {
+		{
 			$titles[$v->contentid] = $v->title;
-    }
+		}
 		$groups  = $this->rouji_group_model->getAll(array('select'=>'groupid,groupname','where'=>array('sellerId'=>$this->sellerid))); //查询所有信息
 		$group  = $this->issue_rouji_model->getAll(array('select'=>'groupid','group'=>'groupid','where'=>array('issueId'=>$id))); //查询所有信息
 		if(empty($id)){
-						$this->_template('bp/contentManage/contentIssue/info',array('item'=>$item,'titles'=>$titles,'groups'=>$groups,'group'=>$group)); 
+			$this->_template('bp/contentManage/contentIssue/info',array('item'=>$item,'titles'=>$titles,'groups'=>$groups,'group'=>$group)); 
 		}else{
-					$target = $this->task_model->getOne(array('select'=>'count(*) as c','where'=>array('issueId'=>$id)));
-						$this->_template('bp/contentManage/contentIssue/show',array('item'=>$item,'titles'=>$titles,'groups'=>$groups,'group'=>$group,'target'=>$target->c)); 
-   }
+			$target = $this->task_model->getOne(array('select'=>'count(*) as c','where'=>array('issueId'=>$id)));
+			$this->_template('bp/contentManage/contentIssue/show',array('item'=>$item,'titles'=>$titles,'groups'=>$groups,'group'=>$group,'target'=>$target->c)); 
+		}
 	}  
 	
 	public function save(){
@@ -138,7 +139,7 @@ class ContentIssue extends Admin_Controller {
 			$data['issueid'] = $id;
 			$result=$this->model->update($data);
 		}else{
-			$data['status'] = 'CRT';
+			$data['status'] = 'RVK';
 			$data['createTime'] = date('Y-m-d H:i:s');
 			$data['sellerid'] = $this->sellerid;
 			$result=$this->model->add($data);
@@ -203,11 +204,12 @@ class ContentIssue extends Admin_Controller {
 		echo '{"status":0,"info":"上传成功"}';
 		ignore_user_abort(true);
 		$size=ob_get_length();
-    header("Content-Length: $size");
+		header("Content-Length: $size");
 		header("Connection: Close");
 		ob_flush();
 		$tmp = $this->getIssue($id);
 		$this->addTarget($rempath,$tmp);
+		$this->model->update(array('issueid'=>$id,'status'=>'CRT'));
 	}	
 	private function getIssue($id){
 		$option = array('select'=>'issueid,startTime,endTime,type,e.contentId,title','where'=>array('issueid'=>$id));
@@ -217,29 +219,29 @@ class ContentIssue extends Admin_Controller {
   }
 	private  function addTarget($file,$data)
 	{
-					$data['status'] = 'CRT';
-					$handle = @fopen($file, "r");
-					$i=0;
-					$tmp = array();
-					while (($buffer = fgets($handle, 4096)) !== false) {
-							$str = trim($buffer);	
-							$data['sendsMobileNum'] = $str;
-							$tmp[] = $data;
-							if($i==1000)
-							{	
-									$this->task_model->addBatch($tmp)	;
-									unset($tmp);
-									$i=0;
-									$tmp = array();
-							}
-							$i++;
-					} 
-					if(sizeof($tmp)>0)
-					{
-									$this->task_model->addBatch($tmp) ;
-						//	print_r($tmp);
-					}
-					fclose($handle);
+		$data['status'] = 'CRT';
+		$handle = @fopen($file, "r");
+		$i=0;
+		$tmp = array();
+		while (($buffer = fgets($handle, 4096)) !== false) {
+			$str = trim($buffer);	
+			$data['sendsMobileNum'] = $str;
+			$tmp[] = $data;
+			if($i==1000)
+			{	
+				$this->task_model->addBatch($tmp)	;
+				unset($tmp);
+				$i=0;
+				$tmp = array();
+			}
+			$i++;
+		} 
+		if(sizeof($tmp)>0)
+		{
+			$this->task_model->addBatch($tmp) ;
+			//	print_r($tmp);
+		}
+		fclose($handle);
 	}
 	function revoke(){
 	    $id = $this->input->get_post('id');

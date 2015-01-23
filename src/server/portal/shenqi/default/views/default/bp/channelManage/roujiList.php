@@ -72,6 +72,9 @@
 	                                <a class="red tooltip-success" href="javascript:" onclick="msgdelete(<?php echo $item->mobilenum?>)" data-rel="tooltip" title="删除">
 	                                    <i class="icon-trash bigger-130"></i>
 	                                </a>
+ 	                                <a class="red tooltip-success" href="javascript:" onclick="group(<?php echo $item->mobilenum?>)" data-rel="tooltip" title="移动">
+ 	                                    <i class="icon-exchange bigger-130"></i>
+ 	                                </a>
 																	</div>
 														</td>
                           </tr>
@@ -87,3 +90,20 @@
         </div>
     </div>
 </div>
+ <script>
+ function  group(mobile){
+ 								$.layer({
+ type: 2,
+ maxmin: true,
+ shadeClose: true,
+ title: '',
+ offset: ['20px',''],
+ area: ['800px', '300px'],
+ iframe: {src: 'rouji/moveGroup?mobile='+mobile+'&'+Math.random()}
+ ,close: function (i){
+ layer.close(i);
+ window.location.href='<?php echo base_url('bp/channelManage/rouji?mobileNum='.$mobileNum.'&groupId='.$groupId.'&userName='.$userName);?>';
+ }
+ }); 
+ }
+ </script>

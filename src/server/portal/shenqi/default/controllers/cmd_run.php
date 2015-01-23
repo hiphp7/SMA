@@ -181,7 +181,7 @@ function fillAgent($master,$sellers,$key ='master')
 	}
 	function getIssueRealCount($day ,$issueid)
 	{
-		$sql="select count(*) as c from t_task where sentTime between '$day 00:00:00' and '$day 23:59:59' and sentTime between '$day 00:00:00' and '$day 23:59:59' and issueid='$issueid'";
+ 		$sql="select count(*) as c from t_task where  sentTime between '$day 00:00:00' and '$day 23:59:59' and issueid='$issueid'";
 		$query = $this->db->query($sql);
 		return $query->row(0)->c;
 	}

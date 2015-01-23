@@ -22,7 +22,8 @@ class Month extends Admin_Controller {
 		$option =array('where'=>array('s_month'=>$day,'sellerId'=>$this->sellerid),'page'    => $cupage,'per_page'  => $per_page);
 		$option['order'] = 's_month desc,mobile';
 		$rt =$this->statistic_seller_m_model->getAll($option,$return_arr);
-		$page = $this->sharepage->showPage ('', $return_arr ['total_rows'], $cupage );
+ 		$url="?day=$day";
+ 		$page = $this->sharepage->showPage ($url, $return_arr ['total_rows'], $cupage );
  		$this->_template('bp/statistic/monthByRj',array('lc_list'=>$rt,'page'=>$page,'totals'  => $return_arr ['total_rows'],'s_month'=>$day));
 	}	
 	function monthByIssue()
@@ -38,7 +39,8 @@ class Month extends Admin_Controller {
 		$option =array('where'=>array('s_month'=>$day,'sellerId'=>$this->sellerid),'page'    => $cupage,'per_page'  => $per_page);
 		$option['order'] = 's_month desc';
 		$rt =$this->statistic_seller_mi_model->getAll($option,$return_arr);
-		$page = $this->sharepage->showPage ('', $return_arr ['total_rows'], $cupage );
+ 		$url="?day=$day";
+ 		$page = $this->sharepage->showPage ($url, $return_arr ['total_rows'], $cupage );
  		$this->_template('bp/statistic/monthByIssue',array('lc_list'=>$rt,'page'=>$page,'totals'  => $return_arr ['total_rows'],'s_month'=>$day));
 	}
 	function monthByRate(){
@@ -53,7 +55,8 @@ class Month extends Admin_Controller {
 		$option =array('where'=>array('s_month'=>$day,'sellerId'=>$this->sellerid),'page'    => $cupage,'per_page'  => $per_page);
 		$option['order'] = 's_month desc';
 		$rt =$this->statistic_seller_mr_model->getAll($option,$return_arr);
-		$page = $this->sharepage->showPage ('', $return_arr ['total_rows'], $cupage );
+ 		$url="?day=$day";
+ 		$page = $this->sharepage->showPage ($url, $return_arr ['total_rows'], $cupage );
  		$this->_template('bp/statistic/monthByRate',array('lc_list'=>$rt,'page'=>$page,'totals'  => $return_arr ['total_rows'],'s_month'=>$day));
 	}	
 } 
