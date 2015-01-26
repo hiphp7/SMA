@@ -64,8 +64,8 @@
                             <td><?php echo ($key+1)+$page ;?></td>
                             <td><a href="<?php echo base_url('bp/contentManage/contentIssue/info?id='.$item->issueid) ?>"><?php echo $item->issueid;?></a></td>
                             <td><?php echo $item->title;?></td>
-                            <td><?php echo $item->starttime;?></td>
-                            <td><?php echo $item->endtime;?></td>
+                            <td><?php echo substr($item->starttime,0,10);?></td>
+                            <td><?php echo substr($item->endtime,0,10);?></td>
                             <td><?php echo $item->target;?></td>
                             <td>
 														<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">

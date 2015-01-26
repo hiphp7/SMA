@@ -4,27 +4,27 @@
 echo ace_form_open('','',array('id'=>$item->agentid));
 
 	$options = array(
-			'label_text'=>'代理编号',
-			'datatype'=>'*',
-			'nullmsg'=>"请输入代理编号！",
-			'errormsg'=>"请输入代理编号",
-			'help'=>'代理登录后台的用户号'
+			'label_text'=>'代理账号',
+			'datatype'=>'s6-45',
+			'nullmsg'=>"请输入代理账号！",
+			'errormsg'=>"格式不正确，只允许6-45位数字和字母!",
+			'help'=>'6到45个位数字和字母!'
 	);
 	echo ace_input_m($options ,'agentid',$item->agentid,'maxlength="45" id="agentid"');
 	
 	$options = array(
 	        'label_text'=>'代理全称',
 					'datatype'=>'*',
-					'nullmsg'=>"请输入代理编号！",
-					'errormsg'=>"请输入代理编号",
+					'nullmsg'=>"请输入代理全称！",
+					'errormsg'=>"请输入代理全称",
 	        'help'=>'代理全称'
 	);
 	echo ace_input_m($options,'agentname',$item->agentname,'maxlength="45" id="agentname"');
 	$options = array(
 	        'label_text'=>'代理简称',
 					'datatype'=>'*',
-					'nullmsg'=>"请输入代理编号！",
-					'errormsg'=>"请输入代理编号",
+					'nullmsg'=>"请输入代理简称！",
+					'errormsg'=>"请输入代理简称",
 	        'help'=>'代理简称'
 	);
 	echo ace_input_m($options,'shortname',$item->shortname,'maxlength="45" id="shortname"');

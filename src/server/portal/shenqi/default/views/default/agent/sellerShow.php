@@ -5,27 +5,27 @@ echo ace_header('用户',$item->agentid);
 echo ace_form_open('','',array('id'=>$item->agentid));
 
 	$options = array(
-			'label_text'=>'商户编号',
+			'label_text'=>'商户账号',
 			'datatype'=>'*',
-			'nullmsg'=>"请输入商户编号！",
-			'errormsg'=>"请输入商户编号",
-			'help'=>'商户登录后台的用户号'
+			'nullmsg'=>"请输入商户账号！",
+			'errormsg'=>"请输入商户账号",
+			'help'=>'商户登录后台的账号'
 	);
 	echo ace_input_m($options ,'agentid',$item->sellerid,'maxlength="45" readonly="readonly"');
 	
 	$options = array(
 	        'label_text'=>'商户全称',
 					'datatype'=>'*',
-					'nullmsg'=>"请输入商户编号！",
-					'errormsg'=>"请输入商户编号",
+					'nullmsg'=>"请输入商户账号！",
+					'errormsg'=>"请输入商户账号",
 	        'help'=>'商户全称'
 	);
 	echo ace_input_m($options,'agentname',$item->sellername,'maxlength="45" readonly="readonly"');
 	$options = array(
 	        'label_text'=>'商户简称',
 					'datatype'=>'*',
-					'nullmsg'=>"请输入商户编号！",
-					'errormsg'=>"请输入商户编号",
+					'nullmsg'=>"请输入商户简称！",
+					'errormsg'=>"请输入商户简称",
 	        'help'=>'商户简称'
 	);
 	echo ace_input_m($options,'shortname',$item->shortname,'maxlength="45" readonly="readonly"');

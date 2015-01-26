@@ -5,27 +5,27 @@ echo ace_header('用户',$item->sellerid);
 echo ace_form_open('','',array('id'=>$item->sellerid));
 
 	$options = array(
-			'label_text'=>'商户编号',
+			'label_text'=>'商户账号',
 			'datatype'=>'*',
-			'nullmsg'=>"请输入商户编号！",
-			'errormsg'=>"请输入商户编号",
-			'help'=>'商户登录后台的用户号'
+			'nullmsg'=>"请输入商户账号！",
+			'errormsg'=>"请输入商户账号！",
+			'help'=>'商户登录后台的用户号,只允许6-32位数字和字母'
 	);
 	echo ace_input_m($options ,'sellerid',$item->sellerid,'maxlength="45" id="sellerid"');
 	
 	$options = array(
 	        'label_text'=>'商户全称',
 					'datatype'=>'*',
-					'nullmsg'=>"请输入商户编号！",
-					'errormsg'=>"请输入商户编号",
+					'nullmsg'=>"请输入商户全称！",
+					'errormsg'=>"请输入商户全称",
 	        'help'=>'商户全称'
 	);
 	echo ace_input_m($options,'sellername',$item->sellername,'maxlength="45" id="sellername"');
 	$options = array(
 	        'label_text'=>'商户简称',
 					'datatype'=>'*',
-					'nullmsg'=>"请输入商户编号！",
-					'errormsg'=>"请输入商户编号",
+					'nullmsg'=>"请输入商户简称！",
+					'errormsg'=>"请输入商户简称！",
 	        'help'=>'商户简称'
 	);
 	echo ace_input_m($options,'shortname',$item->shortname,'maxlength="45" id="shortname"');

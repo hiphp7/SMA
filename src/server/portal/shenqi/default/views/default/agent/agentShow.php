@@ -5,27 +5,23 @@ echo ace_header('用户',$item->agentid);
 echo ace_form_open('','',array('id'=>$item->agentid));
 
 	$options = array(
-			'label_text'=>'代理编号',
+			'label_text'=>'代理账号',
 			'datatype'=>'*',
-			'nullmsg'=>"请输入代理编号！",
-			'errormsg'=>"请输入代理编号",
-			'help'=>'代理登录后台的用户号'
+			'nullmsg'=>"请输入代理账号！",
+			'errormsg'=>"请输入代理账号",
+			'help'=>'代理登录后台的账号'
 	);
 	echo ace_input_m($options ,'agentid',$item->agentid,'maxlength="45" readonly="readonly"');
 	
 	$options = array(
 	        'label_text'=>'代理全称',
 					'datatype'=>'*',
-					'nullmsg'=>"请输入代理编号！",
-					'errormsg'=>"请输入代理编号",
 	        'help'=>'代理全称'
 	);
 	echo ace_input_m($options,'agentname',$item->agentname,'maxlength="45" readonly="readonly"');
 	$options = array(
 	        'label_text'=>'代理简称',
 					'datatype'=>'*',
-					'nullmsg'=>"请输入代理编号！",
-					'errormsg'=>"请输入代理编号",
 	        'help'=>'代理简称'
 	);
 	echo ace_input_m($options,'shortname',$item->shortname,'maxlength="45" readonly="readonly"');

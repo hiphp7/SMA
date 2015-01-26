@@ -9,10 +9,10 @@ echo '<div class="widget-box"><div class=""><div class="tabbable"><ul class="nav
 echo '<div class="widget-body"><div class="widget-main padding-6"><div class="tab-content"><div id="tab1" class="tab-pane in active">';
 $data = array('label_text'=>'标题','help'=>'选择相应标题的内容发布');
 echo ace_dropdown($data,'contentid',$titles,$item->contentid,'class="width-100" disabled="disabled"');
-$data = array('name'=>'starttime','datefmt'=>'yyyy-MM-dd H:mm:ss','class'=>'Wdate width-100','id'=>'starttime','readonly'=>'readonly');
-echo ace_input_m('开始时间',$data,$item->starttime);
-$data = array('name'=>'endtime', 'datefmt'=>'yyyy-MM-dd H:mm:ss','class'=>'Wdate width-100','id'=>'endtime','readonly'=>'readonly');
-echo ace_input_m('结束时间',$data,$item->endtime);
+$data = array('name'=>'starttime','datefmt'=>'yyyy-MM-dd','class'=>'Wdate width-100','id'=>'starttime','readonly'=>'readonly');
+echo ace_input_m('开始时间',$data,substr($item->starttime,0,10));
+$data = array('name'=>'endtime', 'datefmt'=>'yyyy-MM-dd','class'=>'Wdate width-100','id'=>'endtime','readonly'=>'readonly');
+echo ace_input_m('结束时间',$data,substr($item->endtime,0,10));
 ?>
 <div class="clearfix ">
                       <div class="col-md-offset-3 col-md-9">

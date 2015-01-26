@@ -64,7 +64,7 @@
             $("#logout").click(function(){
                 layer.confirm('您确定退出？',function(index){
                     layer.close(index);
-                    window.location = '<?php echo site_url('login/logout/index-admin')?>';
+                    window.location = '<?php echo site_url('login/logout/index-agent')?>';
                 });
                 return false;
             })

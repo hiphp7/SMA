@@ -9,9 +9,9 @@ echo '<div class="widget-box"><div class=""><div class="tabbable"><ul class="nav
 echo '<div class="widget-body"><div class="widget-main padding-6"><div class="tab-content"><div id="tab1" class="tab-pane in active">';
 $data = array('label_text'=>'标题','help'=>'选择相应标题的内容发布');
 echo ace_dropdown($data,'contentid',$titles,$item->contentid);
-$data = array('name'=>'starttime','datefmt'=>'yyyy-MM-dd H:mm:ss','class'=>'Wdate width-100','id'=>'starttime');
+$data = array('name'=>'starttime','datefmt'=>'yyyy-MM-dd','class'=>'Wdate width-100','id'=>'starttime');
 echo ace_input_m('开始时间',$data,$item->starttime);
-$data = array('name'=>'endtime', 'datefmt'=>'yyyy-MM-dd H:mm:ss','class'=>'Wdate width-100','id'=>'endtime');
+$data = array('name'=>'endtime', 'datefmt'=>'yyyy-MM-dd','class'=>'Wdate width-100','id'=>'endtime');
 echo ace_input_m('结束时间',$data,$item->endtime);
 ?>
 <div class="clearfix ">
@@ -82,12 +82,12 @@ $(function(){
 $(function(){
         $("#starttime").click(function(){
         var o = $(this);
-        WdatePicker({dateFmt:o.attr('dateFmt'),minDate:'<?php echo empty($item->starttime)?'%y-%M-%d 0:00:00':$item->starttime;?>',startDate:'<?php echo empty($item->starttime)?'%y-%M-%d 0:00:00':$item->starttime;?>'});
+        WdatePicker({dateFmt:o.attr('dateFmt'),minDate:'<?php echo empty($item->starttime)?'%y-%M-%d':$item->starttime;?>',startDate:'<?php echo empty($item->starttime)?'%y-%M-%d':$item->starttime;?>'});
         
     });
         $("#endtime").click(function(){
         var o = $(this);
-            WdatePicker({dateFmt:o.attr('dateFmt'),minDate:'#F{$dp.$D(\'starttime\')}',startDate:'<?php echo empty($item->starttime)?'%y-%M-%d 23:59:59':$item->starttime;?>'});
+            WdatePicker({dateFmt:o.attr('dateFmt'),minDate:'#F{$dp.$D(\'starttime\')}',startDate:'<?php echo empty($item->starttime)?'%y-%M-%d':$item->starttime;?>'});
     });
 });
 });

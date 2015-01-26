@@ -60,7 +60,10 @@
         <script src="<?php echo static_url('theme/common/common.js')?>?<?php echo random(3)?>"></script>        
     </head>
         <body  style="overflow-x : hidden;background-color: white;">
-				<?php echo ace_form_open('','',array('mobile'=>$item->mobilenum)); ?>
+	<?php echo ace_form_open('',''); ?>
+	<div style="display:none">
+	<input type="hidden" name="mobile" value="<?php echo $item->mobilenum;?>" id="mobile" >
+	</div>
 <div class="form-group">
 <label for="bpoid_sponsor" class="col-xs-12 col-sm-2 control-label no-padding-right"><span class="red">*</span>选择分组:</label><div class="col-xs-12 col-sm-5"><select name="groupId" id="groupid" style="width: 100%;">
 <?php
@@ -95,20 +98,5 @@ echo ace_form_close();
         </script>
 <![endif]-->
 <script src="http://115.29.7.155:8011/static/theme/common/layer/layer.min.js"></script>
-<script>
-$('#btn').click(function (){
-mobile=$('#mobile').val();
-groupid=$('#groupid').val();
-$.post('',{mobile:mobile,groupId:groupid},function (data){
-if(data.status == 0)
-{
-	layer.alert(data.info,3);
-	return ;
-}
-layer.alert(data.info,1);
-},'json');
-return;
-});
-</script>
 	</body>
 </html>

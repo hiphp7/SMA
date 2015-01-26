@@ -98,11 +98,29 @@
  shadeClose: true,
  title: '',
  offset: ['20px',''],
- area: ['800px', '300px'],
+ area: ['600px', ($(window).height() - 50)+'px'],
  iframe: {src: 'rouji/moveGroup?mobile='+mobile+'&'+Math.random()}
  ,close: function (i){
  layer.close(i);
  window.location.href='<?php echo base_url('bp/channelManage/rouji?mobileNum='.$mobileNum.'&groupId='.$groupId.'&userName='.$userName);?>';
+ }
+ ,btns:1
+ ,yes: function(i){
+ mobile=layer.getChildFrame("#mobile").val();
+ groupid=layer.getChildFrame("#groupid").val();
+ $.post('rouji/moveGroup',{mobile:mobile,groupId:groupid},function (data){
+	 if(data.status == 0)
+	 {
+	   layer.alert(data.info,3);
+	     layer.close(i);
+	       return ;
+	       }
+	       layer.alert(data.info,1,'确认',function(){
+		       window.location.href='<?php echo base_url('bp/channelManage/rouji?mobileNum='.$mobileNum.'&groupId='.$groupId.'&userName='.$userName);?>';
+		       });
+	       layer.close(i);
+	       },'json');
+ return;
  }
  }); 
  }
