@@ -11,7 +11,7 @@ echo ace_dropdown($data,'contentid',$titles,$item->contentid,' disabled="disable
 $data = array('name'=>'starttime','datefmt'=>'yyyy-MM-dd','class'=>'Wdate width-100','id'=>'starttime','readonly'=>'readonly');
 echo ace_input_m('开始时间',$data,substr($item->starttime,0,10));
 $data = array('name'=>'endtime', 'datefmt'=>'yyyy-MM-dd','class'=>'Wdate width-100','id'=>'endtime','readonly'=>'readonly');
-echo ace_input_m('结束时间',$data,($item->endtime,0,10));
+echo ace_input_m('结束时间',$data,substr($item->endtime,0,10));
 ?>
 <div class="clearfix ">
                       <div class="col-md-offset-3 col-md-9">
