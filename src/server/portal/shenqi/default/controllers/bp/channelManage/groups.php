@@ -86,16 +86,27 @@ class Groups extends Admin_Controller {
 		die;
 	}
 	function delete()
-  {
-					$id = $this->input->get_post('id');
-					$result = $this->model->delete(array('where'=>array('groupid'=>$id,'sellerid'=>$this->sellerid)));
-					if($result){
-									ajax_return('删除成功',1,'',base_url('bp/channelManage/groups'));
-					}else{
-									ajax_return("删除失败",0);
-					}
-  }
-  function ajaxName()
+	{
+		$id = $this->input->get_post('id');
+		$c = $this->rouji_model->getOne(array('where'=>array('groupid'=>$id),'select'=>'count(*) as c'));
+		if($c->c)
+		{
+			//ajax_return("删除失败,有任务机的组不能删除",0);
+			echo '{"msg":"删除失败,有任务机的组不能删除","status":0,"back_url":""}';
+			return;
+		}
+		$result = $this->model->delete(array('where'=>array('groupid'=>$id,'sellerid'=>$this->sellerid)));
+		if($result){
+			//ajax_return('删除成功',1,'',base_url('bp/channelManage/groups'));
+			echo '{"msg":"删除成功","status":1,"back_url":"'.base_url('bp/channelManage/groups').'"}';
+			return;
+		}else{
+			//ajax_return("删除失败",0);
+			echo '{"msg":"删除失败","status":0,"back_url":""}';
+			return;
+		}
+	}
+	function ajaxName()
 	{
 		$name = $this->input->get_post('groupname'); //字段值
 		$options = array('select'=>'*');
@@ -103,14 +114,13 @@ class Groups extends Admin_Controller {
 			$options['where'] = array('groupname'=>$name,'sellerId'=>$this->sellerid);
 		}
 		$item = $this->rouji_group_model->getOne($options);
-    //if(isset($item)&&!empty($item->agentid)&&$item->agentid!=$id){
-    if(isset($item)&&!empty($item->groupname)){
-    	echo json_encode(array('status'=> '1','info'=>'组名称已经存在'));exit();
-    }else{
-    	echo json_encode(array('status'=> '0','info'=>'可用'));exit();
-    }
-
-  }	
+		//if(isset($item)&&!empty($item->agentid)&&$item->agentid!=$id){
+		if(isset($item)&&!empty($item->groupname)){
+			echo json_encode(array('status'=> '1','info'=>'组名称已经存在'));exit();
+		}else{
+			echo json_encode(array('status'=> '0','info'=>'可用'));exit();
+		}
+	}	
 }
  
 ?>
