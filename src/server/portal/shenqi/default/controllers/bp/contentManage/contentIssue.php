@@ -135,6 +135,8 @@ class ContentIssue extends Admin_Controller {
 		$data['contentid'] = htmlspecialchars($this->input->get_post('contentid'));
 		$data['starttime'] = htmlspecialchars($this->input->get_post('starttime'));
 		$data['endtime'] = htmlspecialchars($this->input->get_post('endtime'));
+		$data['starttime'] = $data['starttime'].' 00:00:00';
+		$data['endtime'] = $data['endtime'].' 23:59:59';
 		if($id>0){
 			$data['issueid'] = $id;
 			$result=$this->model->update($data);
