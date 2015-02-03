@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hummingbird.smsmarketing.mapper.CreditInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.hummingbird.smsmarketing.entity.CreditInfo" >
+    <id column="idt_credit_info" property="idtCreditInfo" jdbcType="INTEGER" />
+    <result column="mobileNum" property="mobilenum" jdbcType="VARCHAR" />
+    <result column="appId" property="appid" jdbcType="VARCHAR" />
+    <result column="creditLimit" property="creditlimit" jdbcType="INTEGER" />
+    <result column="usedCredit" property="usedcredit" jdbcType="INTEGER" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updateTime" property="updatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    idt_credit_info, mobileNum, appId, creditLimit, usedCredit, createTime, updateTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_credit_info
+    where idt_credit_info = #{idtCreditInfo,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_credit_info
+    where idt_credit_info = #{idtCreditInfo,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hummingbird.smsmarketing.entity.CreditInfo" >
+    insert into t_credit_info (idt_credit_info, mobileNum, appId, 
+      creditLimit, usedCredit, createTime, 
+      updateTime)
+    values (#{idtCreditInfo,jdbcType=INTEGER}, #{mobilenum,jdbcType=VARCHAR}, #{appid,jdbcType=VARCHAR}, 
+      #{creditlimit,jdbcType=INTEGER}, #{usedcredit,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hummingbird.smsmarketing.entity.CreditInfo" >
+    insert into t_credit_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idtCreditInfo != null" >
+        idt_credit_info,
+      </if>
+      <if test="mobilenum != null" >
+        mobileNum,
+      </if>
+      <if test="appid != null" >
+        appId,
+      </if>
+      <if test="creditlimit != null" >
+        creditLimit,
+      </if>
+      <if test="usedcredit != null" >
+        usedCredit,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="updatetime != null" >
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idtCreditInfo != null" >
+        #{idtCreditInfo,jdbcType=INTEGER},
+      </if>
+      <if test="mobilenum != null" >
+        #{mobilenum,jdbcType=VARCHAR},
+      </if>
+      <if test="appid != null" >
+        #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="creditlimit != null" >
+        #{creditlimit,jdbcType=INTEGER},
+      </if>
+      <if test="usedcredit != null" >
+        #{usedcredit,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hummingbird.smsmarketing.entity.CreditInfo" >
+    update t_credit_info
+    <set >
+      <if test="mobilenum != null" >
+        mobileNum = #{mobilenum,jdbcType=VARCHAR},
+      </if>
+      <if test="appid != null" >
+        appId = #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="creditlimit != null" >
+        creditLimit = #{creditlimit,jdbcType=INTEGER},
+      </if>
+      <if test="usedcredit != null" >
+        usedCredit = #{usedcredit,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where idt_credit_info = #{idtCreditInfo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hummingbird.smsmarketing.entity.CreditInfo" >
+    update t_credit_info
+    set mobileNum = #{mobilenum,jdbcType=VARCHAR},
+      appId = #{appid,jdbcType=VARCHAR},
+      creditLimit = #{creditlimit,jdbcType=INTEGER},
+      usedCredit = #{usedcredit,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where idt_credit_info = #{idtCreditInfo,jdbcType=INTEGER}
+  </update>
+</mapper>

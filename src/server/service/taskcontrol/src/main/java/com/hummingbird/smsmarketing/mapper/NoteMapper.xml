@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hummingbird.smsmarketing.mapper.NoteMapper" >
+  <resultMap id="BaseResultMap" type="com.hummingbird.smsmarketing.entity.Note" >
+    <id column="idt_note" property="idtNote" jdbcType="INTEGER" />
+    <result column="roujiMobile" property="roujimobile" jdbcType="VARCHAR" />
+    <result column="issueId" property="issueid" jdbcType="INTEGER" />
+    <result column="customerMobile" property="customermobile" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updateTime" property="updatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    idt_note, roujiMobile, issueId, customerMobile, note, createTime, updateTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_note
+    where idt_note = #{idtNote,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_note
+    where idt_note = #{idtNote,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hummingbird.smsmarketing.entity.Note" >
+    insert into t_note (idt_note, roujiMobile, issueId, 
+      customerMobile, note, createTime, 
+      updateTime)
+    values (#{idtNote,jdbcType=INTEGER}, #{roujimobile,jdbcType=VARCHAR}, #{issueid,jdbcType=INTEGER}, 
+      #{customermobile,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hummingbird.smsmarketing.entity.Note" >
+    insert into t_note
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idtNote != null" >
+        idt_note,
+      </if>
+      <if test="roujimobile != null" >
+        roujiMobile,
+      </if>
+      <if test="issueid != null" >
+        issueId,
+      </if>
+      <if test="customermobile != null" >
+        customerMobile,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="updatetime != null" >
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idtNote != null" >
+        #{idtNote,jdbcType=INTEGER},
+      </if>
+      <if test="roujimobile != null" >
+        #{roujimobile,jdbcType=VARCHAR},
+      </if>
+      <if test="issueid != null" >
+        #{issueid,jdbcType=INTEGER},
+      </if>
+      <if test="customermobile != null" >
+        #{customermobile,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hummingbird.smsmarketing.entity.Note" >
+    update t_note
+    <set >
+      <if test="roujimobile != null" >
+        roujiMobile = #{roujimobile,jdbcType=VARCHAR},
+      </if>
+      <if test="issueid != null" >
+        issueId = #{issueid,jdbcType=INTEGER},
+      </if>
+      <if test="customermobile != null" >
+        customerMobile = #{customermobile,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where idt_note = #{idtNote,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hummingbird.smsmarketing.entity.Note" >
+    update t_note
+    set roujiMobile = #{roujimobile,jdbcType=VARCHAR},
+      issueId = #{issueid,jdbcType=INTEGER},
+      customerMobile = #{customermobile,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where idt_note = #{idtNote,jdbcType=INTEGER}
+  </update>
+</mapper>

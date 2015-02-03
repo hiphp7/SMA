@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hummingbird.smsmarketing.mapper.IssueRoujiMapper" >
+  <resultMap id="BaseResultMap" type="com.hummingbird.smsmarketing.entity.IssueRouji" >
+    <id column="idt_issue_rouji" property="idtIssueRouji" jdbcType="INTEGER" />
+    <result column="issueId" property="issueid" jdbcType="INTEGER" />
+    <result column="roujiMobileNum" property="roujimobilenum" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="groupId" property="groupid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    idt_issue_rouji, issueId, roujiMobileNum, status, groupId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_issue_rouji
+    where idt_issue_rouji = #{idtIssueRouji,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_issue_rouji
+    where idt_issue_rouji = #{idtIssueRouji,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hummingbird.smsmarketing.entity.IssueRouji" >
+    insert into t_issue_rouji (idt_issue_rouji, issueId, roujiMobileNum, 
+      status, groupId)
+    values (#{idtIssueRouji,jdbcType=INTEGER}, #{issueid,jdbcType=INTEGER}, #{roujimobilenum,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{groupid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hummingbird.smsmarketing.entity.IssueRouji" >
+    insert into t_issue_rouji
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idtIssueRouji != null" >
+        idt_issue_rouji,
+      </if>
+      <if test="issueid != null" >
+        issueId,
+      </if>
+      <if test="roujimobilenum != null" >
+        roujiMobileNum,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="groupid != null" >
+        groupId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idtIssueRouji != null" >
+        #{idtIssueRouji,jdbcType=INTEGER},
+      </if>
+      <if test="issueid != null" >
+        #{issueid,jdbcType=INTEGER},
+      </if>
+      <if test="roujimobilenum != null" >
+        #{roujimobilenum,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="groupid != null" >
+        #{groupid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hummingbird.smsmarketing.entity.IssueRouji" >
+    update t_issue_rouji
+    <set >
+      <if test="issueid != null" >
+        issueId = #{issueid,jdbcType=INTEGER},
+      </if>
+      <if test="roujimobilenum != null" >
+        roujiMobileNum = #{roujimobilenum,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="groupid != null" >
+        groupId = #{groupid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where idt_issue_rouji = #{idtIssueRouji,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hummingbird.smsmarketing.entity.IssueRouji" >
+    update t_issue_rouji
+    set issueId = #{issueid,jdbcType=INTEGER},
+      roujiMobileNum = #{roujimobilenum,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      groupId = #{groupid,jdbcType=INTEGER}
+    where idt_issue_rouji = #{idtIssueRouji,jdbcType=INTEGER}
+  </update>
+</mapper>

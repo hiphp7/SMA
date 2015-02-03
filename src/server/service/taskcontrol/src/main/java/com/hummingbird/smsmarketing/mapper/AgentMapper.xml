@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hummingbird.smsmarketing.mapper.AgentMapper" >
+  <resultMap id="BaseResultMap" type="com.hummingbird.smsmarketing.entity.Agent" >
+    <id column="agentId" property="agentid" jdbcType="VARCHAR" />
+    <result column="agentName" property="agentname" jdbcType="VARCHAR" />
+    <result column="shortName" property="shortname" jdbcType="VARCHAR" />
+    <result column="mobileNum" property="mobilenum" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="qq" property="qq" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updateTime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="superiorId" property="superiorid" jdbcType="VARCHAR" />
+    <result column="contact" property="contact" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    agentId, agentName, shortName, mobileNum, password, qq, createTime, updateTime, superiorId, 
+    contact, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_agent
+    where agentId = #{agentid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_agent
+    where agentId = #{agentid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hummingbird.smsmarketing.entity.Agent" >
+    insert into t_agent (agentId, agentName, shortName, 
+      mobileNum, password, qq, 
+      createTime, updateTime, superiorId, 
+      contact, status)
+    values (#{agentid,jdbcType=VARCHAR}, #{agentname,jdbcType=VARCHAR}, #{shortname,jdbcType=VARCHAR}, 
+      #{mobilenum,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{superiorid,jdbcType=VARCHAR}, 
+      #{contact,jdbcType=VARCHAR}, #{status,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hummingbird.smsmarketing.entity.Agent" >
+    insert into t_agent
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="agentid != null" >
+        agentId,
+      </if>
+      <if test="agentname != null" >
+        agentName,
+      </if>
+      <if test="shortname != null" >
+        shortName,
+      </if>
+      <if test="mobilenum != null" >
+        mobileNum,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="qq != null" >
+        qq,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="updatetime != null" >
+        updateTime,
+      </if>
+      <if test="superiorid != null" >
+        superiorId,
+      </if>
+      <if test="contact != null" >
+        contact,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="agentid != null" >
+        #{agentid,jdbcType=VARCHAR},
+      </if>
+      <if test="agentname != null" >
+        #{agentname,jdbcType=VARCHAR},
+      </if>
+      <if test="shortname != null" >
+        #{shortname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilenum != null" >
+        #{mobilenum,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="superiorid != null" >
+        #{superiorid,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hummingbird.smsmarketing.entity.Agent" >
+    update t_agent
+    <set >
+      <if test="agentname != null" >
+        agentName = #{agentname,jdbcType=VARCHAR},
+      </if>
+      <if test="shortname != null" >
+        shortName = #{shortname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilenum != null" >
+        mobileNum = #{mobilenum,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="superiorid != null" >
+        superiorId = #{superiorid,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        contact = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+    </set>
+    where agentId = #{agentid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hummingbird.smsmarketing.entity.Agent" >
+    update t_agent
+    set agentName = #{agentname,jdbcType=VARCHAR},
+      shortName = #{shortname,jdbcType=VARCHAR},
+      mobileNum = #{mobilenum,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      superiorId = #{superiorid,jdbcType=VARCHAR},
+      contact = #{contact,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR}
+    where agentId = #{agentid,jdbcType=VARCHAR}
+  </update>
+</mapper>
