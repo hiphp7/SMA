@@ -29,7 +29,7 @@
 
                 echo ace_input(array('label_text'=>'系统错误信息','help'=>'当系统出错时的显示信息'),'site_error_message',$setting->site_error_message);
 
-                echo ace_input(array('label_text'=>'字符串加密','help'=>'字符串加密,默认为123456,在启用程序时请修改,之后请劳记'),'site_auth_key',$setting->site_auth_key);
+                //echo ace_input(array('label_text'=>'字符串加密','help'=>'字符串加密,默认为123456,在启用程序时请修改,之后请劳记'),'site_auth_key',$setting->site_auth_key);
 
                 echo ace_input(array('label_text'=>'缓存时间','help'=>'整站缓存时间，单位秒'),'site_cache_time',$setting->site_cache_time);
 
