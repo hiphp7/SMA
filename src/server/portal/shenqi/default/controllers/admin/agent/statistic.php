@@ -42,7 +42,8 @@ class Statistic extends Admin_Controller {
 				$rt[$k]->agentname = $child['seller'][$v->agentid];
 			}
 		}
-		$url = base_url('admin/agent/statistic/day?');
+		$str = '&sdate='.$sdate.'&edate'.$edate;
+		$url = base_url('admin/agent/statistic/day?'.$str);
 		$page = $this->sharepage->showPage ($url, $total_rows, $cupage );
 		$this->_template('admin/agent/day',array('lc_list'=>$rt,'page'=>$page,'totals'  => $total_rows,'sdate'=>$sdate,'edate'=>$edate));
 	}	
