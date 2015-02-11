@@ -190,7 +190,7 @@ class Admin_Controller extends MY_Controller {
     /**
      * 删除
      */
-    public function delete($id = '',$status='DEl'){
+    public function delete($id = '',$status='0'){
 			if(empty($id))
 			{
     	    $id = $this->input->get_post('id');
