@@ -6,9 +6,9 @@ echo ace_form_open('','',array('id'=>$item->uid));
 
 	$options = array(
 			'label_text'=>'账号',
-			'datatype'=>'*',
+			'datatype'=>'u',
 			'nullmsg'=>"请输入账号！",
-			'errormsg'=>"请输入账号",
+			'errormsg'=>"账号只允许字母开头，允许5-16字节，允许字母数字下划线",
 			'help'=>'用户名,登录后台的账号'
 	);
 	echo ace_input_m($options ,'user_name',$item->user_name,'maxlength="32"');

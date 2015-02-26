@@ -8,7 +8,7 @@ echo ace_form_open('','',array('id'=>$item->sellerid));
 			'label_text'=>'商户编号',
 			'datatype'=>'*',
 			'nullmsg'=>"请输入商户编号！",
-			'errormsg'=>"请输入商户编号",
+			'errormsg'=>"商户编号只允许字母开头，允许5-16字节，允许字母数字下划线",
 			'help'=>'商户登录后台的用户号'
 	);
 	echo ace_input_m($options ,'sellerid',$item->sellerid,'maxlength="45" id="sellerid"');
@@ -16,16 +16,16 @@ echo ace_form_open('','',array('id'=>$item->sellerid));
 	$options = array(
 	        'label_text'=>'商户全称',
 					'datatype'=>'*',
-					'nullmsg'=>"请输入商户编号！",
-					'errormsg'=>"请输入商户编号",
+					'nullmsg'=>"请输入商户全称！",
+					'errormsg'=>"请输入商户全称",
 	        'help'=>'商户全称'
 	);
 	echo ace_input_m($options,'sellername',$item->sellername,'maxlength="45" id="sellername"');
 	$options = array(
 	        'label_text'=>'商户简称',
 					'datatype'=>'*',
-					'nullmsg'=>"请输入商户编号！",
-					'errormsg'=>"请输入商户编号",
+					'nullmsg'=>"请输入商户简称！",
+					'errormsg'=>"请输入商户简称",
 	        'help'=>'商户简称'
 	);
 	echo ace_input_m($options,'shortname',$item->shortname,'maxlength="45" id="shortname"');
@@ -53,9 +53,12 @@ echo ace_form_open('','',array('id'=>$item->sellerid));
 
 	$options = array(
 	        'label_text'=>'QQ',
+					'datatype'=>'n1-15',
+					'nullmsg'=>"请输入QQ！",
+					'errormsg'=>"QQ号不能大于15位数字",
 	        'help'=>'商户联系人的QQ'
 	);
-	echo ace_input($options,'qq',$item->qq,'maxlength="45"');
+	echo ace_input($options,'qq',$item->qq,'maxlength="15"');
 	
   	echo ace_srbtn('agent/seller',false);
   echo ace_form_close()
