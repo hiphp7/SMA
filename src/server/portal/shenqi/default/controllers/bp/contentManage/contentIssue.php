@@ -204,11 +204,11 @@ class ContentIssue extends Admin_Controller {
 		$id = (int)$this->input->get_post('id');
 		$this->mass_sends_model->add(array('massSendsPath'=>$rempath,'issueId'=>$id));
 		echo '{"status":0,"info":"上传成功"}';
-		ignore_user_abort(true);
-		$size=ob_get_length();
-		header("Content-Length: $size");
-		header("Connection: Close");
-		ob_flush();
+	//	ignore_user_abort(true);
+	//	$size=ob_get_length();
+	//	header("Content-Length: $size");
+	//	header("Connection: Close");
+	//	ob_flush();
 		$tmp = $this->getIssue($id);
 		$this->addTarget($rempath,$tmp);
 		$this->model->update(array('issueid'=>$id,'status'=>'CRT'));
@@ -227,6 +227,10 @@ class ContentIssue extends Admin_Controller {
 		$tmp = array();
 		while (($buffer = fgets($handle, 4096)) !== false) {
 			$str = trim($buffer);	
+			if(!is_numeric($str))
+			{
+				continue;
+			}
 			$data['sendsMobileNum'] = $str;
 			$tmp[] = $data;
 			if($i==1000)
