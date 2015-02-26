@@ -8,7 +8,7 @@ class Index extends Admin_Controller{
 	}
 	
 	public function index(){
-	    $this->_template('admin/index');
+	    $this->_template('admin/main');
 	}
 	
 	public function test(){

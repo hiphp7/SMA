@@ -10,7 +10,7 @@ class Main extends Admin_Controller{
 	public function index(){
 	    $count = array();
 	    
-	    $this->_template('admin/main',$data);
+	    $this->_template('admin/main');
 	}
 	
 	public function test(){
