@@ -125,34 +125,34 @@ class Rouji extends Admin_Controller {
 		}*/
 		$id = (int)$this->input->get_post('groupId');
 		$data = array();
-		include 'shared/libraries/Excel/Excel_Reader.php';
-		$reader = new Excel_Reader();
-		$reader->setOutputEncoding('UTF-8');
-		$reader->read($_FILES['files']['tmp_name']);
-		$tmp = $reader->sheets[0]['cells'];
-		$time = date('Y-m-d H:i:s');
-		foreach( $tmp as $k=> $v)
-		{
-			if($k==1)
-			{
-				continue;
-			}
-			if($this->roujiExist($v[1]))
-			{
-				echo '{"status":1,"info":"上传失败,号码'.$v[1].'已经存在"}';
-				return;
-			}
-			if(empty($v[1])||empty($v[2])){
-				continue;
-			}
-			$data[] = array('mobileNum'=>$v[1],'username'=>$v[2],'groupid'=>$id,'createtime'=>$time);
-		}
 		try{
+						include 'shared/libraries/Excel/Excel_Reader.php';
+						$reader = new Excel_Reader();
+						$reader->setOutputEncoding('UTF-8');
+						$reader->read($_FILES['files']['tmp_name']);
+						$tmp = $reader->sheets[0]['cells'];
+						$time = date('Y-m-d H:i:s');
+						foreach( $tmp as $k=> $v)
+						{
+										if($k==1)
+										{
+														continue;
+										}
+										if($this->roujiExist($v[1]))
+										{
+														echo '{"status":1,"info":"上传失败,号码'.$v[1].'已经存在"}';
+														return;
+										}
+										if(empty($v[1])||empty($v[2])){
+														continue;
+										}
+										$data[] = array('mobileNum'=>$v[1],'username'=>$v[2],'groupid'=>$id,'createtime'=>$time);
+						}
 						$this->rouji_model->addBatch($data);
-	  }
+		}
 		catch(Exception $e) 
 		{
-				echo '{"status":1,"info":"上传失败"}';
+						echo '{"status":1,"info":"上传失败"}';
 		}
 		echo '{"status":0,"info":"上传成功"}';
 		return;

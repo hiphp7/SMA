@@ -572,7 +572,9 @@
 	                    e.preventDefault();
 						filesList.find('.start').click();
 						return false;
-					}else{
+					}
+/*
+  else{
 						if(typeof(isMust) != 'undefined')
 						{
 							layer.alert('请选择文件');
@@ -580,6 +582,7 @@
 						}
 						return true;
 					}
+*/
 					
                 }
             });

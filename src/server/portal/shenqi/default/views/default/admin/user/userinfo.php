@@ -6,18 +6,21 @@ echo ace_form_open('','',array('id'=>$item->uid));
 
 	$options = array(
 			'label_text'=>'账号',
-			'datatype'=>'*',
+			'datatype'=>'u',
 			'nullmsg'=>"请输入账号！",
-			'errormsg'=>"请输入账号",
+			'errormsg'=>"账号只允许字母开头，允许5-16字节，允许字母数字下划线",
 			'help'=>'用户名,登录后台的账号'
 	);
 	echo ace_input_m($options ,'user_name',$item->user_name,'maxlength="32"');
 	
 	$options = array(
 	        'label_text'=>'昵称',
-	        'help'=>'用户的昵称'
+			'datatype'=>'*2-20',
+			'nullmsg'=>"请输入昵称！",
+			'errormsg'=>"用户昵称最少2字节",
+	        'help'=>'昵称'
 	);
-	echo ace_input($options,'nickname',$item->nickname,'maxlength="20"');
+	echo ace_input_m($options,'nickname',$item->nickname,'maxlength="20"');
 	
 	if(!$item->uid){
 		$options = array('label_text'=>'密码','datatype'=>'pwd','help'=>lang('pwd_help_msg'),'errormsg'=>lang('pwd_help_msg'));

@@ -190,6 +190,7 @@
 			"p":/^[0-9]{6}$/,
 			"m":/^13[0-9]{9}$|14[0-9]{9}|15[0-9]{9}$|18[0-9]{9}$/,
 			"e":/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
+			"u":/^[a-zA-Z]{1}[\w]{4,15}$/,
 			"url":/^(\w+:\/\/)?\w+(\.\w+)+.*$/
 		},
 		
@@ -1125,8 +1126,8 @@ $(function(){
 		    	}
 			    if(val.length < 6 || val.length > 20){
 			    	lv=0;
-		    	}else if(val.length > 8){
-		    		lv++;
+		    	//}else if(val.length > 8){
+		    	//	lv++;
 		    	}
 			    var pwdStrength = obj.closest('span').next('.passwordStrength');
 			    pwdStrength.find('span').removeClass('bgStrength');

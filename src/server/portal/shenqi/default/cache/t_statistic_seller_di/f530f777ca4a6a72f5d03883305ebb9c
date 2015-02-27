@@ -1,1 +1,0 @@
-a:3:{s:4:"time";i:1420428994;s:3:"ttl";i:3600;s:4:"data";a:2:{i:0;a:1:{i:0;O:8:"stdClass":7:{s:6:"s_date";s:10:"2015-01-04";s:8:"sellerid";s:2:"A1";s:7:"issueid";s:3:"223";s:5:"title";s:14:"1月3号发布";s:5:"cycle";s:41:"2015-01-03 00:00:00至2015-01-31 23:59:59";s:9:"plancount";s:1:"6";s:9:"realcount";s:1:"6";}}i:1;a:1:{s:10:"total_rows";i:1;}}}

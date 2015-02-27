@@ -101,7 +101,40 @@ class Index extends Admin_Controller {
 		); 
 		$this->_template('admin/user/userinfo',$data); 
 	}  
-	
+	public function edit(){
+
+	    if($this->input->is_post()){
+	        $this->save();
+	    }
+	    
+		$id	  =	intval($this->input->get_post('uid'));
+		$options = array();
+		if($id>0){
+			$options['where'] = array('uid'=>$id);
+		}
+		$item = $this->model->getOne($options);
+		
+		$where['status'] = 1;
+		$options['order'] = 'gid';
+		if($this->user_info->gid == 0){
+			
+		}else if ($this->user_info->gid == 1){
+			$where['gid >'] = 1;
+		}else{
+			$where['gid >'] = 2;
+		}
+		
+		$options['where'] = $where;
+		$group_list = array();
+		foreach ($this->group_model->getAll($options) as $tmp){
+			$group_list[$tmp->gid] = $tmp->title;
+		}
+		$data = array(
+			'item'	=> $item,	
+			'group_list'	=> $group_list,
+		); 
+		$this->_template('admin/user/userinfo',$data); 
+	}
 	public function save(){
 		
 		$id = (int)$this->input->get_post('id');

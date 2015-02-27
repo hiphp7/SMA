@@ -56,7 +56,7 @@
                       <?php foreach($lc_list as $item):?>
                       <tr>
                         <td style="text-align: center;"><?php echo $item->uid;?></td>
-                        <td><a href="<?php echo admin_base_url('user/index/info?uid=')?><?php echo $item->uid;?>" ><?php echo $item->user_name;?></a></td>
+                        <td><a href="<?php echo admin_base_url('user/index/edit?uid=')?><?php echo $item->uid;?>" ><?php echo $item->user_name;?></a></td>
                         <td><?php echo $item->nickname;?></td>
                         <td><?php if(!$item->gid):?>超级管理员<?php else:?><?php if($item->group_name):?><?php echo $item->group_name;?><?php else:?>无<?php endif;?><?php endif;?></td>
                         
@@ -72,7 +72,7 @@
                         <td>
 	                            <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 	                                <?php if($item->status > 0):?> 
-	                                <a class="green <?php if($item->status < 0):?>disabled<?php endif;?>" href="<?php echo admin_base_url('user/index/info?uid=')?><?php echo $item->uid;?>">
+	                                <a class="green <?php if($item->status < 0):?>disabled<?php endif;?>" href="<?php echo admin_base_url('user/index/edit?uid=')?><?php echo $item->uid;?>">
 	                                    <i class="icon-pencil bigger-130"></i>
 	                                </a>
 	                                <a class="red" href="javascript:" onclick="msgdelete(<?php echo $item->uid;?>)" >
@@ -92,7 +92,7 @@
 	                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
 	
 	                                        <li>
-	                                            <a href="<?php echo admin_base_url('user/index/info?uid=')?><?php echo $item->uid;?>" class="tooltip-success" data-rel="tooltip" title="修改">
+	                                            <a href="<?php echo admin_base_url('user/index/edit?uid=')?><?php echo $item->uid;?>" class="tooltip-success" data-rel="tooltip" title="修改">
 	                                                <span class="green">
 	                                                    <i class="icon-edit bigger-120"></i>
 	                                                </span>
@@ -113,6 +113,8 @@
 
                       </tr>
                       <?php endforeach;?>
+                    <?php else:?>
+											<tr><td colspan="10" align="center">暂无内容</td></tr>
                     <?php endif;?>
 
 	                </tbody>

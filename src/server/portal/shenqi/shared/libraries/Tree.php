@@ -28,7 +28,7 @@ class Tree {
         
         $tmp = array();
         foreach ($result as $node) {
-            if($current && @!array_diff($current, $node)){
+            if($current && @!array_diff_assoc($current, $node)){
 				$this->current_id = $node[$fields[0]];
             }
             

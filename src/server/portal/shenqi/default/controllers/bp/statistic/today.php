@@ -16,7 +16,7 @@ class Today extends Admin_Controller {
 		$sql="select '$sellerid' as sellerid ,'$day' as s_date,roujimobilenum as mobile,count(*) as sentcount from t_task t left join t_issue i on (i.issueid=t.issueid) where sentTime >= '$day 00:00:00' and sellerid='$sellerid' group by roujiMobileNum";      
                 $query = $this->db->query($sql);
 		$data = $query->result();
- 		$this->_template('bp/statistic/todayByRj',array('lc_list'=>$data,'page'=>0,'totals'  => 0,'sdate'=>0,'edate'=>0));
+ 		$this->_template('bp/statistic/todayByRj',array('lc_list'=>$data,'page'=>'','totals'  => 0,'sdate'=>0,'edate'=>0));
 	}	
 	function dayByIssue()
 	{
@@ -28,7 +28,7 @@ class Today extends Admin_Controller {
 		foreach($data as $k=>$row){
 			$data[$k]->realcount =$this->getIssueRealCount($day,$row->issueid);
 		}
- 		$this->_template('bp/statistic/todayByIssue',array('lc_list'=>$data,'page'=>0,'totals'  =>0,'sdate'=>0,'edate'=>0));
+ 		$this->_template('bp/statistic/todayByIssue',array('lc_list'=>$data,'page'=>'','totals'  =>0,'sdate'=>0,'edate'=>0));
 	}
 	function dayByRate(){
 		$sellerid=$this->sellerid ;
@@ -36,7 +36,7 @@ class Today extends Admin_Controller {
 		$sql ="select '$sellerid' as sellerid ,'$day' as s_date,count(*) as sentcount,count(visitTime) as visitcount,round( count(visitTime)/count(*)*100,2) as rate from t_task t left join t_issue i on(i.issueid=t.issueid) left join t_customer_visit v on(v.issueId=t.issueId and visitTime >= '$day 00:00:00') where sentTime >= '$day 00:00:00' and sellerid='$sellerid' ";
                 $query = $this->db->query($sql);
 		$data = $query->result();
- 		$this->_template('bp/statistic/todayByRate',array('lc_list'=>$data,'page'=>0,'totals'  =>0,'sdate'=>0,'edate'=>0));
+ 		$this->_template('bp/statistic/todayByRate',array('lc_list'=>$data,'page'=>'','totals'  =>0,'sdate'=>0,'edate'=>0));
 	}	
 	function getIssueRealCount($day ,$issueid)
 	{

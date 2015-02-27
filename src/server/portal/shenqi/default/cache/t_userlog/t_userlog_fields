@@ -1,1 +1,0 @@
-a:3:{s:4:"time";i:1420611650;s:3:"ttl";i:3600;s:4:"data";a:2:{s:5:"_type";a:6:{s:3:"lid";s:9:"mediumint";s:9:"loginname";s:4:"char";s:9:"logintime";s:3:"int";s:10:"logouttime";s:3:"int";s:7:"loginip";s:4:"char";s:6:"status";s:7:"tinyint";}s:3:"_pk";s:3:"lid";}}
