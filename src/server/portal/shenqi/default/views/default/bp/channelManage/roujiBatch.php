@@ -73,7 +73,7 @@ echo ace_form_close();
         </td>
         <td>
             {% if (!i && !o.options.autoUpload) { %}
-                <button class="btn btn-sm btn-success start" style="display:none" >
+                <button class="btn btn-sm btn-success start" style="display:none" disabled>
                     <i class="icon-upload"></i>
                     <span>上传</span>
                 </button>
