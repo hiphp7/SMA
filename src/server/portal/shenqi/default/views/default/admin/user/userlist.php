@@ -113,6 +113,8 @@
 
                       </tr>
                       <?php endforeach;?>
+                    <?php else:?>
+											<tr><td colspan="10" align="center">暂无内容</td></tr>
                     <?php endif;?>
 
 	                </tbody>

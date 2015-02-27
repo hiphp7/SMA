@@ -227,6 +227,10 @@ class ContentIssue extends Admin_Controller {
 		$tmp = array();
 		while (($buffer = fgets($handle, 4096)) !== false) {
 			$str = trim($buffer);	
+			if(!is_numeric($str)||strlen($sttr)!=11)
+			{
+				continue;
+			}
 			$data['sendsMobileNum'] = $str;
 			$tmp[] = $data;
 			if($i==1000)

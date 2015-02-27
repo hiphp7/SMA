@@ -15,9 +15,12 @@ echo ace_form_open('','',array('id'=>$item->uid));
 	
 	$options = array(
 	        'label_text'=>'昵称',
-	        'help'=>'用户的昵称'
+			'datatype'=>'*2-20',
+			'nullmsg'=>"请输入昵称！",
+			'errormsg'=>"用户昵称最少2字节",
+	        'help'=>'昵称'
 	);
-	echo ace_input($options,'nickname',$item->nickname,'maxlength="20"');
+	echo ace_input_m($options,'nickname',$item->nickname,'maxlength="20"');
 	
 	if(!$item->uid){
 		$options = array('label_text'=>'密码','datatype'=>'pwd','help'=>lang('pwd_help_msg'),'errormsg'=>lang('pwd_help_msg'));

@@ -80,7 +80,7 @@
                                             <div class="space-6"></div>
 
                                             <form id="login-form" action="<?php echo $action?>" method="post">
-                                                <input type="hidden" name="referer" value="<?php echo admin_base_url('index')?>" />
+                                                <input type="hidden" name="referer" value="<?php echo admin_base_url('main')?>" />
                                                 <fieldset>
                                                     <label class="block clearfix">
                                                         <span class="block input-icon input-icon-right">

@@ -36,7 +36,7 @@ echo ace_form_open('','',array('id'=>$item->agentid));
 	}
 	$options = array(
 	        'label_text'=>'手机号',
-					'datatype'=>'*11-11',
+					'datatype'=>'n11-11',
 					'nullmsg'=>"请输入手机号！",
 					'errormsg'=>"请输入手机号",
 	        'help'=>'代理联系人手机号'
@@ -53,12 +53,12 @@ echo ace_form_open('','',array('id'=>$item->agentid));
 
 	$options = array(
 	        'label_text'=>'QQ',
-					'datatype'=>'n1-15',
+					'datatype'=>'n5-15',
 					'nullmsg'=>"请输入联系人QQ！",
-					'errormsg'=>"联系人QQ不能大于15位数字",
+					'errormsg'=>"联系人QQ不能大于15位数字,不能小于5位",
 	        'help'=>'代理联系人的QQ'
 	);
-	echo ace_input($options,'qq',$item->qq,'maxlength="15"');
+	echo ace_input_m($options,'qq',$item->qq,'maxlength="15"');
 	
   	echo ace_srbtn('agent/agent',false);
   echo ace_form_close()

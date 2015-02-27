@@ -10,7 +10,7 @@ echo ace_form_open('','',array('id'=>$item->groupid));
 					'help'=>'组名称'
 					);
 	echo ace_input_m($options,'groupname',$item->groupname,'maxlength="15"');
-echo ace_srbtn('bp/channelManage/groups/info',TRUE,'确认保存','');
+echo ace_srbtn('bp/channelManage/groups',FALSE,'确认保存','');
 echo ace_form_close();
 ?>
 <script>

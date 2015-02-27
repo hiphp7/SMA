@@ -28,6 +28,10 @@ class Custom extends Admin_Controller {
 		if(!empty($edate))
 		{
 			$option['where']['visitTime <='] = $edate.' 23:59:59';
+		}else
+		{
+						$option['where']['visitTime <='] = date('Y-m-d').' 00:00:00';
+						$edate = date('Y-m-d');
 		}
 		$option['select'] ='c.title,v.*,starttime,endtime';
 		$option['join'] = array(array('t_customer_visit v','v.issueId=t_issue.issueId'),array('t_content c','c.contentid=t_issue.contentid'));

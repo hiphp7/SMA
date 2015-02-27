@@ -12,7 +12,7 @@
                             <label class="col-sm-3">
                             姓名：<input type="text" class="input-text" name="userName" value="<?php echo $userName?>" />
                             </label>
-                            <label class="col-sm-3">
+                            <label class="col-sm-4">
                             组名：<select type="text" class="input-text" name="groupId" value="<?php echo $groupId?>" >
 																			<option value="" >全部</option>
 																		<?php foreach($groups as $v){ 
@@ -22,7 +22,7 @@
 																		<?php }?>
 																	</select>
                             </label>
-                            <label class="col-sm-2">
+                            <label class="col-sm-1">
                                 <button class="btn btn-sm btn-primary" type="submit">
                                    <i class="icon-search"></i>搜索
                                 </button>

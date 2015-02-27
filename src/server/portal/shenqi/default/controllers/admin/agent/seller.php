@@ -145,7 +145,7 @@ class Seller extends Admin_Controller {
 		}
 		$item = $this->model->getOne($options);
     if(isset($item)&&!empty($item->sellerid)){
-    	echo json_encode(array('status'=> '1','info'=>'代理编号已经存在'));exit();
+    	echo json_encode(array('status'=> '1','info'=>'商户编号已经存在'));exit();
     }else{
     	echo json_encode(array('status'=> '0','info'=>'可用'));exit();
     }
@@ -159,7 +159,7 @@ class Seller extends Admin_Controller {
 		}
 		$item = $this->model->getOne($options);
     if(isset($item)&&!empty($item->sellerid)){
-    	echo json_encode(array('status'=> '1','info'=>'代理名称已经存在'));exit();
+    	echo json_encode(array('status'=> '1','info'=>'商户名称已经存在'));exit();
     }else{
     	echo json_encode(array('status'=> '0','info'=>'可用'));exit();
     }
@@ -175,7 +175,7 @@ class Seller extends Admin_Controller {
 		$item = $this->model->getOne($options);
     //if(isset($item)&&!empty($item->agentid)&&$item->agentid!=$id){
     if(isset($item)&&!empty($item->sellerid)){
-    	echo json_encode(array('status'=> '1','info'=>'代理简称已经存在'));exit();
+    	echo json_encode(array('status'=> '1','info'=>'商户简称已经存在'));exit();
     }else{
     	echo json_encode(array('status'=> '0','info'=>'可用'));exit();
     }
@@ -189,7 +189,7 @@ class Seller extends Admin_Controller {
 		$row = $this->model->getOne(array('where'=>array('sellerid'=>$id,'agentId'=>$this->agentId)));
 		if(empty($row))
 		{
-		  $this->_template('message',array('msg'=>'修改的用户不存在'));
+		  $this->_template('message',array('msg'=>'修改的商户不存在'));
 		  return;
 		}
 		$this->_template('admin/agent/reset',array('id'=>$id));
