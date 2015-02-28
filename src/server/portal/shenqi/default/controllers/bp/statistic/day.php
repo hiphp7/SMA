@@ -14,63 +14,71 @@ class Day extends Admin_Controller {
 		$per_page	= (int)$this->input->get_post('per_page');
 		$cupage	= config_item('site_page_num'); //每页显示个数
 		$return_arr = array ('total_rows' => true );
- 		$sdate=$this->input->get_post('sdate');
- 		if(empty($sdate))
- 		{
- 						$sdate = date('Y-m-01');
- 		}
- 		$edate=$this->input->get_post('edate');
- 		if(empty($edate))
- 		{
- 						$edate = date('Y-m-d');
- 		}
- 		$option =array('where'=>array('s_date >='=>$sdate,'s_date <='=>$edate,'sellerId'=>$this->sellerid),'page'    => $cupage,'per_page'  => $per_page);
+ 		$option =array('where'=>array('sellerId'=>$this->sellerid),'page'    => $cupage,'per_page'  => $per_page);
+		$date_range = $this->input->get_post('date_range');
+		$string='';
+		if($date_range){
+						$tmp_date = explode('-', $date_range);
+						$option['where']['s_date >= '] = trim($tmp_date[0]).' 00:00:00';
+						$option['where']['s_date <= '] = trim($tmp_date[1]).' 23:59:59';
+						$string .= '&date_range='.$date_range;
+		}else{
+						$option['where']['s_date >= '] = date('Y/m/d').' 00:00:00';
+						$option['where']['s_date <= '] = date('Y/m/d').' 23:59:59';
+						$date_range = date('Y/m/01').' - '.date('Y/m/d');
+						$string .= '&date_range='.$date_range;
+		}
 		$option['order'] = 's_date desc,mobile';
 		$rt =$this->statistic_seller_d_model->getAll($option,$return_arr);
- 		$url = '?sdate='.$sdate.'&edate='.$edate;
-		$page = $this->sharepage->showPage ($url, $return_arr ['total_rows'], $cupage );
- 		$this->_template('bp/statistic/dayByRj',array('lc_list'=>$rt,'page'=>$page,'totals'  => $return_arr ['total_rows'],'sdate'=>$sdate,'edate'=>$edate));
+		$page = $this->sharepage->showPage ($string, $return_arr ['total_rows'], $cupage );
+ 		$this->_template('bp/statistic/dayByRj',array('lc_list'=>$rt,'page'=>$page,'totals'  => $return_arr ['total_rows'],'date_range'=>$date_range));
 	}	
 	function dayByIssue()
 	{
 		$per_page	= (int)$this->input->get_post('per_page');
 		$cupage	= config_item('site_page_num'); //每页显示个数
 		$return_arr = array ('total_rows' => true );
- 		$sdate=$this->input->get_post('sdate');
- 		if(empty($sdate))
- 		{
- 						$sdate = date('Y-m-01');
- 		}
- 		$edate=$this->input->get_post('edate');
- 		if(empty($edate))
- 		{
- 						$edate = date('Y-m-d');
- 		}
- 		$option =array('where'=>array('s_date >='=>$sdate,'s_date <='=>$edate,'sellerId'=>$this->sellerid),'page'    => $cupage,'per_page'  => $per_page);
+
+		$date_range = $this->input->get_post('date_range');
+		$string='';
+ 		$option =array('where'=>array('sellerId'=>$this->sellerid),'page'    => $cupage,'per_page'  => $per_page);
+		if($date_range){
+						$tmp_date = explode('-', $date_range);
+						$option['where']['s_date >= '] = trim($tmp_date[0]).' 00:00:00';
+						$option['where']['s_date <= '] = trim($tmp_date[1]).' 23:59:59';
+						$string .= '&date_range='.$date_range;
+		}else{
+						$option['where']['s_date >= '] = date('Y/m/d').' 00:00:00';
+						$option['where']['s_date <= '] = date('Y/m/d').' 23:59:59';
+						$date_range = date('Y/m/01').' - '.date('Y/m/d');
+						$string .= '&date_range='.$date_range;
+		}
 		$option['order'] = 's_date desc,issueid';
 		$rt =$this->statistic_seller_di_model->getAll($option,$return_arr);
- 		$url = '?sdate='.$sdate.'&edate='.$edate;
-		$page = $this->sharepage->showPage ($url, $return_arr ['total_rows'], $cupage );
- 		$this->_template('bp/statistic/dayByIssue',array('lc_list'=>$rt,'page'=>$page,'totals'  => $return_arr ['total_rows'],'sdate'=>$sdate,'edate'=>$edate));
+		$page = $this->sharepage->showPage ($string, $return_arr ['total_rows'], $cupage );
+ 		$this->_template('bp/statistic/dayByIssue',array('lc_list'=>$rt,'page'=>$page,'totals'  => $return_arr ['total_rows'],'date_range'=>$date_range));
 	}
 	function dayByRate(){
 		$per_page	= (int)$this->input->get_post('per_page');
 		$cupage	= config_item('site_page_num'); //每页显示个数
 		$return_arr = array ('total_rows' => true );
- 		$sdate=$this->input->get_post('sdate');
- 		if(empty($sdate))
- 		{
- 						$sdate = date('Y-m-01');
- 		}
- 		$edate=$this->input->get_post('edate');
- 		if(empty($edate))
- 		{
- 						$edate = date('Y-m-d');
- 		}
- 		$option =array('where'=>array('s_date >='=>$sdate,'s_date <='=>$edate,'sellerId'=>$this->sellerid),'page'    => $cupage,'per_page'  => $per_page);
+		$date_range = $this->input->get_post('date_range');
+		$string='';
+ 		$option =array('where'=>array('sellerId'=>$this->sellerid),'page'    => $cupage,'per_page'  => $per_page);
+		if($date_range){
+						$tmp_date = explode('-', $date_range);
+						$option['where']['s_date >= '] = trim($tmp_date[0]).' 00:00:00';
+						$option['where']['s_date <= '] = trim($tmp_date[1]).' 23:59:59';
+						$string .= '&date_range='.$date_range;
+		}else{
+						$option['where']['s_date >= '] = date('Y/m/d').' 00:00:00';
+						$option['where']['s_date <= '] = date('Y/m/d').' 23:59:59';
+						$date_range = date('Y/m/01').' - '.date('Y/m/d');
+						$string .= '&date_range='.$date_range;
+		}
 		$option['order'] = 's_date desc';
 		$rt =$this->statistic_seller_dr_model->getAll($option,$return_arr);
 		$page = $this->sharepage->showPage ('', $return_arr ['total_rows'], $cupage );
- 		$this->_template('bp/statistic/dayByRate',array('lc_list'=>$rt,'page'=>$page,'totals'  => $return_arr ['total_rows'],'sdate'=>$sdate,'edate'=>$edate));
+ 		$this->_template('bp/statistic/dayByRate',array('lc_list'=>$rt,'page'=>$page,'totals'  => $return_arr ['total_rows'],'date_range'=>$date_range));
 	}	
 } 

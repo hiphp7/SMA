@@ -14,17 +14,17 @@ class Statistic extends Admin_Controller {
 		$cupage	= config_item('site_page_num'); //每页显示个数
  		$sdate=$this->input->get_post('sdate');
 		$str = '';
- 		if(empty($sdate))
- 		{
-			$sdate = date('Y-m-01');
- 		}
-		$str .= '&sdate='.$sdate;
- 		$edate=$this->input->get_post('edate');
- 		if(empty($edate))
- 		{
-			$edate = date('Y-m-d');
- 		}
-		$str .= '&edate'.$edate;
+		$date_range = $this->input->get_post('date_range');
+		if($date_range){
+						$tmp_date = explode('-', $date_range);
+						$sdate = trim($tmp_date[0]);
+						$edate = trim($tmp_date[1]);
+		}else{
+ 						$sdate = date('Y-m-01');
+ 						$edate = date('Y-m-d');
+						$date_range = $sdate.' - '.$edate;
+		}
+		$str = '&date_range='.$date_range;
 		$child =$this->getAllChild();
 		$sellerids = join(array_keys($child['seller']),"','");
 		$agentids = join(array_keys($child['agent']),"','");
@@ -47,7 +47,7 @@ class Statistic extends Admin_Controller {
 		}
 		$url = base_url('agent/statistic/day?'.$str);
 		$page = $this->sharepage->showPage ($url, $total_rows, $cupage );
-		$this->_template('agent/day',array('lc_list'=>$rt,'page'=>$page,'totals'  => $total_rows,'sdate'=>$sdate,'edate'=>$edate));
+		$this->_template('agent/day',array('lc_list'=>$rt,'page'=>$page,'totals'  => $total_rows,'date_range'=>$date_range));
 	}	
 	function month(){
 		$per_page	= (int)$this->input->get_post('per_page');

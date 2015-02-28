@@ -12,33 +12,27 @@ class Custom extends Admin_Controller {
     
 	function index(){
 		$per_page = (int)$this->input->get_post('per_page');
-		$sdate = $this->input->get_post('sdate');
-		$edate = $this->input->get_post('edate');
-                $cupage = config_item('site_page_num'); //每页显示个数
-                $return_arr = array ('total_rows' => true );
-                $option =array('where'=>array('t_issue.sellerId'=>$this->sellerid),'page'    => $cupage,'per_page'  => $per_page);
-		if(!empty($sdate))
-		{
-			$option['where']['visitTime >='] = $sdate.' 00:00:00';
-		}else
-		{
-			$option['where']['visitTime >='] = date('Y-m-d').' 00:00:00';
-			$sdate = date('Y-m-d');
-		}
-		if(!empty($edate))
-		{
-			$option['where']['visitTime <='] = $edate.' 23:59:59';
-		}else
-		{
-						$option['where']['visitTime <='] = date('Y-m-d').' 00:00:00';
-						$edate = date('Y-m-d');
+		$cupage = config_item('site_page_num'); //每页显示个数
+		$return_arr = array ('total_rows' => true );
+		$option =array('where'=>array('t_issue.sellerId'=>$this->sellerid),'page'    => $cupage,'per_page'  => $per_page);
+		$date_range = $this->input->get_post('date_range');
+		$string='';
+		if($date_range){
+						$tmp_date = explode('-', $date_range);
+						$option['where']['visitTime >= '] = trim($tmp_date[0]).' 00:00:00';
+						$option['where']['visitTime <= '] = trim($tmp_date[1]).' 23:59:59';
+						$string .= '&date_range='.$date_range;
+		}else{
+						$option['where']['visitTime >= '] = date('Y/m/d').' 00:00:00';
+						$option['where']['visitTime <= '] = date('Y/m/d').' 23:59:59';
+						$date_range = date('Y/m/d').' - '.date('Y/m/d');
+						$string .= '&date_range='.$date_range;
 		}
 		$option['select'] ='c.title,v.*,starttime,endtime';
 		$option['join'] = array(array('t_customer_visit v','v.issueId=t_issue.issueId'),array('t_content c','c.contentid=t_issue.contentid'));
-                $option['order'] = 'visitTime desc,v.issueId';
-                $rt =$this->issue_model->getAll($option,$return_arr);
-		$url = '?sdate='.$sdate.'&edate='.$edate;
-                $page = $this->sharepage->showPage ($url, $return_arr ['total_rows'], $cupage );
-                $this->_template('bp/statistic/custom',array('lc_list'=>$rt,'page'=>$page,'totals'  => $return_arr ['total_rows'],'sdate'=>$sdate,'edate'=>$edate));
+		$option['order'] = 'visitTime desc,v.issueId';
+		$rt =$this->issue_model->getAll($option,$return_arr);
+		$page = $this->sharepage->showPage ($string, $return_arr ['total_rows'], $cupage );
+		$this->_template('bp/statistic/custom',array('lc_list'=>$rt,'page'=>$page,'totals'  => $return_arr ['total_rows'],'date_range'=>$date_range));
 	}	
 } 

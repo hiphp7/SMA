@@ -1,4 +1,3 @@
- <script type="text/javascript" src="<?php echo static_url('theme/common/My97DatePicker/WdatePicker.js')?>?<?php echo random(3)?>"></script>
 <div class="row">
     <div class="col-xs-12">
 
@@ -7,12 +6,15 @@
 				<div class="row">
 					<div class="col-sm-12">
 					    <form method="get" action="">
-                             <label class="col-sm-4">
-                             开始：<input type="text" id='sdate' datefmt="yyyy-MM-dd" class="Wdate" name="sdate" value="<?php echo $sdate?>" />
+                            <div class="input-group col-sm-5">
+                             <label for="date_range">
+                             时间段：
                              </label>
-                             <label class="col-sm-4">
-                             结束：<input type="text" id='edate' datefmt="yyyy-MM-dd" class="Wdate " name="edate" value="<?php echo $edate?>" />
-                             </label>
+								<span class="input-group-addon">
+									<i class="icon-calendar bigger-110"></i>
+								</span>
+<input type="text" id='date_range' name="date_range" value="<?php echo $date_range;?>" class="form-control" style="margin-left: 0; border-left: none;"/>
+</div>
                              <label class="col-sm-4">
                                 <button class="btn btn-sm btn-primary" type="submit">
                                    <i class="icon-search"></i>搜索
@@ -65,15 +67,13 @@
         </div>
     </div>
 </div>
+<link rel="stylesheet" href="<?php echo static_url('theme/ace/css/daterangepicker.css')?>" />
+<script src="<?php echo static_url('theme/ace/js/date-time/moment.min.js')?>"></script>
+<script src="<?php echo static_url('theme/ace/js/date-time/daterangepicker.min.js')?>"></script>
  <script>
  $(function (){
-  $("#sdate").click(function(){
-         var o = $(this);
-             WdatePicker({dateFmt:o.attr('dateFmt')});
- });
-  $("#edate").click(function(){
-         var o = $(this);
-             WdatePicker({dateFmt:o.attr('dateFmt')});
- });
+		$('#date_range').daterangepicker().prev().on(ace.click_event, function(){
+			$(this).next().focus();
+		});
  });
  </script>
