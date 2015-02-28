@@ -24,7 +24,7 @@
 	
 	                                                                                            欢迎使用
 	                    <strong class="green">
-							<?php echo config_item('site_name')?>后台管理系统
+							<?php echo config_item('site_name')?>商户门户管理系统
 	                        <small>(v1.0)</small>
 	                    </strong>
 	                </div>

@@ -19,12 +19,12 @@ class Day extends Admin_Controller {
 		$string='';
 		if($date_range){
 						$tmp_date = explode('-', $date_range);
-						$option['where']['s_date >= '] = trim($tmp_date[0]).' 00:00:00';
-						$option['where']['s_date <= '] = trim($tmp_date[1]).' 23:59:59';
+						$option['where']['s_date >= '] = date('Y-m-d',strtotime(trim($tmp_date[0])));
+						$option['where']['s_date <= '] = date('Y-m-d',strtotime(trim($tmp_date[1])));
 						$string .= '&date_range='.$date_range;
 		}else{
-						$option['where']['s_date >= '] = date('Y/m/d').' 00:00:00';
-						$option['where']['s_date <= '] = date('Y/m/d').' 23:59:59';
+						$option['where']['s_date >= '] = date('Y-m-01');
+						$option['where']['s_date <= '] = date('Y-m-d');
 						$date_range = date('Y/m/01').' - '.date('Y/m/d');
 						$string .= '&date_range='.$date_range;
 		}
@@ -44,12 +44,12 @@ class Day extends Admin_Controller {
  		$option =array('where'=>array('sellerId'=>$this->sellerid),'page'    => $cupage,'per_page'  => $per_page);
 		if($date_range){
 						$tmp_date = explode('-', $date_range);
-						$option['where']['s_date >= '] = trim($tmp_date[0]).' 00:00:00';
-						$option['where']['s_date <= '] = trim($tmp_date[1]).' 23:59:59';
+						$option['where']['s_date >= '] = date('Y-m-d',strtotime(trim($tmp_date[0])));
+						$option['where']['s_date <= '] = date('Y-m-d',strtotime(trim($tmp_date[1])));
 						$string .= '&date_range='.$date_range;
 		}else{
-						$option['where']['s_date >= '] = date('Y/m/d').' 00:00:00';
-						$option['where']['s_date <= '] = date('Y/m/d').' 23:59:59';
+						$option['where']['s_date >= '] = date('Y-m-01');
+						$option['where']['s_date <= '] = date('Y-m-d');
 						$date_range = date('Y/m/01').' - '.date('Y/m/d');
 						$string .= '&date_range='.$date_range;
 		}
@@ -67,12 +67,12 @@ class Day extends Admin_Controller {
  		$option =array('where'=>array('sellerId'=>$this->sellerid),'page'    => $cupage,'per_page'  => $per_page);
 		if($date_range){
 						$tmp_date = explode('-', $date_range);
-						$option['where']['s_date >= '] = trim($tmp_date[0]).' 00:00:00';
-						$option['where']['s_date <= '] = trim($tmp_date[1]).' 23:59:59';
+						$option['where']['s_date >= '] = date('Y-m-d',strtotime(trim($tmp_date[0])));
+						$option['where']['s_date <= '] = date('Y-m-d',strtotime(trim($tmp_date[1])));
 						$string .= '&date_range='.$date_range;
 		}else{
-						$option['where']['s_date >= '] = date('Y/m/d').' 00:00:00';
-						$option['where']['s_date <= '] = date('Y/m/d').' 23:59:59';
+						$option['where']['s_date >= '] = date('Y-m-01');
+						$option['where']['s_date <= '] = date('Y-m-d');
 						$date_range = date('Y/m/01').' - '.date('Y/m/d');
 						$string .= '&date_range='.$date_range;
 		}

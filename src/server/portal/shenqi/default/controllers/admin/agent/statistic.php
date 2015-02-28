@@ -15,12 +15,12 @@ class Statistic extends Admin_Controller {
 		$date_range = $this->input->get_post('date_range');
 		if($date_range){
 						$tmp_date = explode('-', $date_range);
-						$sdate = trim($tmp_date[0]);
-						$edate = trim($tmp_date[1]);
+						$sdate = date('Y-m-d',strtotime(trim($tmp_date[0])));
+						$edate = date('Y-m-d',strtotime(trim($tmp_date[1])));
 		}else{
  						$sdate = date('Y-m-01');
  						$edate = date('Y-m-d');
-						$date_range = $sdate.' - '.$edate;
+						$date_range = date('Y/m/01').' - '.date('Y-m-d');
 		}
 		$child =$this->getAllChild();
 		$sellerids = join(array_keys($child['seller']),"','");

@@ -6,13 +6,15 @@
 				<div class="row">
 					<div class="col-sm-12">
 					    <form method="get" action="">
-                            <label class="col-sm-3">
+                            <label class="col-sm-4">
                             组名：<input type="text" class="input-text" name="groupName" value="<?php echo $name?>" />
                             </label>
-                            <label class="col-sm-5">
+                            <label class="col-sm-1">
                                 <button class="btn btn-sm btn-primary" type="submit">
                                    <i class="icon-search"></i>搜索
                                 </button>
+                            </label>
+                            <label class="col-sm-6">
                             </label>
 						    <label class="col-sm-1">
 							    <a class="btn btn-sm btn-primary" href="<?php echo base_url('bp/channelManage/groups/info')?>">
