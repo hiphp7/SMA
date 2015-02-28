@@ -225,7 +225,7 @@ class Seller extends Admin_Controller {
 		if($tof){
 		    ajax_return(lang('update_success'),0,'',admin_base_url('agent/seller'));
 	    }else{
-	        ajax_return(lang('update_pwd_failed'));
+	        ajax_return("密码更新失败");
 	    }
 	}
 }

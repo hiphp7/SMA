@@ -3,7 +3,14 @@
 
     echo ace_form_open();
 
-    echo ace_input('昵称','nickname',$item['nickname']);
+	$options = array(
+	        'label_text'=>'昵称',
+			'datatype'=>'*2-20',
+			'nullmsg'=>"请输入昵称！",
+			'errormsg'=>"用户昵称最少2字节",
+	        'help'=>'昵称'
+	);
+    echo ace_input_m($options,'nickname',$item['nickname'],'maxlength="20"');
     
     echo ace_input('邮箱','email',$item['email']);
     
