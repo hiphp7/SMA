@@ -138,6 +138,11 @@ class Rouji extends Admin_Controller {
 										{
 														continue;
 										}
+
+										if(!is_numeric($v[1])||strlen($v[1])!=11)
+										{
+														continue;
+										}
 										if($this->roujiExist($v[1]))
 										{
 														echo '{"status":1,"info":"上传失败,号码'.$v[1].'已经存在"}';
