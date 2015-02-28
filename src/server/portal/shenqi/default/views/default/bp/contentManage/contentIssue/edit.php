@@ -159,7 +159,7 @@ echo ace_form_close();
         </td>
         <td>
             {% if (!i && !o.options.autoUpload) { %}
-                <button class="btn btn-sm btn-success start" style="" >
+                <button class="btn btn-sm btn-success start" style="display:none;" disabled>
                     <i class="icon-upload"></i>
                     <span>上传</span>
                 </button>
@@ -247,13 +247,14 @@ $(function () {
         disableImageResize: /Android(?!.*Chrome)|Opera/
             .test(window.navigator.userAgent),
         maxFileSize: 50000000,
-        maxNumberOfFiles: 7,
+        maxNumberOfFiles: 1,
         acceptFileTypes: /(\.|\/)(txt)$/i,
         done: function (e, data) {
             $('.cancel').remove();
 
             if(data.result.status == 0){
                         layer.msg(data.result.info,3,1,function(){
+																window.location.href='<?php echo base_url('bp/contentManage/contentIssue');?>';
 														count++;	
                         });
                         }else{
@@ -360,6 +361,7 @@ function pre(i)
 	return false;
 
 }
+/*
 $("#bt").click(function (){
 //if(count>0)
 if(true)
@@ -370,5 +372,6 @@ if(true)
         layer.alert("请先点击上传按钮上传文件",3);
 }
 });
+*/
 });
 </script>
