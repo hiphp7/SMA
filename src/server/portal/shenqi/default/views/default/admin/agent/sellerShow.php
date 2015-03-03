@@ -50,7 +50,7 @@ echo ace_form_open('','',array('id'=>$item->agentid));
 	        'label_text'=>'QQ',
 	        'help'=>'商户联系人的QQ'
 	);
-	echo ace_input_m($options,'qq',$item->qq,'maxlength="45" disabled="disabled"');
+//	echo ace_input_m($options,'qq',$item->qq,'maxlength="45" disabled="disabled"');
 ?>	
 <div class="clearfix form-actions">
                       <div class="col-md-offset-3 col-md-9">

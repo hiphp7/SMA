@@ -5,13 +5,13 @@
                 <i class="green icon-cog bigger-120"></i> 基本设置
             </a>
         </li>
-
+<!--
         <li>
             <a data-toggle="tab" href="#upload_set">
                 <i class="orange icon-cloud-upload bigger-120"></i> 上传设置
             </a>
         </li>
-
+-->
     </ul>
     
     <?php 
@@ -31,11 +31,11 @@
 
                 //echo ace_input(array('label_text'=>'字符串加密','help'=>'字符串加密,默认为123456,在启用程序时请修改,之后请劳记'),'site_auth_key',$setting->site_auth_key);
 
-                echo ace_input(array('label_text'=>'缓存时间','help'=>'整站缓存时间，单位秒'),'site_cache_time',$setting->site_cache_time);
+                //echo ace_input(array('label_text'=>'缓存时间','help'=>'整站缓存时间，单位秒'),'site_cache_time',$setting->site_cache_time);
 
-                echo ace_input(array('label_text'=>'后台程序目录','help'=>'后台目录,如果程序目录没有改动,请不要修改此项'),'site_admin_dir',$setting->site_admin_dir);
+               // echo ace_input(array('label_text'=>'后台程序目录','help'=>'后台目录,如果程序目录没有改动,请不要修改此项'),'site_admin_dir',$setting->site_admin_dir);
                 
-                echo ace_input(array('label_text'=>'基本素材目录','help'=>'基本素材目录,如果目录没有改动,请不要修改此项'),'site_static_dir',$setting->site_static_dir);
+               // echo ace_input(array('label_text'=>'基本素材目录','help'=>'基本素材目录,如果目录没有改动,请不要修改此项'),'site_static_dir',$setting->site_static_dir);
                 
                 echo ace_input(array('label_text'=>'每页数量','help'=>'每页显示的数量'),'site_page_num',$setting->site_page_num);
                 
@@ -43,11 +43,12 @@
                 
                 echo ace_input(array('label_text'=>'拒绝登录等待时间','help'=>'登入密码错误次数达到, 将登录等待时间,单位分钟'),'site_accesslogin_time',$setting->site_accesslogin_time);
                 
-                echo ace_radio(array('label_text'=>'是否开启缓存','help'=>'开启缓存后,将提高页面执行效率'),'cache_open',$setting->cache_open);
+               // echo ace_radio(array('label_text'=>'是否开启缓存','help'=>'开启缓存后,将提高页面执行效率'),'cache_open',$setting->cache_open);
 
-                echo ace_radio(array('label_text'=>'是否开启调试','help'=>'开启调试后，会在页脚输出页面调试信息'),'site_debug',$setting->site_debug);
+               // echo ace_radio(array('label_text'=>'是否开启调试','help'=>'开启调试后，会在页脚输出页面调试信息'),'site_debug',$setting->site_debug);
             ?>
         </div>
+<!--
         <div id="upload_set" class="tab-pane">
             <?php
                 echo ace_input(array('label_text'=>'图片文件上传目录','help'=>'图片文件等素材上传保存目录,如果目录没有改动,请不要修改此项'),'site_attachments_dir',$setting->site_attachments_dir);
@@ -61,6 +62,7 @@
                 echo ace_input(array('label_text'=>'允许的附件格式','help'=>'允许的附件格式,多个用|分隔'),'site_file_ext',$setting->site_file_ext);
             ?>
         </div>
+-->
     </div>
     <?php 
            echo ace_srbtn('','');

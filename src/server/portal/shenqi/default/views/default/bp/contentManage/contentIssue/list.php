@@ -9,8 +9,11 @@
                             <label class="col-sm-4">
                             发布号：<input type="text" class="input-text" name="issueid" value="<?php echo $issueid?>" />
                             </label>
-                            <label class="col-sm-4">
+                            <label class="col-sm-1">
                             标题：<input type="text" class="input-text" name="title" value="<?php echo $title?>" />
+                            </label>
+                            <label class="col-sm-3">
+															&nbsp;
                             </label>
                             <label class="col-sm-3">
                                 <button class="btn btn-sm btn-primary" type="submit">

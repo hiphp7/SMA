@@ -166,7 +166,7 @@ $(function () {
 
             if(data.result.status == 0){
                         layer.msg(data.result.info,3,1,function(){
-															
+																window.location.href='<?php echo base_url('bp/channelManage/rouji');?>';
                         });
                         }else{
                                 layer.msg(data.result.info,3,3,function(){

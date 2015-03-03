@@ -11,7 +11,7 @@
 					    <form method="get" action="<?php echo admin_base_url('user/userlog')?>">
 						    
                             <label>
-                            用户账号：<input type="text" class="input-text" name="loginname" value="" />
+                            用户账号：<input type="text" class="input-text" name="loginname" value="<?php echo $loginname?>" />
                             </label>
                             <label>
                                 <button class="btn btn-sm btn-primary" type="submit">

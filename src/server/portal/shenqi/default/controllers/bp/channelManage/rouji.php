@@ -130,6 +130,11 @@ class Rouji extends Admin_Controller {
 						$reader = new Excel_Reader();
 						$reader->setOutputEncoding('UTF-8');
 						$reader->read($_FILES['files']['tmp_name']);
+						if(!isset($reader->sheets[0]))
+						{
+										echo '{"status":1,"info":"上传失败"}';
+										return;
+						}
 						$tmp = $reader->sheets[0]['cells'];
 						$time = date('Y-m-d H:i:s');
 						foreach( $tmp as $k=> $v)

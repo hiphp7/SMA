@@ -15,7 +15,7 @@
 	                            </a>
 						    </label>
                             <label>
-                            组名：<input type="text" class="input-text" name="title" value="" />
+                            组名：<input type="text" class="input-text" name="title" value="<?php echo $title;?>" />
                             </label>
                             <label>
                                 <button class="btn btn-sm btn-primary" type="submit">

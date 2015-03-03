@@ -58,7 +58,7 @@ echo ace_form_open('','',array('id'=>$item->sellerid));
 					'errormsg'=>"QQ号不能大于15位数字,不能小于5位",
 	        'help'=>'商户联系人的QQ'
 	);
-	echo ace_input_m($options,'qq',$item->qq,'maxlength="15"');
+//	echo ace_input_m($options,'qq',$item->qq,'maxlength="15"');
 	
   	echo ace_srbtn('agent/seller',false);
   echo ace_form_close()

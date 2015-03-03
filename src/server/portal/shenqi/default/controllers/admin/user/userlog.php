@@ -23,7 +23,7 @@ class Userlog extends Admin_Controller {
 			$where['status >='] = -1;
 		}else{
 			
-			$where['status'] = 1;
+			$where['status >='] = 0;
 		}
 		
 		$loginname = htmlspecialchars($this->input->get_post("loginname"));
@@ -54,6 +54,7 @@ class Userlog extends Admin_Controller {
 		$data = array(
 			'lc_list'	=> $lc_list,
 			'page'		=> $page,	
+			'loginname'		=> $loginname,	
 			'totals'	=> $return_arr ['total_rows'],	 //数据总数
 		); 
 

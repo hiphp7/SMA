@@ -50,6 +50,7 @@ class Group extends Admin_Controller {
 		$data = array(
 			'lc_list'	=> $lc_list,
 			'page'		=> $page,	
+			'title'		=> $title,	
 			'totals'	=> $return_arr ['total_rows'],	 //数据总数
 		); 
 		

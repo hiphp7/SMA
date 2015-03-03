@@ -36,9 +36,17 @@ class basic extends Admin_Controller {
 			}
 		}		
 		//缓存
+		require $file;
+		foreach($config as $k=>$v)
+		{
+						if(isset($array[$k]))
+						{
+										$config[$k] = $array[$k];
+						}
+		}
 		$text='<?php if ( ! defined("BASEPATH")) exit("No direct script access allowed");';
 		
-		$text.=' $config='.var_export($array,true).';';
+		$text.=' $config='.var_export($config,true).';';
 		
 		if(false!==@fopen($file,'w+')){
 			

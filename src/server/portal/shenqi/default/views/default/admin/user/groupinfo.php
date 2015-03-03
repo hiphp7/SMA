@@ -3,9 +3,9 @@
 echo ace_form_open('','',array('gid'=>$item->gid));
 	$options = array(
 					'label_text'=>'角色名称',
-					'datatype'=>'*', 
+					'datatype'=>'s1-10', 
 					'nullmsg'=>"请输入角色名称！",
-					'errormsg'=>"请输入角色名称", 
+					'errormsg'=>"角色名必须为数字、字母、下划线和点号，最长10位", 
 					'help'=>'角色名称'
 					);
 	echo ace_input_m($options,'title',$item->title,'maxlength="35"');
