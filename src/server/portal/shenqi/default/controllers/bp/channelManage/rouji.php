@@ -130,7 +130,7 @@ class Rouji extends Admin_Controller {
 						$reader = new Excel_Reader();
 						$reader->setOutputEncoding('UTF-8');
 						$reader->read($_FILES['files']['tmp_name']);
-						if(!isset($reader->sheets[0]))
+						if(!isset($reader->sheets[0])||!isset($reader->sheets[0]['cells']))
 						{
 										echo '{"status":1,"info":"上传失败"}';
 										return;
@@ -158,7 +158,10 @@ class Rouji extends Admin_Controller {
 										}
 										$data[] = array('mobileNum'=>$v[1],'username'=>$v[2],'groupid'=>$id,'createtime'=>$time);
 						}
-						$this->rouji_model->addBatch($data);
+						if(!empty($data))
+						{
+										$this->rouji_model->addBatch($data);
+						}
 		}
 		catch(Exception $e) 
 		{

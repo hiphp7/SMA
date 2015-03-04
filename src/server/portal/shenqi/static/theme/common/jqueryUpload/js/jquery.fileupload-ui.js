@@ -568,10 +568,11 @@
             this._on(fileUploadButtonBar.find('.start'), {
                 click: function (e) {
                     
-					if(filesList.find(".error").length>0)
-					{
-					return false;
-					}
+					filesList.find(".error").each(function (i,e){
+									if($(e).html()!= ''){
+									return false;
+									}
+									});
 					if(filesList.find('.start').length >0){
 	                    e.preventDefault();
 						filesList.find('.start').click();
