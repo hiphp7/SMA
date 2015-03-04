@@ -27,7 +27,7 @@ echo ace_form_open('','',array('id'=>$item->agentid));
 	echo ace_input_m($options,'shortname',$item->shortname,'maxlength="45" id="shortname" disabled="disabled"');
 	$options = array(
 	        'label_text'=>'手机号',
-					'datatype'=>'*11-11',
+					'datatype'=>'n11-11',
 					'nullmsg'=>"请输入手机号！",
 					'errormsg'=>"请输入手机号",
 	        'help'=>'代理联系人手机号'
