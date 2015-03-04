@@ -85,9 +85,9 @@ class Index extends Admin_Controller {
 		if($this->user_info->gid == 0){
 			
 		}else if ($this->user_info->gid == 1){
-			$where['gid >'] = 1;
+			$where['gid >'] = 0;
 		}else{
-			$where['gid >'] = 2;
+			$where['gid >'] = 1;
 		}
 		
 		$options['where'] = $where;

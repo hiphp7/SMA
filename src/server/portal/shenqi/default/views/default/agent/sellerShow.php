@@ -51,6 +51,14 @@ echo ace_form_open('','',array('id'=>$item->agentid));
 	        'help'=>'商户联系人的QQ'
 	);
 //	echo ace_input_m($options,'qq',$item->qq,'maxlength="45" disabled="disabled"');
-	
+?>	
+<div class="clearfix form-actions">
+                      <div class="col-md-offset-3 col-md-9">
+        				  <a href="<?php echo base_url('agent/seller');?>" class="btn btn-info">
+                             <i class="icon-list"></i>返回列表
+                          </a>
+                  </div>
+                  </div>
+<?php 	
   echo ace_form_close()
 ?>

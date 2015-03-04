@@ -46,7 +46,7 @@ echo ace_form_open('','',array('id'=>$item->agentid));
 	        'label_text'=>'QQ',
 	        'help'=>'代理联系人的QQ'
 	);
-	echo ace_input($options,'qq',$item->qq,'maxlength="45"');
+//	echo ace_input($options,'qq',$item->qq,'maxlength="45"');
 	
   	echo ace_srbtn('agent/main',false);
   echo ace_form_close()
