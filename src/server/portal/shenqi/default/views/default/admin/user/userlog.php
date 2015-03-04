@@ -1,8 +1,5 @@
 <div class="row">
     <div class="col-xs-12">
-        <div class="table-header">
-            &nbsp;
-        </div>
 
         <div class="table-responsive">
             <div class="dataTables_wrapper">   
