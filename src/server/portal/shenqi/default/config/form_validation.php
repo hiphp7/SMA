@@ -40,7 +40,7 @@ $config = array(
                 array(
                         'field' => 'nickname',
                         'label' => '昵称',
-                        'rules' => 'trim|min_length[2]|max_length[32]|'
+                        'rules' => 'trim|min_length[2]|max_length[100]|'
                 ),
                 array(
                         'field' => 'email',
