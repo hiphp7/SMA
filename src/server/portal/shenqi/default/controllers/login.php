@@ -55,7 +55,7 @@ class Login extends MY_Controller {
      * @access public
      * @return void
      */
-    public function logout($url='') {
+    public function logout($url='index-bp') {
         
         $this->load->helper('cookie');
         delete_cookie('P');

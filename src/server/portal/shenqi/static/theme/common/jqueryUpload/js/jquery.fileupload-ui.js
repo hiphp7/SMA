@@ -568,21 +568,23 @@
             this._on(fileUploadButtonBar.find('.start'), {
                 click: function (e) {
                     
+					if(filesList.find(".error").length>0)
+					{
+					return false;
+					}
 					if(filesList.find('.start').length >0){
 	                    e.preventDefault();
 						filesList.find('.start').click();
 						return false;
 					}
-/*
   else{
-						if(typeof(isMust) != 'undefined')
-						{
+					//	if(typeof(isMust) != 'undefined')
+					//	{
 							layer.alert('请选择文件');
 							return false;
-						}
-						return true;
+					//	}
+				//		return true;
 					}
-*/
 					
                 }
             });
