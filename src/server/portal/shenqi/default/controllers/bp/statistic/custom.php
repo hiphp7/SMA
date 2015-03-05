@@ -16,7 +16,7 @@ class Custom extends Admin_Controller {
 		$return_arr = array ('total_rows' => true );
 		$option =array('where'=>array('t_issue.sellerId'=>$this->sellerid),'page'    => $cupage,'per_page'  => $per_page);
 		$date_range = $this->input->get_post('date_range');
-		$string='';
+		$string=base_url('bp/statistic/custom?');
 		if($date_range){
 						$tmp_date = explode('-', $date_range);
 						$option['where']['visitTime >= '] = trim($tmp_date[0]).' 00:00:00';

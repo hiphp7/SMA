@@ -13,7 +13,7 @@ class Statistic extends Admin_Controller {
 		$per_page	= (int)$this->input->get_post('per_page');
 		$cupage	= config_item('site_page_num'); //每页显示个数
  		$sdate=$this->input->get_post('sdate');
-		$str = '';
+		$str = base_url('agent/statistic/day?');;
 		$date_range = $this->input->get_post('date_range');
 		if($date_range){
 						$tmp_date = explode('-', $date_range);

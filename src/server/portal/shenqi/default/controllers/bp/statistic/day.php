@@ -16,7 +16,7 @@ class Day extends Admin_Controller {
 		$return_arr = array ('total_rows' => true );
  		$option =array('where'=>array('sellerId'=>$this->sellerid),'page'    => $cupage,'per_page'  => $per_page);
 		$date_range = $this->input->get_post('date_range');
-		$string='';
+		$string=base_url('bp/statistic/day/dayByRj?');
 		if($date_range){
 						$tmp_date = explode('-', $date_range);
 						$option['where']['s_date >= '] = date('Y-m-d',strtotime(trim($tmp_date[0])));
@@ -40,7 +40,7 @@ class Day extends Admin_Controller {
 		$return_arr = array ('total_rows' => true );
 
 		$date_range = $this->input->get_post('date_range');
-		$string='';
+		$string=base_url('bp/statistic/day/dayByIssue?');
  		$option =array('where'=>array('sellerId'=>$this->sellerid),'page'    => $cupage,'per_page'  => $per_page);
 		if($date_range){
 						$tmp_date = explode('-', $date_range);
@@ -63,7 +63,7 @@ class Day extends Admin_Controller {
 		$cupage	= config_item('site_page_num'); //每页显示个数
 		$return_arr = array ('total_rows' => true );
 		$date_range = $this->input->get_post('date_range');
-		$string='';
+		$string=base_url('bp/statistic/day/dayByRate?');
  		$option =array('where'=>array('sellerId'=>$this->sellerid),'page'    => $cupage,'per_page'  => $per_page);
 		if($date_range){
 						$tmp_date = explode('-', $date_range);
