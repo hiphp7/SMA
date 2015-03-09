@@ -174,10 +174,17 @@ function fillAgent($master,$sellers,$key ='master')
 
 	function getDaySendByIssue($day,$sellerid)
 	{
-		$sql="select '$sellerid' as sellerid ,'$day' as s_date,i.issueid ,c.title,CONCAT(i.starttime,'至',i.endtime,'  ') as cycle,count(*) as plancount  from t_task t left join t_issue i on (i.issueid=t.issueid) left join t_content c on(c.contentid=i.contentid) where sentTime between '$day 00:00:00' and '$day 23:59:59' and i.sellerid='$sellerid' group by i.issueid";
+		$sql="select  i.sellerid ,'$day' as s_date,i.issueid ,c.title,CONCAT(i.starttime,'至',i.endtime,'  ') as cycle from  t_issue i left join t_content c on(c.contentid=i.contentid) where (starttime <= '$day 23:59:59' and endtime>= '$day 00:00:00') and i.sellerid='$sellerid' and i.status!='RVK' group by i.issueid";
 		//echo $sql."\n";
 		$query = $this->db->query($sql);
-		return $query->result_array();
+		$rt = $query->result_array();
+		foreach($rt as $k=>$v){
+						$sql = 'select count(*) as c from t_task where issueid='.$v['issueid'];
+						$query = $this->db->query($sql);
+						$row = $query->row_array();
+						$rt[$k]['plancount'] = $row['c'];
+		}
+		return $rt;
 	}
 	function getIssueRealCount($day ,$issueid)
 	{
@@ -187,10 +194,27 @@ function fillAgent($master,$sellers,$key ='master')
 	}
 	function getDaySendByRJ($day,$sellerid)
 	{
+		
 		$sql="select '$sellerid' as sellerid ,'$day' as s_date,roujimobilenum as mobile,count(*) as sentcount from t_task t left join t_issue i on (i.issueid=t.issueid) where sentTime between '$day 00:00:00' and '$day 23:59:59' and sellerid='$sellerid' group by roujiMobileNum";
 		//echo $sql."\n";
 		$query = $this->db->query($sql);
-		return $query->result_array();
+		$send = $query->result_array();
+		$tmp=array();
+		foreach($send as $v)
+		{
+						$tmp[] = $v['mobile'];
+		}
+		$sql = "select mobileNum from t_rouji r left join t_rouji_group g on (r.groupId=g.groupId) where sellerid='$sellerid'";
+		$query = $this->db->query($sql);
+		$rouji = $query->result_array();
+		foreach($rouji as $v)
+		{
+						if(!in_array($v['mobileNum'],$tmp))
+						{
+										$send[] = array('sellerid'=>$sellerid,'s_date'=>$day,'mobile'=>$v['mobileNum'],'sentcount'=>0);
+						}
+		}
+		return $send;
 	}
 	function agent_month(){
 		$day = date("Y-m",strtotime("-1 month"));
@@ -247,5 +271,19 @@ function fillAgent($master,$sellers,$key ='master')
 		$sql.= join($row,"','")."')";
 		//echo $sql;
 		return $this->db->query($sql);
+	}
+	function test($i=1)
+	{
+
+					for($i=1;$i<29;$i++){
+									$str =str_pad($i,2,'0',STR_PAD_LEFT);
+									$rows = $this->getDaySendByRJ("2015-02-$i",'shangwushanghu');
+		//			$r = $this->getDaySendByIssue("2015-02-$str",'shangwushanghu');
+			foreach($rows as $row){
+		//		$row['realcount'] =$this->getIssueRealCount('2015-02-'.$str,$row['issueid']);
+				$this->put2db('t_statistic_seller_d',$row);
+
+			}
+					}
 	}
 }

@@ -28,7 +28,7 @@ class Day extends Admin_Controller {
 						$date_range = date('Y/m/01').' - '.date('Y/m/d');
 						$string .= '&date_range='.$date_range;
 		}
-		$option['order'] = 's_date desc,mobile';
+		$option['order'] = 's_date desc,sentCount desc ,mobile';
 		$rt =$this->statistic_seller_d_model->getAll($option,$return_arr);
 		$page = $this->sharepage->showPage ($string, $return_arr ['total_rows'], $cupage );
  		$this->_template('bp/statistic/dayByRj',array('lc_list'=>$rt,'page'=>$page,'totals'  => $return_arr ['total_rows'],'date_range'=>$date_range));
