@@ -24,6 +24,12 @@ class basic extends Admin_Controller {
 	
 	public function save(){
 		
+	    $this->load->library('form_validation');
+	    $valid = $this->form_validation->run('admin/setting/basic/info');
+	    if(!$valid){
+	        $msg = $this->form_validation->error_string();
+	        ajax_return($msg,3);
+	    }
 		$file='./default/config/setting.php';
 		$array = array();
 		foreach ($this->input->post(null,true) as $k=>$v){

@@ -7,6 +7,33 @@ $config = array(
                         'rules' => 'trim|min_length[2]'
                 ),
         ),
+        'admin/setting/basic/info'=>array(
+                array(
+                        'field' => 'site_admin_email',
+                        'label' => '管理员邮箱',
+                        'rules' => 'trim|valid_email'
+                ),
+                array(
+                        'field' => 'site_admin_qq',
+                        'label' => '管理员QQ',
+                        'rules' => 'trim|numeric'
+                ),
+                array(
+                        'field' => 'site_page_num',
+                        'label' => '每页数量',
+                        'rules' => 'trim|numeric'
+                ),
+                array(
+                        'field' => 'site_accesslogin_count',
+                        'label' => '限制登录总共次数',
+                        'rules' => 'trim|numeric'
+                ),
+                array(
+                        'field' => 'site_accesslogin_time',
+                        'label' => '拒绝登录等待时间',
+                        'rules' => 'trim|numeric'
+                ),
+        ),
         'index/_reset_password' => array(
                 array(
                         'field' => 'password',

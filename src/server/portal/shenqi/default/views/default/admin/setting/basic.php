@@ -21,11 +21,11 @@
         <div id="basic_set" class="tab-pane active">
         
             <?php 
-                echo ace_input(array('label_text'=>'网站标题','help'=>'站点名称，将显示在浏览器窗口标题等位置'),'site_name',$setting->site_name);
+                echo ace_input(array('label_text'=>'网站标题','help'=>'站点名称，将显示在浏览器窗口标题等位置'),'site_name',$setting->site_name,'maxlength="15"');
 
-                echo ace_input(array('label_text'=>'管理员邮箱','help'=>'管理员 E-mail，将作为系统发邮件的时候的发件人地址'),'site_admin_email',$setting->site_admin_email);
+                echo ace_input(array('label_text'=>'管理员邮箱','help'=>'管理员 E-mail，将作为系统发邮件的时候的发件人地址'),'site_admin_email',$setting->site_admin_email,'maxlength="45"');
 
-                echo ace_input(array('label_text'=>'管理员QQ','help'=>'管理员QQ，作为网站登入和联系管理员QQ'),'site_admin_qq',$setting->site_admin_qq);
+                echo ace_input(array('label_text'=>'管理员QQ','help'=>'管理员QQ，作为网站登入和联系管理员QQ'),'site_admin_qq',$setting->site_admin_qq,'maxlength="15"');
 
                 echo ace_input(array('label_text'=>'系统错误信息','help'=>'当系统出错时的显示信息'),'site_error_message',$setting->site_error_message);
 
@@ -37,7 +37,7 @@
                 
                // echo ace_input(array('label_text'=>'基本素材目录','help'=>'基本素材目录,如果目录没有改动,请不要修改此项'),'site_static_dir',$setting->site_static_dir);
                 
-                echo ace_input(array('label_text'=>'每页数量','help'=>'每页显示的数量'),'site_page_num',$setting->site_page_num);
+                echo ace_input(array('label_text'=>'每页数量','help'=>'每页显示的数量'),'site_page_num',$setting->site_page_num,'maxlength="3"');
                 
                 echo ace_input(array('label_text'=>'限制登录总共次数','help'=>'登入密码错误次数限制'),'site_accesslogin_count',$setting->site_accesslogin_count);
                 
