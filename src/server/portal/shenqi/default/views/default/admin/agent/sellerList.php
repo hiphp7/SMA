@@ -79,8 +79,8 @@
                                     <span class="lbl"></span>
                                 </label>
                                                         </td>
-                            <td><?php echo $item->updatetime;?></td>
                             <td><?php echo $item->createtime;?></td>
+                            <td><?php echo $item->updatetime;?></td>
 <td><div class="visible-md visible-lg hidden-sm hidden-xs action-buttons"><a href="<?php echo admin_base_url('agent/seller/modify_pwd?id='.$item->sellerid);?>"><i class="icon-undo bigger-130"></i></a></div></td>
                           </tr>
                           <?php endforeach;?>
