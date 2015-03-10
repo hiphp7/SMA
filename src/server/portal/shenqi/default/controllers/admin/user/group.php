@@ -19,10 +19,10 @@ class Group extends Admin_Controller {
 		$return_arr = array ('total_rows' => true );
 		
 		$where = array();
-		if($this->user_info->key != 'root'){
+	//	if($this->user_info->key != 'root'){
 			$where['status >='] = 0;
 			$where['gid !='] = 1;
-		}
+	//	}
 		
 		$title = htmlspecialchars($this->input->get_post("title"));
 		
