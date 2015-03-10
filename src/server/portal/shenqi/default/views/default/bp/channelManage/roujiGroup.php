@@ -99,6 +99,6 @@ echo ace_form_close();
          window.jQuery || document.write("<script src='<?php echo static_url('theme/common/jquery/jquery-1.10.2.min.js')?>'>"+"<"+"/script>");
         </script>
 <![endif]-->
-<script src="http://115.29.7.155:8011/static/theme/common/layer/layer.min.js"></script>
+        <script src="<?php echo static_url('theme/common/layer/layer.min.js')?>"></script>
 	</body>
 </html>

@@ -97,8 +97,8 @@
  maxmin: true,
  shadeClose: true,
  title: '',
- offset: ['20px',''],
- area: ['600px', ($(window).height() - 50)+'px'],
+ offset: ['100px',''],
+ area: ['600px', ($(window).height() - 500)+'px'],
  iframe: {src: 'rouji/moveGroup?mobile='+mobile+'&'+Math.random()}
  ,close: function (i){
  layer.close(i);
