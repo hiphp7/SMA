@@ -51,7 +51,7 @@
                             <th>代理简称</th>
                             <th>联系人</th>
                             <th>手机号</th>
-                            <th>QQ号码</th>
+                          <!--  <th>QQ号码</th> -->
                             <th>状态</th>
                             <th>创建时间</th>
 														<th>更新时间</th>
@@ -72,7 +72,7 @@
                             <td><?php echo $item->shortname;?></td>
                             <td><?php echo $item->contact;?></td>
                             <td><?php echo $item->mobilenum;?></td>
-                            <td><?php echo $item->qq;?></td>
+                      <!--      <td><?php echo $item->qq;?></td> -->
 														<td class="hidden-480">
 														   <label>
                                     <input type="checkbox" class="ace ace-switch ace-switch-6" name="status[]" item_id="<?php echo $item->agentid?>" value="<?php echo $item->status=='OFF'?'0':'1';?>" <?php echo $item->status=='OFF'?'':'checked';?> >
