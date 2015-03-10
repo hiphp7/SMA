@@ -75,6 +75,7 @@ foreach($groups as $k =>$v){
 <select>
 </div>
 </div>
+<!--
 <div class="clearfix form-actions">
                       <div class="col-md-offset-3 col-md-9">
                           <button type="button" class="btn btn-success" id="btn">
@@ -82,6 +83,7 @@ foreach($groups as $k =>$v){
                           </button>
                       </div>
 </div>
+-->
 </div>
 <?php 
 echo ace_form_close();
