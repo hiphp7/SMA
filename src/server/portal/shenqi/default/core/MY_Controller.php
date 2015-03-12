@@ -62,13 +62,24 @@ class Admin_Controller extends MY_Controller {
         
          //var_dump($this->auth->user());
          //var_dump($this->auth->islogin());die;
+				$dir = $this->router->directory;
+				$dirs = explode('/',$dir);
+				if($dirs[0]=='admin')
+				{
+								$type='index-admin';
+				}elseif($dirs[0]=='agent'){
+								$type='index-agent';
+				}else
+				{
+								$type='index-bp';
+				}
         // 检测是否有权限登录管理后台
 		if (!$this->auth->islogin()){
 		    //如果是ajax请求,直接返回
             if ($this->input->is_ajax_request()) {
-                ajax_return(lang('you_are_logout'),-999,'','/login/logout');
+                ajax_return(lang('you_are_logout'),-999,'','/login/logout/'.$type);
             }
-			redirect( site_url('login/logout') );
+			redirect( site_url('login/logout/'.$type) );
 		}
 		
 		$this->user_info = $this->auth->user();
