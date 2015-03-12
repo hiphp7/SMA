@@ -210,7 +210,7 @@ class Seller extends Admin_Controller {
 		
 		$options = array();
 		
-		$options['where']['sellerid'] = $this->input->get_post('sellerid');
+		$options['where']['sellerid'] = $this->input->get_post('agentid');
 		$options['where']['agentId'] = $uid;
 		
 		$password             = $this->input->get_post('password');
