@@ -69,12 +69,20 @@ class Groups extends Admin_Controller {
 	public function save(){
 
 		$id = (int)$this->input->get_post('id');
-		$data['groupName'] = htmlspecialchars($this->input->get_post('groupname'));
+		$data['groupName'] = htmlspecialchars(trim($this->input->get_post('groupname')));
 		if($id>0){
 			$data['groupId'] = $id;
 			$result=$this->model->update($data);
 		}else{
 			$data['sellerid'] = $this->sellerid;
+			$options = array('select'=>'*');
+			$options['where'] = $data;
+			$item = $this->rouji_group_model->getOne($options);
+			if(!empty($item))
+			{
+							ajax_return("添加失败,组名称已经存在",1);
+							die;
+			}
 			$result=$this->model->add($data);
 		}
 		//信息返回操作
@@ -108,7 +116,7 @@ class Groups extends Admin_Controller {
 	}
 	function ajaxName()
 	{
-		$name = $this->input->get_post('groupname'); //字段值
+		$name = htmlspecialchars(trim($this->input->get_post('groupname'))); //字段值
 		$options = array('select'=>'*');
 		if(!empty($name)){
 			$options['where'] = array('groupname'=>$name,'sellerId'=>$this->sellerid);

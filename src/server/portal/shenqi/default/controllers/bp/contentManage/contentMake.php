@@ -6,7 +6,7 @@ class ContentMake extends Admin_Controller {
 		   
 		parent::__construct();
 		
-		$this->load->model(array('content_model','sharepage','rouji_group_model'));
+		$this->load->model(array('content_model','sharepage','rouji_model'));
 		$this->model = $this->content_model;
 		$this->sellerid = $this->user_info->sellerid;
 		#$this->lang->load('admin');
@@ -67,8 +67,8 @@ class ContentMake extends Admin_Controller {
 	}
 	public function info(){
 		$opt =array('select'=>'count(*) as c','where'=>array('sellerId'=>$this->sellerid));
-		$opt['join'] = array(array('t_rouji r','r.groupid=t_rouji_group.groupid'));
-		$having  = $this->rouji_group_model->getOne($opt); //查询所有信息
+		$opt['join'] = array(array('t_rouji_group r','r.groupid=t_rouji.groupid'));
+		$having  = $this->rouji_model->getOne($opt); //查询所有信息
 		if($having->c == 0)
 		{
 						$this->_template('message',array('msg'=>"请先添加任务机")); 

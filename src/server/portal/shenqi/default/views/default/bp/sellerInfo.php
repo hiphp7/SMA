@@ -1,30 +1,21 @@
 <?php 
 echo ace_form_open();
 	$options = array(
-			'label_text'=>'商户编号',
-			'datatype'=>'*',
-			'nullmsg'=>"请输入商户编号！",
-			'errormsg'=>"请输入商户编号",
+			'label_text'=>'<span class="red">*</span>商户编号',
 			'help'=>'商户登录后台的用户号'
 	);
-	echo ace_input_m($options ,'sellerid',$item->sellerid,'maxlength="45" id="sellerid" disabled="disabled"');
+	echo ace_input($options ,'sellerid',$item->sellerid,'maxlength="45" id="sellerid" disabled="disabled"');
 	
 	$options = array(
-	        'label_text'=>'商户全称',
-					'datatype'=>'*',
-					'nullmsg'=>"请输入商户编号！",
-					'errormsg'=>"请输入商户编号",
+	        'label_text'=>'<span class="red">*</span>商户全称',
 	        'help'=>'商户全称'
 	);
-	echo ace_input_m($options,'sellername',$item->sellername,'maxlength="45" id="sellername" disabled="disabled"');
+	echo ace_input($options,'sellername',$item->sellername,'maxlength="5" id="sellername" disabled="disabled"');
 	$options = array(
-	        'label_text'=>'商户简称',
-					'datatype'=>'*',
-					'nullmsg'=>"请输入商户编号！",
-					'errormsg'=>"请输入商户编号",
+	        'label_text'=>'<span class="red">*</span>商户简称',
 	        'help'=>'商户简称'
 	);
-	echo ace_input_m($options,'shortname',$item->shortname,'maxlength="45" id="shortname" disabled="disabled"');
+	echo ace_input($options,'shortname',$item->shortname,'maxlength="45" id="shortname" disabled="disabled"');
 	
 	$options = array(
 	        'label_text'=>'手机号',

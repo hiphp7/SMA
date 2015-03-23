@@ -162,7 +162,6 @@ $(function () {
         maxNumberOfFiles: 1,
         acceptFileTypes: /(\.|\/)(xls)$/i,
         done: function (e, data) {
-            $('.cancel').remove();
 
             if(data.result.status == 0){
                         layer.msg(data.result.info,3,1,function(){

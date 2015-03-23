@@ -7,7 +7,7 @@
   'site_admin_dir' => 'admin',
   'site_static_dir' => 'static',
   'site_page_num' => 10,
-  'site_accesslogin_count' => 1,
+  'site_accesslogin_count' => 5,
   'site_accesslogin_time' => 15,
   'cache_open' => '0',
   'site_debug' => '0',

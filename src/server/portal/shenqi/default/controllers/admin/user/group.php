@@ -143,11 +143,14 @@ class Group extends Admin_Controller {
 	public function clicktik(){
 	
 	    $val = $this->input->get_post('val'); //字段值
+			$id = intval($this->input->get_post('id'));
+	    if($this->user_model->getOne(array('gid'=>$id))&&$val==0){
+	        echo json_encode(array('status'=> 2,'msg'=>'该角色下还有用户，请先禁用其下所有用户，再禁用该角色！','back_url'=>base_url('admin/user/group')));
+	        exit();
+	    }
 	    if(!$val){
-	        $id = intval($this->input->get_post('id'));
 	        $this->user_model->update(array('token'=>''),array('gid'=>$id));
 	    }
-	
 	    parent::clicktik();
 	}
 }
