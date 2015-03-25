@@ -132,7 +132,7 @@ class Rouji extends Admin_Controller {
 						$reader->read($_FILES['files']['tmp_name']);
 						if(!isset($reader->sheets[0])||!isset($reader->sheets[0]['cells']))
 						{
-										echo '{"status":1,"info":"上传失败"}';
+										echo json_encode(array("status"=>1,"info"=>"上传失败"));
 										return;
 						}
 						$tmp = $reader->sheets[0]['cells'];
@@ -150,7 +150,7 @@ class Rouji extends Admin_Controller {
 										}
 										if($this->roujiExist($v[1]))
 										{
-														echo '{"status":1,"info":"上传失败,号码'.$v[1].'已经存在"}';
+														echo json_encode(array("status"=>1,"info"=>"上传失败,号码{$v[1]}已经存在"));
 														return;
 										}
 										if(empty($v[1])||empty($v[2])){
@@ -165,9 +165,9 @@ class Rouji extends Admin_Controller {
 		}
 		catch(Exception $e) 
 		{
-						echo '{"status":1,"info":"上传失败"}';
+						echo json_encode(array("status"=>1,"info"=>"上传失败"));
 		}
-		echo '{"status":0,"info":"上传成功"}';
+		echo json_encode(array("status"=>1,"info"=>"上传成功"));
 		return;
 	}	
 	function moveGroup()

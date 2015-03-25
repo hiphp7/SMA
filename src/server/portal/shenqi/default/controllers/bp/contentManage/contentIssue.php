@@ -203,7 +203,8 @@ class ContentIssue extends Admin_Controller {
 		}
 		$id = (int)$this->input->get_post('id');
 		$this->mass_sends_model->add(array('massSendsPath'=>$rempath,'issueId'=>$id));
-		echo '{"status":0,"info":"上传成功"}';
+		//echo '{"status":0,"info":"上传成功"}';
+		echo json_encode(array("status"=>0,"info"=>"上传成功"));
 	//	ignore_user_abort(true);
 	//	$size=ob_get_length();
 	//	header("Content-Length: $size");
