@@ -204,6 +204,7 @@ function fillAgent($master,$sellers,$key ='master')
 		{
 						$tmp[] = $v['mobile'];
 		}
+/*
 		$sql = "select mobileNum from t_rouji r left join t_rouji_group g on (r.groupId=g.groupId) where sellerid='$sellerid'";
 		$query = $this->db->query($sql);
 		$rouji = $query->result_array();
@@ -214,6 +215,7 @@ function fillAgent($master,$sellers,$key ='master')
 										$send[] = array('sellerid'=>$sellerid,'s_date'=>$day,'mobile'=>$v['mobileNum'],'sentcount'=>0);
 						}
 		}
+*/
 		return $send;
 	}
 	function agent_month(){

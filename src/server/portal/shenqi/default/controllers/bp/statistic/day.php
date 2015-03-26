@@ -16,7 +16,7 @@ class Day extends Admin_Controller {
 		$return_arr = array ('total_rows' => true );
  		$option =array('where'=>array('sellerId'=>$this->sellerid),'page'    => $cupage,'per_page'  => $per_page);
 		$date_range = $this->input->get_post('date_range');
-		$string=base_url('bp/statistic/day/dayByRj?');
+		$string=base_url('bp/statistic/day/dayByRJ?');
 		if($date_range){
 						$tmp_date = explode('-', $date_range);
 						$option['where']['s_date >= '] = date('Y-m-d',strtotime(trim($tmp_date[0])));

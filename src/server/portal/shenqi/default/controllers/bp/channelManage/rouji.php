@@ -167,7 +167,7 @@ class Rouji extends Admin_Controller {
 		{
 						echo json_encode(array("status"=>1,"info"=>"上传失败"));
 		}
-		echo json_encode(array("status"=>1,"info"=>"上传成功"));
+		echo json_encode(array("status"=>0,"info"=>"上传成功"));
 		return;
 	}	
 	function moveGroup()

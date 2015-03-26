@@ -77,7 +77,7 @@ class Statistic extends Admin_Controller {
 		$page = $this->sharepage->showPage ($url, $total_rows, $cupage );
 		$this->_template('agent/month',array('lc_list'=>$rt,'page'=>$page,'totals'  => $total_rows));
 	}	
-	function getAllchild()
+	function getAllChild()
 	{
 		$sql = "select agentname,agentid from t_agent where superiorid='{$this->agentid}'";
 		$query = $this->db->query($sql);
