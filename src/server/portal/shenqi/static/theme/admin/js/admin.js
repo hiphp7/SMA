@@ -137,7 +137,9 @@ $(function(){
 				return false;
 			}else{
 				
-				layer.alert(obj.msg,3);
+				layer.alert(obj.msg,3,'错误',function (){ 
+					window.location = window.location;
+				});
 				return false;
 			}
 		})

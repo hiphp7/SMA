@@ -15,9 +15,14 @@
 								</span>
 <input type="text" id='date_range' name="date_range" value="<?php echo $date_range;?>" class="form-control" style="margin-left: 0; border-left: none;"/>
 </div>
-                             <label class="col-sm-4">
+                             <label class="col-sm-1">
                                 <button class="btn btn-sm btn-primary" type="submit">
                                    <i class="icon-search"></i>搜索
+                                </button>
+                            </label>
+                             <label class="col-sm-1">
+                                <button class="btn btn-sm btn-primary" type="button" id="download">
+                                   <i class="icon-download"></i>下载
                                 </button>
                             </label>
                         </form>  
@@ -74,5 +79,10 @@
 		$('#date_range').daterangepicker().prev().on(ace.click_event, function(){
 			$(this).next().focus();
 		});
+		$("#download").click(function (){
+var date_range = $("#date_range").val();
+var url = '<?php echo base_url('bp/statistic/custom/toXls?date_range=');?>'+date_range;
+window.open(url);
+});
  });
  </script>

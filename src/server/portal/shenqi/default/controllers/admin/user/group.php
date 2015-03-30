@@ -129,7 +129,7 @@ class Group extends Admin_Controller {
 
 	    $id = $this->input->get_post('id');
 	    
-	    if($this->user_model->getOne(array('gid'=>$id))){
+	    if($this->user_model->getOne(array('gid'=>$id,'status >'=>0))){
 
 	        echo json_encode(array('status'=> '3','msg'=>'该角色下还有用户，请先删除其下所有用户，再删除该角色！'));
 	        exit();
