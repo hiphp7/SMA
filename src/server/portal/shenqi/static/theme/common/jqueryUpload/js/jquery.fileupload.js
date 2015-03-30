@@ -651,7 +651,8 @@
             };
             data.abort = function () {
                 if (this.jqXHR) {
-                    return this.jqXHR.abort();
+                    //return this.jqXHR.abort();
+                    this.jqXHR.abort();
                 }
                 this.errorThrown = 'abort';
                 that._trigger('fail', null, this);

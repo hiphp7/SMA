@@ -54,7 +54,7 @@ class Custom extends Admin_Controller {
 												$option['where']['visitTime >= '] = date('Y/m/d').' 00:00:00';
 												$option['where']['visitTime <= '] = date('Y/m/d').' 23:59:59';
 								}
-								$option['select'] ='c.title,v.*,starttime,endtime';
+								$option['select'] ='v.visittime,v.customermobile,v.issueid,c.title,v.roujimobile';
 								$option['join'] = array(array('t_customer_visit v','v.issueId=t_issue.issueId'),array('t_content c','c.contentid=t_issue.contentid'));
 								$option['order'] = 'visitTime desc,v.issueId';
 								$list =$this->issue_model->getAll2Array($option);
