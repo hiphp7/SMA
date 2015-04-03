@@ -134,7 +134,7 @@ class ContentMake extends Admin_Controller {
 	
 	function delete(){
 	    $id = $this->input->get_post('contentid');
-	    parent::delete($id);
+	    parent::delete($id,'RVK');
 	}
 	
 }
