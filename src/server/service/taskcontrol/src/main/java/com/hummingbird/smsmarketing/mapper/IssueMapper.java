@@ -35,4 +35,9 @@ public interface IssueMapper {
 	 * @param queueId 
 	 */
 	int finishWhenAllFinish(Integer issueId);
+	/**
+	 * 更新发布为完成，不管任务是否完成
+	 * @param queueId 
+	 */
+	int finishIssue(Integer issueId);
 }

@@ -173,6 +173,11 @@ public class TaskQueueManager implements QueueManager,StatusChecker {
 					if(log.isTraceEnabled()){
 						log.trace(String.format("队列%s待分配任务已完，不能再获取到本队列的请求了,得到任务%s条",this,oldcount-reqtaskcount));
 					}
+					if (log.isDebugEnabled()) {
+						log.debug(String.format("队列%s的任务均已分配，设置队列为完成",this));
+					}
+					//modify by huangjiejun 把队列状态置为已完成
+					issueDao.finishIssue(NumberUtils.toInt(this.queueId));
 					break;
 				}
 			}

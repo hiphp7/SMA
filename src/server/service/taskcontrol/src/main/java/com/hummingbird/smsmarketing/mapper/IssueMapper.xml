@@ -132,4 +132,9 @@
     and status='CRT'
     and issueid=#{issueId,jdbcType=INTEGER}
   </update>
+  <update id="finishIssue"  parameterType="java.lang.Integer" >
+    update t_issue
+    set status = 'DON'
+    where   issueid=#{issueId,jdbcType=INTEGER}
+  </update>
 </mapper>
