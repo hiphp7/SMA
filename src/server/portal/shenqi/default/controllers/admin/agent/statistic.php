@@ -34,6 +34,11 @@ class Statistic extends Admin_Controller {
 		$rt = $query->result();
 		foreach($rt as $k=>$v)
 		{
+			if(empty($v->agentid))
+			{
+				unset($rt[$k]);
+				continue;
+			}
 			if($v->type=='代理')
 			{
 				$rt[$k]->agentname = $child['agent'][$v->agentid];
@@ -63,6 +68,11 @@ class Statistic extends Admin_Controller {
 		$rt = $query->result();
 		foreach($rt as $k=>$v)
 		{
+			if(empty($v->agentid))
+			{
+				unset($rt[$k]);
+				continue;
+			}
 			if($v->type=='代理')
 			{
 				$rt[$k]->agentname = $child['agent'][$v->agentid];
