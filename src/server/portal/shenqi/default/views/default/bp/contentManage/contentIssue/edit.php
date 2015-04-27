@@ -361,7 +361,6 @@ function pre(i)
 	return false;
 
 }
-/*
 $("#bt").click(function (){
 //if(count>0)
 if(true)
@@ -372,6 +371,6 @@ if(true)
         layer.alert("请先点击上传按钮上传文件",3);
 }
 });
-*/
+
 });
 </script>
