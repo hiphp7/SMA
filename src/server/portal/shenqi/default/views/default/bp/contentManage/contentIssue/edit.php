@@ -134,7 +134,7 @@ $(function(){
 											<button class="btn btn-success" id="pre2">
                               <i class="icon-arrow-left  bigger-110"></i>上一步
 															</button>
-                          <button type="button" id="bt"  class="btn btn-success ">
+                          <button type="button" id="bt"  class="btn btn-success start">
                               <i class="icon-ok bigger-110"></i> 完成
                           </button>
                       </div>
@@ -361,6 +361,7 @@ function pre(i)
 	return false;
 
 }
+/*
 $("#bt").click(function (){
 //if(count>0)
 if(true)
@@ -371,6 +372,6 @@ if(true)
         layer.alert("请先点击上传按钮上传文件",3);
 }
 });
-
+*/
 });
 </script>
