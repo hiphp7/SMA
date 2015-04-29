@@ -15,7 +15,7 @@ class Mymodel extends CI_Model{
 	}
 	function issueidExist($issueid)
 	{
-		$sql ="select count(*) as c from t_issue where status!='DON' and issueid='{$issueid}'";
+		$sql ="select count(*) as c from t_issue where issueid='{$issueid}'";
 		$query = $this->db->query($sql);
 		if($query->row(0)->c >0)
 		{
@@ -27,7 +27,7 @@ class Mymodel extends CI_Model{
 	function mobileExist($mobile)
 	{
 		$sql = "select count(*) as c from t_rouji where mobileNum='$mobile' ";
-log_message('INFO','------sql:'.$sql);
+		log_message('INFO','------sql:'.$sql);
 		$query = $this->db->query($sql);
 		if($query->row(0)->c >0)
 		{

@@ -74,9 +74,11 @@
 	                                <a class="red tooltip-success" href="javascript:" onclick="revoke(<?php echo $item->issueid?>)" data-rel="tooltip" title="撤销">
 	                                    <i class="icon-undo bigger-130"></i>
 	                                </a>
+					<?php if($item->status!='DON'){?>
 	                                <a class="red tooltip-success" href="<?php echo base_url('bp/contentManage/contentIssue/edit?id='.$item->issueid);?>" data-rel="tooltip" title="修改">
 	                                    <i class="icon-edit bigger-130"></i>
 	                                </a>
+					<?php }?>
 																	</div>
 														</td>
                           </tr>
