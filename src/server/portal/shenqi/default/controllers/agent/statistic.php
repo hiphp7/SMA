@@ -28,7 +28,7 @@ class Statistic extends Admin_Controller {
 		$child =$this->getAllChild();
 		$sellerids = join(array_keys($child['seller']),"','");
 		$agentids = join(array_keys($child['agent']),"','");
- 		$sql = "select s_date,sentcount,agentid,'代理' as type from t_statistic_agent_d where s_date>='$sdate' and s_date <='$edate' and agentid in('{$agentids}') union all select * from (select s_date,sentcount ,sellerid,'商户' from t_statistic_seller_d where s_date>='$sdate' and s_date<='$edate' and sellerid in ('{$sellerids}') ) m order by s_date desc,type,agentid";
+ 		$sql = "select s_date,sentcount,agentid,'代理' as type from t_statistic_agent_d where s_date>='$sdate' and s_date <='$edate' and agentid in('{$agentids}') union all select * from (select s_date,sum(sentcount) as sentcount ,sellerid,'商户' from t_statistic_seller_d where s_date>='$sdate' and s_date<='$edate' and sellerid in ('{$sellerids}') group by sellerid ,s_date) m order by s_date desc,type,agentid";
 		$count = "select count(*) as c from ($sql) as m";
 		$query = $this->db->query($count);
 		$total_rows  = $query->first_row()->c;
@@ -61,7 +61,7 @@ class Statistic extends Admin_Controller {
 		$child =$this->getAllChild();
 		$sellerids = join(array_keys($child['seller']),"','");
 		$agentids = join(array_keys($child['agent']),"','");
-		$sql = "select s_month,sentcount,agentid,'代理' as type from t_statistic_agent_m where s_month='$day' and agentid  in('{$agentids}') union all select * from (select s_month,sum(sentcount) ,sellerid,'商户' from t_statistic_seller_m where s_month='$day' and sellerid in ('{$sellerids}') ) m order by s_month desc,type,agentid";
+		$sql = "select s_month,sentcount,agentid,'代理' as type from t_statistic_agent_m where s_month='$day' and agentid  in('{$agentids}') union all select * from (select s_month,sum(sentcount) ,sellerid,'商户' from t_statistic_seller_m where s_month='$day' and sellerid in ('{$sellerids}') group by sellerid,s_date) m order by s_month desc,type,agentid";
 		$count = "select count(*) as c from ($sql) as m";
 		$query = $this->db->query($count);
 		$total_rows  = $query->first_row()->c;

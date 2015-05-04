@@ -1,5 +1,5 @@
 <?php 
-
+date_default_timezone_set('PRC');
 class Cmd_run extends CI_Controller { 
 
 	function __construct()  {  
@@ -63,37 +63,37 @@ class Cmd_run extends CI_Controller {
 		}
 		return $seller;
 	}
-function fillAgent($master,$sellers,$key ='master')
-{
-	$data = array();
-	$tmp = array();
-	if(array_key_exists($key,$master)&&!is_array($master[$key]))
+	function fillAgent($master,$sellers,$key ='master')
 	{
+		$data = array();
+		$tmp = array();
+		if(array_key_exists($key,$master)&&!is_array($master[$key]))
+		{
 			if(isset($sellers[$key])&&!empty($sellers[$key]))
 			{
-							return $sellers[$key];
+				return $sellers[$key];
 			}
-	}
-	if(array_key_exists($key,$master)&&is_array($master[$key])){
-		foreach($master[$key] as $v){
-					$t = $this->fillAgent($master,$sellers,$v);
-					if(!empty($t))
+		}
+		if(array_key_exists($key,$master)&&is_array($master[$key])){
+			foreach($master[$key] as $v){
+				$t = $this->fillAgent($master,$sellers,$v);
+				if(!empty($t))
 					{
 									$tmp = array_merge($tmp,$t);
 					}
+			}
 		}
+		if(array_key_exists($key,$sellers)&&!empty($sellers[$key]))
+		{
+			$data = array_merge($tmp,$sellers[$key]);
+		}
+		if(empty($data))
+		{
+			return ;
+		}
+		//return array($key=>$data);
+		return $data;
 	}
-	if(array_key_exists($key,$sellers)&&!empty($sellers[$key]))
-	{
-		$data = array_merge($tmp,$sellers[$key]);
-  }
-	if(empty($data))
-	{
-					return ;
-  }
-	//return array($key=>$data);
-	return $data;
-}
 
 	function seller_month()
 	{
@@ -210,10 +210,10 @@ function fillAgent($master,$sellers,$key ='master')
 		$rouji = $query->result_array();
 		foreach($rouji as $v)
 		{
-						if(!in_array($v['mobileNum'],$tmp))
-						{
-										$send[] = array('sellerid'=>$sellerid,'s_date'=>$day,'mobile'=>$v['mobileNum'],'sentcount'=>0);
-						}
+		if(!in_array($v['mobileNum'],$tmp))
+		{
+		$send[] = array('sellerid'=>$sellerid,'s_date'=>$day,'mobile'=>$v['mobileNum'],'sentcount'=>0);
+		}
 		}
 */
 		return $send;
@@ -241,25 +241,27 @@ function fillAgent($master,$sellers,$key ='master')
 		$b = $this->getSellers();
 		$c=array();
 		foreach($b as $k=>$v ){
-						$sellers = $this->fillAgent($a,$b,$k);
-						$data = $this->sumDayAgent($day,$sellers,$k);
-						foreach($data as $row){
-										if(empty($row['s_date']))
-										{
-														continue;
-										}
-										$this->put2db('t_statistic_agent_d',$row);
-						}
+			$sellers = $this->fillAgent($a,$b,$k);
+			$data = $this->sumDayAgent($day,$sellers,$k);
+			foreach($data as $row){
+				if(empty($row['s_date']))
+				{
+					continue;
+				}
+				$this->put2db('t_statistic_agent_d',$row);
+			}
 		}
 	}
 	function sumDayAgent($day,$sellers,$agentid){
-     $sql = "select sum(sentCount) as sentcount,s_date,'$agentid' as agentid from t_statistic_seller_d  where sellerid in ('".join($sellers,"','")."') and s_date='$day'";
+		$sql = "select sum(sentCount) as sentcount,s_date,'$agentid' as agentid from t_statistic_seller_d  where sellerid in ('".join($sellers,"','")."') and s_date='$day'";
+//		echo $sql."\n";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
 	function sumMonthAgent($month,$sellers,$agentid){
-     $sql = "select sum(sentCount) as sentcount,s_month,'$agentid' as agentid from t_statistic_seller_m  where sellerid in ('".join($sellers,"','")."') and s_month='$month'";
+		$sql = "select sum(sentCount) as sentcount,s_month,'$agentid' as agentid from t_statistic_seller_m  where sellerid in ('".join($sellers,"','")."') and s_month='$month'";
 		$query = $this->db->query($sql);
+		echo $sql."\n";
 		return $query->result_array();
 	}
 	function put2db($t,$data)
@@ -276,16 +278,23 @@ function fillAgent($master,$sellers,$key ='master')
 	}
 	function test($i=1)
 	{
-
-					for($i=1;$i<29;$i++){
-									$str =str_pad($i,2,'0',STR_PAD_LEFT);
-									$rows = $this->getDaySendByRJ("2015-02-$i",'shangwushanghu');
-		//			$r = $this->getDaySendByIssue("2015-02-$str",'shangwushanghu');
-			foreach($rows as $row){
-		//		$row['realcount'] =$this->getIssueRealCount('2015-02-'.$str,$row['issueid']);
-				$this->put2db('t_statistic_seller_d',$row);
-
+		//$day = date("Y-m-d",strtotime("-$d day"));
+		$day = date("Y-m",strtotime("-1 month"));
+		$a = $this->getAgents();
+		$b = $this->getSellers();
+		$c=array();
+		foreach($b as $k=>$v ){
+			$sellers = $this->fillAgent($a,$b,$k);
+			$data = $this->sumMonthAgent($day,$sellers,$k);
+			foreach($data as $row){
+				if(empty($row['s_month']))
+				{
+					continue;
+				}
+	//			$this->put2db('t_statistic_agent_m',$row);
+				print_r($row);
 			}
-					}
+		}
+
 	}
 }
