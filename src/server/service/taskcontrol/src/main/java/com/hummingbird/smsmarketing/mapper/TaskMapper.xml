@@ -177,6 +177,12 @@
     ,sentTime=now()
     where taskId = #{taskId,jdbcType=INTEGER}
   </update>
+  <update id="cancleTaskByQueueId" >
+    update t_task
+    set status = 'RVK'
+    ,sentTime=now()
+    where issueId = #{issueId,jdbcType=INTEGER} and status='CRT'
+  </update>
   <update id="assignTask" >
     update t_task
     set status = 'ASG'

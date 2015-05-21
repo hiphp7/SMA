@@ -38,6 +38,13 @@
     and i.starttime &lt;= now() and i.endtime &gt;= now() 
     
   </select>
+  <select id="selectOvertimeIssue" resultMap="BaseResultMap"  parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_issue i
+    where  i.status in ('ASS','CRT')  
+    and i.endtime &lt;= now() 
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_issue
     where issueId = #{issueid,jdbcType=INTEGER}
@@ -124,13 +131,10 @@
     where issueId = #{issueid,jdbcType=INTEGER}
   </update>
   <update id="finishWhenAllFinish"  parameterType="java.lang.Integer" >
-    update t_issue
-    set status = 'DON'
-    where not exists (
-    	select 1 from t_task where t_task.issueid=issueid and status in ('CRT','ASG')
-    )
-    and status='CRT'
-    and issueid=#{issueId,jdbcType=INTEGER}
+    update t_issue 
+    set status = 'DON' 
+    where status='CRT' and issueid=#{issueId,jdbcType=INTEGER} 
+    and  not exists ( select 1 from t_task where t_task.issueid=t_issue.issueid and status in ('CRT','ASG') )
   </update>
   <update id="finishIssue"  parameterType="java.lang.Integer" >
     update t_issue

@@ -159,6 +159,15 @@ public class TaskQueueManager implements QueueManager,StatusChecker {
 						if(log.isTraceEnabled()){
 							log.trace(String.format("请求[%s]的目标已满足",sendReq));
 						}
+						//检查队列是否分配完
+						if(!canload&&queue.isEmpty()){
+							if (log.isDebugEnabled()) {
+								log.debug(String.format("队列%s的任务均已分配，设置队列为完成",this));
+							}
+							//modify by huangjiejun 把队列状态置为已完成
+							issueDao.finishIssue(NumberUtils.toInt(this.queueId));
+							break;
+						}
 						break;
 					}
 					
@@ -329,6 +338,7 @@ public class TaskQueueManager implements QueueManager,StatusChecker {
 				log.debug(String.format("所有任务都已完成，本任务队列结束"));
 			}
 			this.status = QueueStatus.PAUSE;
+			QueueGCService.getInstance().add2remove(this.queueId);
 		}
 	}
 
@@ -412,6 +422,31 @@ public class TaskQueueManager implements QueueManager,StatusChecker {
 		
 		nomoredata=false;
 		status = QueueStatus.RUNNING;
+	}
+	
+	 /**
+	 * 中止队列
+	 */
+	public void cancle(){
+		if (log.isDebugEnabled()) {
+			log.debug(String.format("用户/程序中止队列"));
+		}
+		status = QueueStatus.PAUSE;
+		taskdao.cancleTaskByQueueId(Integer.parseInt(queueId));
+		//设置
+		QueueGCService.getInstance().add2remove(queueId);
+	}
+	
+	/**
+	 * 移除的准备工作
+	 */
+	public void preRemove(){
+		if (log.isDebugEnabled()) {
+			log.debug(String.format("用户/程序移除队列"));
+		}
+		status = QueueStatus.STOPED;
+		queue.clear();
+		hadassignList.clear();
 	}
 	
 }

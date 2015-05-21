@@ -40,4 +40,10 @@ public interface IssueMapper {
 	 * @param queueId 
 	 */
 	int finishIssue(Integer issueId);
+
+	/**
+	 * 获取过期的发布
+	 * @return
+	 */
+	List<Issue> selectOvertimeIssue();
 }

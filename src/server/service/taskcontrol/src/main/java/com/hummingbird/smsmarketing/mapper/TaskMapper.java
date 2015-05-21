@@ -63,5 +63,11 @@ public interface TaskMapper {
 	 * @param mobileNum
 	 */
 	void assignTask(@Param("taskId") Integer taskid,@Param("roujiMobileNum") String mobileNum);
+
+	/**
+	 * 修改未分配的任务为rvk
+	 * @param queueId
+	 */
+	void cancleTaskByQueueId(Integer issueId);
 	
 }
