@@ -52,14 +52,18 @@ class Mymodel extends CI_Model{
 	{
 		$today = date('Y-m-d');
 		$yestoday = date('Y-m-d',strtotime('-1 day'));
-		$sql = "select (select count(*) from  t_task where status='CRT' and now() between startTime and endtime) as remainPool,(select count(*) from t_task where roujiMobileNum ='{$mobile}' and senttime between '{$yestoday} 00:00:00' and '{$yestoday} 23:59:59' ) as yestoday,(select count(*) from t_task where roujiMobileNum ='{$mobile}' and senttime >= '{$today} 00:00:00' and status in ('RPF','RPS')) as today";
-log_message('INFO',$sql);
+		$sql = "select (select count(*) from t_task where roujiMobileNum ='{$mobile}' and senttime between '{$yestoday} 00:00:00' and '{$yestoday} 23:59:59' ) as yestoday,(select count(*) from t_task where roujiMobileNum ='{$mobile}' and senttime >= '{$today} 00:00:00' and status in ('RPF','RPS')) as today";
+		#$sql = "select (select count(*) from  t_task where status='CRT' and now() between startTime and endtime) as remainPool,(select count(*) from t_task where roujiMobileNum ='{$mobile}' and senttime between '{$yestoday} 00:00:00' and '{$yestoday} 23:59:59' ) as yestoday,(select count(*) from t_task where roujiMobileNum ='{$mobile}' and senttime >= '{$today} 00:00:00' and status in ('RPF','RPS')) as today";
+//log_message('INFO',$sql);
 		$query = $this->db->query($sql);
 		if($query->num_rows <= 0)
 		{
 			return array();
 		}
 		$rt['taskInfo'] = $query->row_array();
+		$sql = "select count(*) as c from  t_task t left join t_issue i on (t.issueid=i.issueid) left join t_rouji_group g on (g.sellerid=i.sellerid) left join t_rouji r on (r.groupid=g.groupid and r.mobileNum='{$mobile}') where t.status='CRT' and now() between t.startTime and t.endtime ";
+		$query = $this->db->query($sql);
+		$rt['remainPool'] = $query->row(0)->c;
 		$sql = "select (select if(count(*)=0,1,count(*)) from (select count(*) as c from t_task where (status='RPF' or status='RPS') and senttime >= '{$today} 00:00:00' group by roujiMobileNum ) as rj) as rouji,(select ifnull(max(c),1)  from (select count(*) as c from t_task where (status='RPF' or status='RPS') and senttime >= '{$today} 00:00:00' group by roujiMobileNum ) as m) maxman,(select count(*) as beyondIndex from (select count(*) as c from t_task where (status='RPF' or status='RPS') and senttime >= '{$today} 00:00:00' group by roujiMobileNum having c<{$rt['taskInfo']['today']}) b) as beyondIndex";
 		$query = $this->db->query($sql);
 		$row= $query->row_array();
