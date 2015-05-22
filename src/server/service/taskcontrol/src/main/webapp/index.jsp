@@ -39,6 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <li onclick='setbinding("/roujiauth/user/login","{\"appId\":\"smsmarketing\",\"timeStamp\":\"TIMESTAMP\", \"nonce\":\"NONCE\",\"signature\":\"8176f5be1ad9e977009c29e4c68218fe\", \"loginInfo\":{\"mobileNum\":\"18922260815\",\"smsCode\":\"223344\"},\"deviceInfo\":{\"mac\":\"3ere:eee:3434:34434\",\"deviceId\":\"设备标识\",\"imsi\":\"SIM卡设备号\"}}")'>验证验证码</li>
 <li onclick='setbinding("/smstaskcontrol/get_task","","{\"mobileNum\":\"18922260815\"}")'>获取短信发送任务</li>
 <li onclick='setbinding("/smstaskcontrol/update_task_status","{\"task\":[    {\"taskId\":\"1\",\"issueId\":\"14\",\"status\":\"OK\"}]}","{\"mobileNum\":\"18922260815\"}")'>上报短信发送任务执行</li>
+<li onclick='setbinding("/smstaskcontrol/cancle_issue","{\"issueId\":\"12\"}")'>取消发布</li>
 <li onclick='setbinding("/smstaskcontrol/queuestatus","")'>队列状态</li>
 <li onclick='setbinding("/smstaskcontrol/resetnomoredata","")'>重置可从数据库中读数据</li>
 <!-- <li onclick='setbinding("/order/fromPayGateWayNotify","{\"errorcode\":\"0\",\"errormsg\":\"支付成功\",\"dealId\":\"UD002014111223555900000050918795\"}")'>支付通知</li>

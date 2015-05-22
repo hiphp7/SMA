@@ -29,6 +29,7 @@ import com.hummingbird.smsmarketing.mapper.RoujiMapper;
 import com.hummingbird.smsmarketing.mapper.TaskMapper;
 import com.hummingbird.smsmarketing.service.impl.SmsTaskService;
 import com.hummingbird.smsmarketing.service.impl.TaskQueuesDispatcher;
+import com.hummingbird.smsmarketing.vo.CancleIssueVO;
 import com.hummingbird.smsmarketing.vo.ITask;
 import com.hummingbird.smsmarketing.vo.SmsTaskVo;
 import com.hummingbird.smsmarketing.vo.TaskFeeBackVO;
@@ -166,6 +167,34 @@ public class SmsTaskController extends BaseController {
 			brm.mergeException(e1);
 			brm.setErrcode(1040);
 			//brm.setErr(1040,"上报短信任务执行信息失败，其它原因");
+		}
+		finally{
+			return brm;
+		}
+	}
+	
+	/**
+	 * 取消发布
+	 * @param getsmsvo
+	 * @return
+	 */
+	@RequestMapping("/cancle_issue")
+	@AccessRequered(methodName="取消发布")
+	public @ResponseBody Object cancleIssue(@RequestBody CancleIssueVO cancleIssueVO) {
+		if(log.isDebugEnabled()){
+			log.debug("取消发布："+cancleIssueVO);
+		}
+		//捕捉所有异常,不要由于有异常而不返回信息
+		ResultModel brm = new ResultModel();
+		brm.setErrmsg("取消发布成功");
+		
+		try {
+			TaskQueuesDispatcher taskqueuedispatcher = SpringBeanUtil.getInstance().getBean(TaskQueuesDispatcher.class);
+			taskqueuedispatcher.cancleQueue(cancleIssueVO.getIssueId());
+		} catch (Exception e1) {
+			log.error(String.format("取消发布出错[%s]",cancleIssueVO),e1);
+			brm.mergeException(e1);
+			brm.setErrcode(1040);
 		}
 		finally{
 			return brm;

@@ -41,5 +41,15 @@ public interface QueueManager {
 
 	public abstract void resetLoadFlag();
 
+	/**
+	 * 中止队列
+	 */
+	void cancle();
+
+	/**
+	 * 移除的准备工作
+	 */
+	void preRemove();
+
 	
 }
