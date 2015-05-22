@@ -6,6 +6,9 @@ package com.hummingbird.smsmarketing.service.impl;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.locks.ReentrantLock;
 
 import javax.annotation.PostConstruct;
@@ -48,6 +51,11 @@ public class TaskQueuesDispatcher implements IssueSendDispatcher,StatusChecker{
 
 	private static TaskQueuesDispatcher self;
 	
+	/**
+	 * 定时处理器
+	 */
+	private static Timer timer =  new Timer(true);
+	
 	Log log = LogFactory.getLog(TaskQueuesDispatcher.class);
 	private List<QueueManager> queuelist = new ArrayList<QueueManager>();
 	
@@ -63,27 +71,33 @@ public class TaskQueuesDispatcher implements IssueSendDispatcher,StatusChecker{
 		//initAllQueue();
 	}
 	
+	static{
+		//加载定时任务
+		timer.schedule(QueueGCService.getInstance(),60*1000,86400*1000);
+//		timer.schedule(QueueGCService.getInstance(),30*1000,60*1000);
+	}
+	
 	/**
 	 * 获取实例
 	 * @return
 	 */
 	
-	public static TaskQueuesDispatcher getInstance(){
-	if(self==null){
-		ReentrantLock lock = new ReentrantLock();
-		try {
-			lock.lock();
-			if(self==null){
-				self = new TaskQueuesDispatcher();
-				self.initAllQueue();
-			}
-			
-		} finally  {
-			lock.unlock();
-		}
-	}
-	return self;
-}
+//	public static TaskQueuesDispatcher getInstance(){
+//	if(self==null){
+//		ReentrantLock lock = new ReentrantLock();
+//		try {
+//			lock.lock();
+//			if(self==null){
+//				self = new TaskQueuesDispatcher();
+//				self.initAllQueue();
+//			}
+//			
+//		} finally  {
+//			lock.unlock();
+//		}
+//	}
+//	return self;
+//}
 	
 	/**
 	 * 获取app下可用的队列，因为手机app与队列是多对多关系，一个手机不会对应所有的队列
@@ -327,6 +341,26 @@ public class TaskQueuesDispatcher implements IssueSendDispatcher,StatusChecker{
 		return sr;
 	}
 	
+	
+	/**
+	 * 中止队列，不处理
+	 * @param issueId
+	 */
+	public void cancleQueue(String issueId){
+		if(log.isDebugEnabled())
+		{
+			log.debug(String.format("终止id为【%s】的队列",issueId));
+		}
+		for (Iterator iterator = queuelist.iterator(); iterator.hasNext();) {
+			QueueManager qm = (QueueManager) iterator.next();
+			String queueId = qm.getQueueId();
+			if(issueId.equals(queueId)){
+				//调整队列的状态
+				qm.cancle();
+			}
+		}
+	}
+	
 	/**
 	 * 设置可以从数据库重新加载
 	 */
@@ -342,6 +376,27 @@ public class TaskQueuesDispatcher implements IssueSendDispatcher,StatusChecker{
 				queueManager.resetLoadFlag();
 			}
 			
+		}
+	}
+
+	/**
+	 * 移除队列
+	 * @param queueId
+	 */
+	public void removeQueue(String issueId) {
+		
+		if(log.isDebugEnabled())
+		{
+			log.debug(String.format("移除id为【%s】的队列",issueId));
+		}
+		for (ListIterator iterator = queuelist.listIterator(); iterator.hasNext();) {
+			QueueManager qm = (QueueManager) iterator.next();
+			String queueId = qm.getQueueId();
+			if(issueId.equals(queueId)){
+				//调整队列的状态
+				qm.preRemove();
+				iterator.remove();
+			}
 		}
 	}
 
