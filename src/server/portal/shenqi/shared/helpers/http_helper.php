@@ -20,7 +20,7 @@ function throw_exception($message)
  * @param int $connectTimeout
  * @param int $readTimeout
  */
-function curlRequest($url,$data='',$method='POST',$cookieFile='',$headers='',$connectTimeout = 30,$readTimeout = 30)
+function curlRequest($url,$data='',$method='POST',$cookieFile='',$headers=['Content-Type: application/json'],$connectTimeout = 30,$readTimeout = 30)
 {
     $method = strtoupper($method);
     if(!function_exists('curl_init')) return socketRequest($url, $data, $method, $cookieFile, $connectTimeout);
@@ -105,7 +105,8 @@ function socketRequest($url, $data, $method, $cookieFile, $connectTimeout) {
         $out .= "Accept: */*\r\n";
         //$out .= "Referer: $boardurl\r\n";
         $out .= "Accept-Language: zh-cn\r\n";
-        $out .= "Content-Type: application/x-www-form-urlencoded\r\n";
+        //$out .= "Content-Type: application/x-www-form-urlencoded\r\n";
+        $out .= "Content-Type: application/json\r\n";
         $out .= "User-Agent: ".$_SERVER['HTTP_USER_AGENT']."\r\n";
         $out .= "Host: $host\r\n";
         $out .= 'Content-Length: '.strlen($post)."\r\n";

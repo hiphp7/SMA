@@ -8,6 +8,7 @@ class ContentIssue extends Admin_Controller {
 		parent::__construct();
 		$this->load->model(array('issue_model','content_model','sharepage','rouji_group_model','issue_rouji_model','mass_sends_model','rouji_model','task_model'));
 		$this->model = $this->issue_model;
+		$this->load->helper('http_helper');
 		$this->sellerid = $this->user_info->sellerid;
 	} 
 		 
@@ -256,7 +257,12 @@ class ContentIssue extends Admin_Controller {
 			$data['issueid']=$id;;
 			$result = $this->model->update($data);
     	if($result){
-    		echo json_encode(array('status'=> '1','msg'=>'撤销成功'));exit();
+		$json = curlRequest(JIF."/smstaskcontrol/cancle_issue",'{"issueid":'.$id.'}');
+		$ret = json_decode($json,TRUE);
+		if(isset($ret['errcode'])&&$ret['errcode']=='0'){
+			echo json_encode(array('status'=> '1','msg'=>'撤销成功'));exit();
+		}
+    		echo json_encode(array('status'=> '2','msg'=>'撤销失败'));exit();
     	}else{
     		echo json_encode(array('status'=> '2','msg'=>'撤销失败'));exit();
     	}
