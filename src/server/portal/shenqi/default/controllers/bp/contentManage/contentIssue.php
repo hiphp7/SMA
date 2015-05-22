@@ -252,22 +252,22 @@ class ContentIssue extends Admin_Controller {
 		fclose($handle);
 	}
 	function revoke(){
-	    $id = $this->input->get_post('id');
-			$data['status']='RVK';
-			$data['issueid']=$id;;
-			$result = $this->model->update($data);
-    	if($result){
-		$json = curlRequest(JIF."/smstaskcontrol/cancle_issue",'{"issueid":'.$id.'}');
+		$id = $this->input->get_post('id');
+		$data['status']='RVK';
+		$data['issueid']=$id;
+		$json = curlRequest(JIF."/smstaskcontrol/cancle_issue",'{"issueId":'.$id.'}');
 		$ret = json_decode($json,TRUE);
-		if(isset($ret['errcode'])&&$ret['errcode']=='0'){
-			echo json_encode(array('status'=> '1','msg'=>'撤销成功'));exit();
+		if(!isset($ret['errcode'])||$ret['errcode']!='0'){
+			echo json_encode(array('status'=> '2','msg'=>'撤销失败'));exit();
 		}
-    		echo json_encode(array('status'=> '2','msg'=>'撤销失败'));exit();
-    	}else{
-    		echo json_encode(array('status'=> '2','msg'=>'撤销失败'));exit();
-    	}
+		$result = $this->model->update($data);
+		if($result){
+			echo json_encode(array('status'=> '1','msg'=>'撤销成功'));exit();
+		}else{
+			echo json_encode(array('status'=> '2','msg'=>'撤销失败'));exit();
+		}
 	}
-	
+
 }
- 
-?>
+
+	?>

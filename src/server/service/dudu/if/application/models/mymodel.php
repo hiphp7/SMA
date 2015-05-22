@@ -75,7 +75,7 @@ log_message('INFO',$sql);
 	}
 	function getIssueContent($id)
 	{
-		$sql = "select title,smscontent as content from t_issue i  left join t_content c on(c.contentId=i.contentId) where  i.status in ('CRT','ASS','DON') and issueid=$id";
+		$sql = "select title,smscontent as content from t_issue i  left join t_content c on(c.contentId=i.contentId) where  i.status in ('CRT','ASS','DON','RVK') and issueid=$id";
 log_message('INFO','------sql:'.$sql);
 		$query = $this->db->query($sql);
 		if ($query->num_rows() > 0)
