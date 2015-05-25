@@ -262,6 +262,7 @@ class ContentIssue extends Admin_Controller {
 		}
 		$result = $this->model->update($data);
 		if($result){
+			$this->task_model->update(['status'=>'RVK'],['issueid'=>$id,'status'=>'CRT']);
 			echo json_encode(array('status'=> '1','msg'=>'撤销成功'));exit();
 		}else{
 			echo json_encode(array('status'=> '2','msg'=>'撤销失败'));exit();

@@ -167,7 +167,7 @@ class Cmd_run extends CI_Controller {
 	}
 
 	function getDayRate($day,$sellerid){
-		$sql ="select '$sellerid' as sellerid ,'$day' as s_date,count(*) as sentcount,count(visitTime) as visitcount,round( count(visitTime)/count(*)*100,2) as rate from t_task t left join t_issue i on(i.issueid=t.issueid) left join t_customer_visit v on(v.issueId=t.issueId and visitTime between '$day 00:00:00' and '$day 23:59:59') where sentTime between '$day 00:00:00' and '$day 23:59:59' and sellerid='$sellerid' ";
+		$sql ="select '$sellerid' as sellerid ,'$day' as s_date,count(*) as sentcount,count(visitTime) as visitcount,round( count(visitTime)/count(*)*100,2) as rate from t_task t left join t_issue i on(i.issueid=t.issueid) left join t_customer_visit v on(v.issueId=t.issueId and visitTime between '$day 00:00:00' and '$day 23:59:59') where sentTime between '$day 00:00:00' and '$day 23:59:59' and t.status !='RVK' and sellerid='$sellerid' ";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
@@ -188,14 +188,14 @@ class Cmd_run extends CI_Controller {
 	}
 	function getIssueRealCount($day ,$issueid)
 	{
- 		$sql="select count(*) as c from t_task where  sentTime between '$day 00:00:00' and '$day 23:59:59' and issueid='$issueid'";
+ 		$sql="select count(*) as c from t_task where  sentTime between '$day 00:00:00' and '$day 23:59:59' and issueid='$issueid' and status !='RVK'";
 		$query = $this->db->query($sql);
 		return $query->row(0)->c;
 	}
 	function getDaySendByRJ($day,$sellerid)
 	{
 		
-		$sql="select '$sellerid' as sellerid ,'$day' as s_date,roujimobilenum as mobile,count(*) as sentcount from t_task t left join t_issue i on (i.issueid=t.issueid) where sentTime between '$day 00:00:00' and '$day 23:59:59' and sellerid='$sellerid' group by roujiMobileNum";
+		$sql="select '$sellerid' as sellerid ,'$day' as s_date,roujimobilenum as mobile,count(*) as sentcount from t_task t left join t_issue i on (i.issueid=t.issueid) where sentTime between '$day 00:00:00' and '$day 23:59:59' and sellerid='$sellerid' and t.status !='RVK' group by roujiMobileNum";
 		//echo $sql."\n";
 		$query = $this->db->query($sql);
 		$send = $query->result_array();
