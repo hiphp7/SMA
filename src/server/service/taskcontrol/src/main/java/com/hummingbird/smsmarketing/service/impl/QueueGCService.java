@@ -110,7 +110,7 @@ public class QueueGCService extends TimerTask {
 		List<Issue> issueslist = issueDao.selectOvertimeIssue();
 		for (Iterator iterator = issueslist.iterator(); iterator.hasNext();) {
 			Issue issue = (Issue) iterator.next();
-			issue.setStatus("RVK");
+			issue.setStatus("DON");
 			issueDao.updateByPrimaryKey(issue);
 			add2remove(issue.getIssueid().toString());
 		}
