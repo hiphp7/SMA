@@ -52,7 +52,7 @@ class Note extends CI_Controller {
 		{
 			jsonout(2015,'参数customerMobile缺失');
 		}
-		if(empty($this->json['content']))
+		if(!isset($this->json['content']))
 		{
 			jsonout(2015,'参数content缺失');
 		}
