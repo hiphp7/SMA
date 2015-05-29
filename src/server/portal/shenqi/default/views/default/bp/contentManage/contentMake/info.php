@@ -53,7 +53,7 @@ window.UEDITOR_HOME_URL='<?php echo base_url()?>';
           initialFrameHeight:300, 
 					enableAutoSave:false,
           elementPathEnabled:false//关闭elementPath
-					,toolbars:[['bold', 'italic', 'underline', 'strikethrough',  'blockquote', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc','source','fullscreen','link', 'unlink', 'insertimage','preview','fontfamily', 'fontsize']]
+					,toolbars:[['bold', 'italic', 'underline', 'strikethrough',  'blockquote', 'forecolor', 'backcolor','background', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc','source','fullscreen','link', 'unlink', 'insertimage','preview','fontfamily', 'fontsize']]
       });
 </script>
    </div>

@@ -45,11 +45,15 @@
 	                <div class="hr hr32 hr-dotted"></div>
 	
 	                <div class="row">
-	                    <div class="col-sm-5">
-	                    
+	                    <div class="col-sm-4">
+											</div>
+	                    <div class="col-sm-2">
+	                   		<a class="btn btn-big btn-success" style="border-radius:4px;font-size:24px;font-family:微软雅黑;" href="apk/shenqi.apk"><i class="icon-download-alt"></i>APK下载</a>
 	                    </div>
-	
-	                    <div class="col-sm-7">
+	                    <div class="col-sm-2">
+	                   		<a class="btn btn-big btn-success" style="border-radius:4px;font-size:24px;font-family:微软雅黑;" href="doc/使用手册.doc"><i class="icon-download-alt"></i>文档下载</a>
+	                    </div>
+	                    <div class="col-sm-4">
 	                    </div>
 	                </div>
 	

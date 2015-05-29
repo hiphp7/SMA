@@ -1,30 +1,30 @@
 <?php 
 echo ace_form_open('','',array('id'=>$item->agentid));
 	$options = array(
-			'label_text'=>'代理编号',
-			'datatype'=>'*',
+			'label_text'=>'<span class="red">*</span>代理编号',
+//			'datatype'=>'*',
 			'nullmsg'=>"请输入代理编号！",
 			'errormsg'=>"请输入代理编号",
 			'help'=>'代理登录后台的用户号'
 	);
-	echo ace_input_m($options ,'agentid',$item->agentid,'maxlength="45" id="agentid" disabled="disabled"');
+	echo ace_input($options ,'agentid',$item->agentid,'maxlength="45" id="agentid" disabled="disabled"');
 	
 	$options = array(
-	        'label_text'=>'代理全称',
-					'datatype'=>'*',
+	        'label_text'=>'<span class="red">*</span>代理全称',
+	//				'datatype'=>'*',
 					'nullmsg'=>"请输入代理编号！",
 					'errormsg'=>"请输入代理编号",
 	        'help'=>'代理全称'
 	);
-	echo ace_input_m($options,'agentname',$item->agentname,'maxlength="45" id="agentname"  disabled="disabled"');
+	echo ace_input($options,'agentname',$item->agentname,'maxlength="45" id="agentname"  disabled="disabled"');
 	$options = array(
-	        'label_text'=>'代理简称',
-					'datatype'=>'*',
+	        'label_text'=>'<span class="red">*</span>代理简称',
+		//			'datatype'=>'*',
 					'nullmsg'=>"请输入代理编号！",
 					'errormsg'=>"请输入代理编号",
 	        'help'=>'代理简称'
 	);
-	echo ace_input_m($options,'shortname',$item->shortname,'maxlength="45" id="shortname" disabled="disabled"');
+	echo ace_input($options,'shortname',$item->shortname,'maxlength="45" id="shortname" disabled="disabled"');
 	$options = array(
 	        'label_text'=>'手机号',
 					'datatype'=>'n11-11',

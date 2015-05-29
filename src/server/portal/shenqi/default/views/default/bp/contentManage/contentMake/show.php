@@ -40,6 +40,13 @@ echo ace_textarea('<span class="red">*</span>内容',$options,$item->smscontent,
 <iframe width="100%" src="<?php echo base_url($item->mobilepage);?>" ></iframe>
 </div>
    </div>
+<div class="clearfix form-actions">
+                      <div class="col-md-offset-3 col-md-9">
+                           <a href="javascript:;" class="btn btn-info" onclick="history.go(-1)">
+	                         <i class="icon-reply"></i>返回上一页
+	                      </a>
+	                      </div>
+                  </div>
 <?php 
 echo ace_form_close();
 ?>

@@ -10,7 +10,7 @@ class Main extends Admin_Controller {
     
     function index()   {  
         
-        $this->_template('bp/main');
+        $this->_template('agent/main');
     }  
 	function info(){
 	    if($this->input->is_post()){
