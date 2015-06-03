@@ -22,7 +22,7 @@ class Today extends Admin_Controller {
 	{
 		$sellerid=$this->sellerid ;
 		$day=date('Y-m-d');
-		$sql="select '$sellerid' as sellerid ,'$day' as s_date,i.issueid ,c.title,CONCAT(i.starttime,'至',i.endtime,'  ') as cycle,count(*) as plancount  from t_task t left join t_issue i on (i.issueid=t.issueid) left join t_content c on(c.contentid=i.contentid) where sentTime >= '$day 00:00:00' and t.status !='RVK' and i.sellerid='$sellerid' group by i.issueid";
+		$sql="select '$sellerid' as sellerid ,'$day' as s_date,i.issueid ,c.title,CONCAT(i.starttime,'至',i.endtime,'  ') as cycle,count(*) as plancount  from t_task t left join t_issue i on (i.issueid=t.issueid) left join t_content c on(c.contentid=i.contentid) where sentTime >= '$day 00:00:00'  and i.sellerid='$sellerid' group by i.issueid";
                 $query = $this->db->query($sql);
 		$data = $query->result();
 		foreach($data as $k=>$row){
@@ -40,7 +40,7 @@ class Today extends Admin_Controller {
 	}	
 	function getIssueRealCount($day ,$issueid)
 	{
-		$sql="select count(*) as c from t_task where sentTime between '$day 00:00:00' and '$day 23:59:59' and issueid='$issueid'";
+		$sql="select count(*) as c from t_task where sentTime between '$day 00:00:00' and '$day 23:59:59' and issueid='$issueid' and status !='RVK'";
 		$query = $this->db->query($sql);
 		return $query->row(0)->c;
 	}
