@@ -174,7 +174,7 @@ class Cmd_run extends CI_Controller {
 
 	function getDaySendByIssue($day,$sellerid)
 	{
-		$sql="select  i.sellerid ,'$day' as s_date,i.issueid ,c.title,CONCAT(i.starttime,'至',i.endtime,'  ') as cycle from  t_issue i left join t_content c on(c.contentid=i.contentid) where (starttime <= '$day 23:59:59' and endtime>= '$day 00:00:00') and i.sellerid='$sellerid' and i.status!='RVK' group by i.issueid";
+		$sql="select  i.sellerid ,'$day' as s_date,i.issueid ,c.title,CONCAT(i.starttime,'至',i.endtime,'  ') as cycle from  t_issue i left join t_content c on(c.contentid=i.contentid) where (starttime <= '$day 23:59:59' and endtime>= '$day 00:00:00') and i.sellerid='$sellerid' group by i.issueid";
 		//echo $sql."\n";
 		$query = $this->db->query($sql);
 		$rt = $query->result_array();
