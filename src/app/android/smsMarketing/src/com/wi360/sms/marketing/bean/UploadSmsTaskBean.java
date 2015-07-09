@@ -40,6 +40,10 @@ public class UploadSmsTaskBean extends BaseBean {
 //			this.status = Constants.FLS + taskId;
 			this.status = Constants.FLS;
 		}
+		
+		public UploadInnerSmsTaskBean(){
+			
+		}
 	}
 
 }

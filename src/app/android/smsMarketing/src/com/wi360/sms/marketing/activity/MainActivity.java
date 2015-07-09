@@ -23,12 +23,17 @@ import com.umeng.analytics.MobclickAgent;
 import com.wi360.sms.marketing.R;
 import com.wi360.sms.marketing.base.BaseActivity;
 import com.wi360.sms.marketing.base.MyAsyncTask;
+import com.wi360.sms.marketing.bean.UploadSmsTaskBean;
+import com.wi360.sms.marketing.bean.UploadSmsTaskBean.UploadInnerSmsTaskBean;
+import com.wi360.sms.marketing.dao.TaskDao;
 import com.wi360.sms.marketing.service.StartingUpService;
 import com.wi360.sms.marketing.utils.ActivityAnimationUtils;
 import com.wi360.sms.marketing.utils.AppUtils;
 import com.wi360.sms.marketing.utils.Constants;
 import com.wi360.sms.marketing.utils.DateUtils;
+import com.wi360.sms.marketing.utils.GsonTools;
 import com.wi360.sms.marketing.utils.L;
+import com.wi360.sms.marketing.utils.SPUtils;
 
 public class MainActivity extends BaseActivity {
 
@@ -70,7 +75,7 @@ public class MainActivity extends BaseActivity {
 	private boolean isLoadWorkData;
 	// 登陆后是否加载过网络数据
 	private boolean isLoginLoadWorkData;
-
+	private TaskDao dao;
 	@Override
 	public void initView() {
 		L.e("MainActivity onCreate initView");
@@ -82,14 +87,46 @@ public class MainActivity extends BaseActivity {
 		view = View.inflate(context, R.layout.activity_main, null);
 		ViewUtils.inject(this, view);
 		tv_date.setText(DateUtils.TimeStamp2Date(new Date().getTime(), "MM月dd日"));
-
+		
 	}
 
 	@Override
 	public void initValue() {
 		// 加载网络数据
 		loadNetsWork();
+		submitcacheinfo();
+	}
 
+	private void submitcacheinfo() {
+		// TODO Auto-generated method stub
+		dao=new TaskDao(this);
+		final UploadSmsTaskBean upTaskBean=new UploadSmsTaskBean();
+		upTaskBean.task=dao.findAllfailed();
+
+		String json = GsonTools.createGsonString(upTaskBean);
+		saveLogInfo("--上报任务日志(缓存历史任务)------: \n" + json);
+		
+		new MyAsyncTask(context, null) {
+			@Override
+			public String connectNetWorkSuccess(String... responseStr) {
+				saveLogInfo("---上报任务返回的json数据(缓存历史任务)------: \n" + responseStr[0]);
+				if (isLoadNetWorkSuccess()) {
+					for(UploadInnerSmsTaskBean item:upTaskBean.task){
+						dao.deletefailedbyid(item.taskId);
+					}
+				} else {
+					
+				}
+				
+				return null;
+			}
+		}.execute(new String[] { Constants.UP_SMS_INFO, json });
+	
+	}
+	
+	private void saveLogInfo(String logInfo) {
+		String spInfo = (String) SPUtils.get(context, Constants.LOG_INFO, "");
+		SPUtils.put(context, Constants.LOG_INFO, spInfo + DateUtils.getNowTime() + "\n" + logInfo + "\n\n");
 	}
 
 	/**

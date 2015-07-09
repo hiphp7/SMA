@@ -18,6 +18,7 @@ import com.wi360.sms.marketing.base.MyAsyncTask;
 import com.wi360.sms.marketing.bean.ResBean;
 import com.wi360.sms.marketing.bean.UploadSmsTaskBean;
 import com.wi360.sms.marketing.bean.UploadSmsTaskBean.UploadInnerSmsTaskBean;
+import com.wi360.sms.marketing.dao.TaskDao;
 import com.wi360.sms.marketing.receiver.Alarmreceiver;
 import com.wi360.sms.marketing.utils.CommonUtil;
 import com.wi360.sms.marketing.utils.Constants;
@@ -45,6 +46,7 @@ public class StartingUpService extends Service {
 	 */
 	private List<ResBean.Task> resTaskBean;
 	private UploadSmsTaskBean uploadTaskBean;
+	private TaskDao dao;
 
 	@Override
 	public void onCreate() {
@@ -52,6 +54,7 @@ public class StartingUpService extends Service {
 		// startForeground(1, notification);
 		Log.i(TAG, "onCreate");
 		context = this;
+		dao=new TaskDao(context);
 		Intent intent = new Intent(this, Alarmreceiver.class);
 		intent.setAction("repeating");
 		PendingIntent sender = PendingIntent.getBroadcast(this, 0, intent, 0);
@@ -123,7 +126,9 @@ public class StartingUpService extends Service {
 							// Constants.key_report_sms_info_json, "");
 							L.i("upLoadSmsHandler handleMessage isLoadNetWorkSuccess");
 						} else {
-
+							for(UploadInnerSmsTaskBean iteminfo:uploadTaskBean.task){
+								dao.addsubtaskfailed(iteminfo);
+							}
 						}
 						L.i("上报短信发送状态  " + resBean.errcode + "   " + resBean.errmsg);
 						return null;

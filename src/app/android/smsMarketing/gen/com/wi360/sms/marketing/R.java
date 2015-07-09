@@ -349,13 +349,13 @@ public final class R {
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #ListView_android_divider android:divider}</code></td><td> Drawable or color to draw between list items.</td></tr>
-           <tr><td><code>{@link #ListView_android_dividerHeight android:dividerHeight}</code></td><td> Height of the divider.</td></tr>
-           <tr><td><code>{@link #ListView_android_entries android:entries}</code></td><td> Reference to an array resource that will populate the ListView.</td></tr>
-           <tr><td><code>{@link #ListView_android_footerDividersEnabled android:footerDividersEnabled}</code></td><td> When set to false, the ListView will not draw the divider before each footer view.</td></tr>
-           <tr><td><code>{@link #ListView_android_headerDividersEnabled android:headerDividersEnabled}</code></td><td> When set to false, the ListView will not draw the divider after each header view.</td></tr>
-           <tr><td><code>{@link #ListView_android_overScrollFooter android:overScrollFooter}</code></td><td> Drawable to draw below list content.</td></tr>
-           <tr><td><code>{@link #ListView_android_overScrollHeader android:overScrollHeader}</code></td><td> Drawable to draw above list content.</td></tr>
+           <tr><td><code>{@link #ListView_android_divider com.wi360.sms.marketing:android_divider}</code></td><td> Drawable or color to draw between list items.</td></tr>
+           <tr><td><code>{@link #ListView_android_dividerHeight com.wi360.sms.marketing:android_dividerHeight}</code></td><td> Height of the divider.</td></tr>
+           <tr><td><code>{@link #ListView_android_entries com.wi360.sms.marketing:android_entries}</code></td><td> Reference to an array resource that will populate the ListView.</td></tr>
+           <tr><td><code>{@link #ListView_android_footerDividersEnabled com.wi360.sms.marketing:android_footerDividersEnabled}</code></td><td> When set to false, the ListView will not draw the divider before each footer view.</td></tr>
+           <tr><td><code>{@link #ListView_android_headerDividersEnabled com.wi360.sms.marketing:android_headerDividersEnabled}</code></td><td> When set to false, the ListView will not draw the divider after each header view.</td></tr>
+           <tr><td><code>{@link #ListView_android_overScrollFooter com.wi360.sms.marketing:android_overScrollFooter}</code></td><td> Drawable to draw below list content.</td></tr>
+           <tr><td><code>{@link #ListView_android_overScrollHeader com.wi360.sms.marketing:android_overScrollHeader}</code></td><td> Drawable to draw above list content.</td></tr>
            </table>
            @see #ListView_android_divider
            @see #ListView_android_dividerHeight
@@ -373,9 +373,8 @@ public final class R {
           <p>
           @attr description
            Drawable or color to draw between list items. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#divider}.
-          @attr name android:divider
+          <p>This corresponds to the global attribute          resource symbol {@link com.wi360.sms.marketing.R.attr#android_divider}.
+          @attr name android:android_divider
         */
         public static final int ListView_android_divider = 1;
         /**
@@ -383,9 +382,8 @@ public final class R {
           @attr description
            Height of the divider. Will use the intrinsic height of the divider if this
              is not specified. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#dividerHeight}.
-          @attr name android:dividerHeight
+          <p>This corresponds to the global attribute          resource symbol {@link com.wi360.sms.marketing.R.attr#android_dividerHeight}.
+          @attr name android:android_dividerHeight
         */
         public static final int ListView_android_dividerHeight = 2;
         /**
@@ -393,9 +391,8 @@ public final class R {
           @attr description
            Reference to an array resource that will populate the ListView.  For static content,
              this is simpler than populating the ListView programmatically. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#entries}.
-          @attr name android:entries
+          <p>This corresponds to the global attribute          resource symbol {@link com.wi360.sms.marketing.R.attr#android_entries}.
+          @attr name android:android_entries
         */
         public static final int ListView_android_entries = 0;
         /**
@@ -403,9 +400,8 @@ public final class R {
           @attr description
            When set to false, the ListView will not draw the divider before each footer view.
              The default value is true. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#footerDividersEnabled}.
-          @attr name android:footerDividersEnabled
+          <p>This corresponds to the global attribute          resource symbol {@link com.wi360.sms.marketing.R.attr#android_footerDividersEnabled}.
+          @attr name android:android_footerDividersEnabled
         */
         public static final int ListView_android_footerDividersEnabled = 4;
         /**
@@ -413,27 +409,24 @@ public final class R {
           @attr description
            When set to false, the ListView will not draw the divider after each header view.
              The default value is true. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#headerDividersEnabled}.
-          @attr name android:headerDividersEnabled
+          <p>This corresponds to the global attribute          resource symbol {@link com.wi360.sms.marketing.R.attr#android_headerDividersEnabled}.
+          @attr name android:android_headerDividersEnabled
         */
         public static final int ListView_android_headerDividersEnabled = 3;
         /**
           <p>
           @attr description
            Drawable to draw below list content. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#overScrollFooter}.
-          @attr name android:overScrollFooter
+          <p>This corresponds to the global attribute          resource symbol {@link com.wi360.sms.marketing.R.attr#android_overScrollFooter}.
+          @attr name android:android_overScrollFooter
         */
         public static final int ListView_android_overScrollFooter = 6;
         /**
           <p>
           @attr description
            Drawable to draw above list content. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#overScrollHeader}.
-          @attr name android:overScrollHeader
+          <p>This corresponds to the global attribute          resource symbol {@link com.wi360.sms.marketing.R.attr#android_overScrollHeader}.
+          @attr name android:android_overScrollHeader
         */
         public static final int ListView_android_overScrollHeader = 5;
         /** Attributes that can be used with a ZrcAbsListView.
@@ -442,16 +435,16 @@ public final class R {
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #ZrcAbsListView_android_cacheColorHint android:cacheColorHint}</code></td><td> Indicates that this list will always be drawn on top of solid, single-color
+           <tr><td><code>{@link #ZrcAbsListView_android_cacheColorHint com.wi360.sms.marketing:android_cacheColorHint}</code></td><td> Indicates that this list will always be drawn on top of solid, single-color
              opaque background.</td></tr>
-           <tr><td><code>{@link #ZrcAbsListView_android_choiceMode android:choiceMode}</code></td><td> Defines the choice behavior for the view.</td></tr>
-           <tr><td><code>{@link #ZrcAbsListView_android_drawSelectorOnTop android:drawSelectorOnTop}</code></td><td> When set to true, the selector will be drawn over the selected item.</td></tr>
-           <tr><td><code>{@link #ZrcAbsListView_android_listSelector android:listSelector}</code></td><td> Drawable used to indicate the currently selected item in the list.</td></tr>
-           <tr><td><code>{@link #ZrcAbsListView_android_scrollingCache android:scrollingCache}</code></td><td> When set to true, the list uses a drawing cache during scrolling.</td></tr>
-           <tr><td><code>{@link #ZrcAbsListView_android_smoothScrollbar android:smoothScrollbar}</code></td><td> When set to true, the list will use a more refined calculation
+           <tr><td><code>{@link #ZrcAbsListView_android_choiceMode com.wi360.sms.marketing:android_choiceMode}</code></td><td> Defines the choice behavior for the view.</td></tr>
+           <tr><td><code>{@link #ZrcAbsListView_android_drawSelectorOnTop com.wi360.sms.marketing:android_drawSelectorOnTop}</code></td><td> When set to true, the selector will be drawn over the selected item.</td></tr>
+           <tr><td><code>{@link #ZrcAbsListView_android_listSelector com.wi360.sms.marketing:android_listSelector}</code></td><td> Drawable used to indicate the currently selected item in the list.</td></tr>
+           <tr><td><code>{@link #ZrcAbsListView_android_scrollingCache com.wi360.sms.marketing:android_scrollingCache}</code></td><td> When set to true, the list uses a drawing cache during scrolling.</td></tr>
+           <tr><td><code>{@link #ZrcAbsListView_android_smoothScrollbar com.wi360.sms.marketing:android_smoothScrollbar}</code></td><td> When set to true, the list will use a more refined calculation
              method based on the pixels height of the items visible on screen.</td></tr>
-           <tr><td><code>{@link #ZrcAbsListView_android_stackFromBottom android:stackFromBottom}</code></td><td> Used by ListView and GridView to stack their content from the bottom.</td></tr>
-           <tr><td><code>{@link #ZrcAbsListView_android_transcriptMode android:transcriptMode}</code></td><td> Sets the transcript mode for the list.</td></tr>
+           <tr><td><code>{@link #ZrcAbsListView_android_stackFromBottom com.wi360.sms.marketing:android_stackFromBottom}</code></td><td> Used by ListView and GridView to stack their content from the bottom.</td></tr>
+           <tr><td><code>{@link #ZrcAbsListView_android_transcriptMode com.wi360.sms.marketing:android_transcriptMode}</code></td><td> Sets the transcript mode for the list.</td></tr>
            </table>
            @see #ZrcAbsListView_android_cacheColorHint
            @see #ZrcAbsListView_android_choiceMode
@@ -471,9 +464,8 @@ public final class R {
           @attr description
            Indicates that this list will always be drawn on top of solid, single-color
              opaque background. This allows the list to optimize drawing. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#cacheColorHint}.
-          @attr name android:cacheColorHint
+          <p>This corresponds to the global attribute          resource symbol {@link com.wi360.sms.marketing.R.attr#android_cacheColorHint}.
+          @attr name android:android_cacheColorHint
         */
         public static final int ZrcAbsListView_android_cacheColorHint = 5;
         /**
@@ -489,9 +481,8 @@ public final class R {
              {@link android.widget.AbsListView.MultiChoiceModeListener} using
              {@link android.widget.AbsListView#setMultiChoiceModeListener} to control the
              selection mode. This uses the {@link android.view.ActionMode} API. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#choiceMode}.
-          @attr name android:choiceMode
+          <p>This corresponds to the global attribute          resource symbol {@link com.wi360.sms.marketing.R.attr#android_choiceMode}.
+          @attr name android:android_choiceMode
         */
         public static final int ZrcAbsListView_android_choiceMode = 6;
         /**
@@ -500,18 +491,16 @@ public final class R {
            When set to true, the selector will be drawn over the selected item.
              Otherwise the selector is drawn behind the selected item. The default
              value is false. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#drawSelectorOnTop}.
-          @attr name android:drawSelectorOnTop
+          <p>This corresponds to the global attribute          resource symbol {@link com.wi360.sms.marketing.R.attr#android_drawSelectorOnTop}.
+          @attr name android:android_drawSelectorOnTop
         */
         public static final int ZrcAbsListView_android_drawSelectorOnTop = 1;
         /**
           <p>
           @attr description
            Drawable used to indicate the currently selected item in the list. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#listSelector}.
-          @attr name android:listSelector
+          <p>This corresponds to the global attribute          resource symbol {@link com.wi360.sms.marketing.R.attr#android_listSelector}.
+          @attr name android:android_listSelector
         */
         public static final int ZrcAbsListView_android_listSelector = 0;
         /**
@@ -520,9 +509,8 @@ public final class R {
            When set to true, the list uses a drawing cache during scrolling.
              This makes the rendering faster but uses more memory. The default
              value is true. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#scrollingCache}.
-          @attr name android:scrollingCache
+          <p>This corresponds to the global attribute          resource symbol {@link com.wi360.sms.marketing.R.attr#android_scrollingCache}.
+          @attr name android:android_scrollingCache
         */
         public static final int ZrcAbsListView_android_scrollingCache = 3;
         /**
@@ -536,18 +524,16 @@ public final class R {
              change size as the user scrolls through the list. When set to fale, the list
              will use only the number of items in the adapter and the number of items visible
              on screen to determine the scrollbar's properties. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#smoothScrollbar}.
-          @attr name android:smoothScrollbar
+          <p>This corresponds to the global attribute          resource symbol {@link com.wi360.sms.marketing.R.attr#android_smoothScrollbar}.
+          @attr name android:android_smoothScrollbar
         */
         public static final int ZrcAbsListView_android_smoothScrollbar = 7;
         /**
           <p>
           @attr description
            Used by ListView and GridView to stack their content from the bottom. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#stackFromBottom}.
-          @attr name android:stackFromBottom
+          <p>This corresponds to the global attribute          resource symbol {@link com.wi360.sms.marketing.R.attr#android_stackFromBottom}.
+          @attr name android:android_stackFromBottom
         */
         public static final int ZrcAbsListView_android_stackFromBottom = 2;
         /**
@@ -555,9 +541,8 @@ public final class R {
           @attr description
            Sets the transcript mode for the list. In transcript mode, the list
              scrolls to the bottom to make new items visible when they are added. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#transcriptMode}.
-          @attr name android:transcriptMode
+          <p>This corresponds to the global attribute          resource symbol {@link com.wi360.sms.marketing.R.attr#android_transcriptMode}.
+          @attr name android:android_transcriptMode
         */
         public static final int ZrcAbsListView_android_transcriptMode = 4;
     };
